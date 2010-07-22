@@ -4,6 +4,7 @@ module TicketMaster::Provider
     #
     #
     class Project < TicketMaster::Provider::Base::Project
+      API = GitHubAPI::Project  
       # declare needed overloaded methods here
       
       

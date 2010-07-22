@@ -9,6 +9,17 @@ module TicketMaster::Provider
     end
     
     # declare needed overloaded methods here
+    def authorize(auth = {})
+      @authentication ||= TicketMaster::Authenticator.new(auth)
+      auth = @authentication
+      if auth.token.nil? and auth.login.nil?
+        raise "Please provide token and login"
+      end
+      
+      GithubApi.token = auth.token
+      GithubApi.authenticate(auth.login)
+      puts 'hi'
+    end
     
   end
 end
