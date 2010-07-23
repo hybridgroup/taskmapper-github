@@ -4,9 +4,23 @@ module TicketMaster::Provider
     #
     #
     class Project < TicketMaster::Provider::Base::Project
-      API = GitHubAPI::Project  
+      attr_accessor :prefix_options
+      API = Octopi::Repository
       # declare needed overloaded methods here
       
+      def self.find(*options)
+	first, attributes = options
+	if first.class == Hash
+	  self::API.find(first)
+	else
+	  super(first, attributes)
+	end
+      end
+      
+      def self.search(options = {}, limit = 100)
+	raise "Please supply arguments for search" if options.blank?
+	self::API.find_all(options)[0...limit]
+      end
       
       # copy from this.copy(that) copies that into this
       def copy(project)

@@ -2,6 +2,7 @@ module TicketMaster::Provider
   # This is the Github Provider for ticketmaster
   module Github
     include TicketMaster::Provider::Base
+    PROJECT_API = Octopi::Repository
     
     # This is for cases when you want to instantiate using TicketMaster::Provider::Github.new(auth)
     def self.new(auth = {})
@@ -18,7 +19,6 @@ module TicketMaster::Provider
       
       GithubApi.token = auth.token
       GithubApi.authenticate(auth.login)
-      puts 'hi'
     end
     
   end
