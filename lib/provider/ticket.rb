@@ -55,6 +55,14 @@ module TicketMaster::Provider
       def reopen
 	Ticket.new API.find(Ticket.build_attributes(repository, {:number => number})).reopen!
       end
+      
+      def save
+	t = API.find(Ticket.build_attributes(repository, {:number => number}))
+	t.title = title
+	t.body = body
+	Ticket.new t.save
+      end
+      
     end
   end
 end
