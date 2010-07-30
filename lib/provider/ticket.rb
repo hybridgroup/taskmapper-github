@@ -44,17 +44,12 @@ module TicketMaster::Provider
 	hash.merge!(options)
       end
       
-      def build_attributes(repo, options)
-	hash = {:repo => repo, :user => Project.find(:first, [repo]).username}
-	hash.merge!(options)
-      end
-      
       def self.open(project_id, *options)
 	self::API.open(build_attributes(project_id, options.first))
       end
       
       def close
-	Ticket.new API.find(build_attributes(repository, {:number => number})).close!
+	Ticket.new API.find(Ticket.build_attributes(repository, {:number => number})).close!
       end
     end
   end
