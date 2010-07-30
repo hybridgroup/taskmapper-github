@@ -51,6 +51,10 @@ module TicketMaster::Provider
       def close
 	Ticket.new API.find(Ticket.build_attributes(repository, {:number => number})).close!
       end
+      
+      def reopen
+	Ticket.new API.find(Ticket.build_attributes(repository, {:number => number})).reopen!
+      end
     end
   end
 end
