@@ -16,9 +16,6 @@ module TicketMaster::Provider
       if auth.token.nil? and auth.login.nil?
         raise "Please provide token and login"
       end
-      
-      GithubApi.token = auth.token
-      GithubApi.authenticate(auth.login)
     end
     
   end

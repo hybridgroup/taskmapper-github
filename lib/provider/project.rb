@@ -4,18 +4,18 @@ module TicketMaster::Provider
     #
     #
     class Project < TicketMaster::Provider::Base::Project
-      attr_accessor :prefix_options
+      attr_accessor :prefix_options, :name, :user
+      
       API = Octopi::Repository
       # declare needed overloaded methods here
       
       def initialize(object)
-	hash = {'description' => object.description,
+	  hash = {'description' => object.description,
 	        'url' => object.url,
 	        'forks' => object.forks,
 	        'name' => object.name,
 	        'homepage' => object.homepage,
 	        'watchers' => object.watchers,
-	        'owner' => object.owner,
 	        'private' => object.private,
 	        'fork' => object.fork,
 	        'open_issues' => object.open_issues,
@@ -30,20 +30,29 @@ module TicketMaster::Provider
 	        'id' => object.id,
 	        'pushed' => object.pushed,
 	        'created' => object.created}
-	
-	puts "Hash => #{hash.inspect}"
+
+	#@system_data ||= {}
+	#@system_data[:owner] = object.owner.login
+	#@system_data[:repo] = object.name
+	  @name = object.name
+	  @user = object.username
 	super hash
       end
       
       def self.search(options = {}, limit = 100)
 	raise "Please supply arguments for search" if options.blank?
 	if options.is_a? Hash
-	  r = self.new(self::API.find(options))
+	  puts "Options => #{options.inspect}"
+	  r = self.new self::API.find(options)
 	  puts "Result => #{r.inspect}"
 	  [] << r
 	else
 	  self::API.find_all(options)[0...limit].collect { |repo| self.new repo }
 	end
+      end
+      
+      def self.find_by_id(id)
+	raise "Cannot search by id, you must search with user and repo names"
       end
       
       # copy from this.copy(that) copies that into this
@@ -56,9 +65,33 @@ module TicketMaster::Provider
           end
         end
       end
+      
+      
+      def easy_finder(api, *options)
+	if api.is_a? Class
+	  return api if options.length == 0 and symbol == :first
+	  puts "Options are => #{options.inspect}"
+	  api.find(*options)
+	end
+      end
+      
+      def tickets(*options)
+	first = options.shift
 
+	if first.nil? || (first == :all and options.nil?)
+	  easy_finder(TicketMaster::Provider::Github::Ticket, name, :all)
+	elsif first.is_a? Fixnum
+	  easy_finder(TicketMaster::Provider::Github::Ticket, name, first)
+	elsif first
+	  unless options.blank?
+	    options = options.first
+	  else
+	    options = {} if options.blank?
+	  end
+	  easy_finder(TicketMaster::Provider::Github::Ticket, name, first, options)
+	end
+      end
+    
     end
   end
 end
-
-
