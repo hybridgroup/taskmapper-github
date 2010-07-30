@@ -66,11 +66,9 @@ module TicketMaster::Provider
         end
       end
       
-      
       def easy_finder(api, *options)
 	if api.is_a? Class
 	  return api if options.length == 0 and symbol == :first
-	  puts "Options are => #{options.inspect}"
 	  api.find(*options)
 	end
       end
@@ -86,12 +84,17 @@ module TicketMaster::Provider
 	  unless options.blank?
 	    options = options.first
 	  else
-	    options = {} if options.blank?
+	    options = {}
 	  end
 	  easy_finder(TicketMaster::Provider::Github::Ticket, name, first, options)
 	end
       end
     
+      def ticket!(*options)
+        #options.first.merge!(:project_id => name) if options.first.is_a?(Hash)
+        TicketMaster::Provider::Github::Ticket.create(name, {:params => options.first})
+      end
+      
     end
   end
 end

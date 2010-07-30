@@ -30,23 +30,31 @@ module TicketMaster::Provider
       end
       
       def self.find_by_id(project_id, ticket_id)
-	puts "Find by id id => #{ticket_id}"
-	puts "Attributes => #{build_attributes(project_id, {:number => ticket_id}).inspect}"
 	self.new self::API.find(build_attributes(project_id, {:number => ticket_id}))
       end
       
       def self.find_by_attributes(project_id, attributes = {})
-	puts "Atributes arriving to find => #{attributes.inspect}"
-	#attributes ||= attributes.first
 	attributes ||= {}
 	attributes[:state] ||= 'open'
-	puts "Attributes => #{build_attributes(project_id, attributes).inspect}"
 	self::API.find_all(build_attributes(project_id, attributes)).collect{|issue| self.new issue}
       end
       
       def self.build_attributes(repo, options)
 	hash = {:repo => repo, :user => Project.find(:first, [repo]).username}
 	hash.merge!(options)
+      end
+      
+      def build_attributes(repo, options)
+	hash = {:repo => repo, :user => Project.find(:first, [repo]).username}
+	hash.merge!(options)
+      end
+      
+      def self.open(project_id, *options)
+	self::API.open(build_attributes(project_id, options.first))
+      end
+      
+      def close
+	Ticket.new API.find(build_attributes(repository, {:number => number})).close!
       end
     end
   end
