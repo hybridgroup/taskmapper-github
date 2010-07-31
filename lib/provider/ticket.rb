@@ -63,6 +63,14 @@ module TicketMaster::Provider
 	Ticket.new t.save
       end
       
+      def comments
+	Comment.find(repository, number, :all)
+      end
+      
+      def comment!(comment)
+	Comment.create(repository, number, comment)
+      end
+      
     end
   end
 end
