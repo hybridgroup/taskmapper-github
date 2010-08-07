@@ -3,6 +3,7 @@ module TicketMaster::Provider
   module Github
     include TicketMaster::Provider::Base
     PROJECT_API = Octopi::Repository
+    ISSUE_API = Octopi::Issue
     
     # This is for cases when you want to instantiate using TicketMaster::Provider::Github.new(auth)
     def self.new(auth = {})
@@ -20,6 +21,10 @@ module TicketMaster::Provider
         Octopi::Api.api.token = auth.token
         Octopi::Api.api.login = auth.login
       end
+    end
+
+    def projects
+      PROJECT_API.find(:user => Octopi::Api.api.login).collect{|repo| Project.new repo}
     end
     
   end
