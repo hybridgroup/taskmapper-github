@@ -9,31 +9,35 @@ module TicketMaster::Provider
       API = Octopi::Repository
       # declare needed overloaded methods here
       
-      def initialize(object)
-	      hash = {'description' => object.description,
-	        'url' => object.url,
-	        'forks' => object.forks,
-	        'name' => object.name,
-	        'homepage' => object.homepage,
-	        'watchers' => object.watchers,
-	        'private' => object.private,
-	        'fork' => object.fork,
-	        'open_issues' => object.open_issues,
-	        'pledgie' => object.pledgie,
-	        'size' => object.size,
-	        'actions' => object.actions,
-	        'score' => object.score,
-	        'language' => object.language,
-	        'followers' => object.followers,
-	        'type' => object.type,
-	        'username' => object.username,
-	        'id' => object.id,
-	        'pushed' => object.pushed,
-	        'created' => object.created}
+      def initialize(*object)
+        if object.first
+          object = object.first
+          hash = {'description' => object.description,
+  	        'url' => object.url,
+            'forks' => object.forks,
+            'name' => object.name,
+            'homepage' => object.homepage,
+            'watchers' => object.watchers,
+            'private' => object.private,
+            'fork' => object.fork,
+            'open_issues' => object.open_issues,
+            'pledgie' => object.pledgie,
+            'size' => object.size,
+            'actions' => object.actions,
+            'score' => object.score,
+            'language' => object.language,
+            'followers' => object.followers,
+            'type' => object.type,
+            'username' => object.username,
+            'id' => object.id,
+            'pushed' => object.pushed,
+            'created' => object.created}
+            
 
-	      @name = object.name
-	      @user = object.username
-	      super hash
+  	      @name = object.name
+  	      @user = object.username
+  	      super hash
+	      end
       end
       
       def self.search(options = {}, limit = 100)
