@@ -49,7 +49,8 @@ module TicketMaster::Provider
       end
       
       def self.find_by_id(id)
-	      raise "Cannot search by id, you must search with user and repo names"
+        warn "It find by name actually"
+        self.new self::API.find({:user => Octopi::Api.api.login, :repo => id})
       end
       
       # copy from this.copy(that) copies that into this
