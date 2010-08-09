@@ -2,7 +2,7 @@ Factory.define :project, :class => TicketMaster::Provider::Github::Project do |p
     p.description ''
     p.url '' 
     p.forks '' 
-    p.name  'project name'
+    p.name  'project_name'
     p.homepage  ''
     p.watchers  ''
     p.private  ''
