@@ -43,9 +43,7 @@ module TicketMaster::Provider
       def self.search(options = {}, limit = 100)
 	      raise "Please supply arguments for search" if options.blank?
       	if options.is_a? Hash
-      	  puts "Options => #{options.inspect}"
       	  r = self.new self::API.find(options)
-      	  puts "Result => #{r.inspect}"
       	  [] << r
       	else
       	  self::API.find_all(options)[0...limit].collect { |repo| self.new repo }
