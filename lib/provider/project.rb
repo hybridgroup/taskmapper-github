@@ -33,7 +33,6 @@ module TicketMaster::Provider
             'pushed' => object.pushed,
             'created' => object.created}
             
-
   	      @name = object.name
   	      @user = object.username
   	      super hash
