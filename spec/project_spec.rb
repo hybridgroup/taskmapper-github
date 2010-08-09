@@ -3,12 +3,12 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Github::Project" do
 
   before(:all) do
+    @project_name = "project_name"
     @github =  TicketMaster.new(:Github, {:login => 'juanespinosa', :token => 'asdfghk'})
     @klass = TicketMaster::Provider::Github::Project
   end
 
   before(:each) do
-    @project_name = "project_name"
     @project = Factory.build(:project)
     @projects = [@project]
     @github.stub!(:projects).and_return(@projects)
