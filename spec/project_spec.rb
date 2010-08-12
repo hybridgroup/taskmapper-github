@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Github::Project" do
 
   before(:all) do
-    @repo_name = "project_name"
+    @repo_name = "test-juange"
     @klass = TicketMaster::Provider::Github::Project
   end
 

@@ -1,4 +1,4 @@
-Factory.define :comment, :class => TicketMaster::Provider::Github::Comment do |p|
+Factory.define :comment, :class => TicketMaster::Provider::Github::GithubComment do |p|
   p.body  'Body message'
   p.id  '335287'
   p.created_at  '2010/07/30 13:50:42'
