@@ -1,4 +1,4 @@
-Factory.define :project, :class => TicketMaster::Provider::Github::Project do |p|
+Factory.define :repository, :class => Octopi::Repository do |p|
     p.description ''
     p.url '' 
     p.forks '' 
