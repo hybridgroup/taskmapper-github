@@ -61,10 +61,7 @@ module TicketMaster::Provider
       end
       
       def save
-      	t = API.find(Ticket.build_attributes(repository, {:number => number}))
-      	t.title = title
-      	t.body = body
-      	Ticket.new t.save
+
       end
       
       def comments

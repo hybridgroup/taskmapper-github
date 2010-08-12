@@ -15,7 +15,6 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     @klass.stub!(:find_by_attributes).and_return(@tickets)
     @klass.stub!(:find_by_id).and_return(@ticket)
     @klass.stub!(:create).and_return(@ticket)
-    TicketMaster::Provider::Github::Ticket.stub!(:save).and_return(@ticket)
     #@project.stub!(:tickets).and_return(@tickets)
   end
   
@@ -46,6 +45,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   
   it "should be able to update a existing ticket" do
     @ticket = @project.tickets(@ticket_id)
+    @ticket.should_receive(:save).and_return(@ticket)
     @ticket.body = "new body"
     @ticket = @ticket.save
     @ticket.should be_an_instance_of(@klass)
