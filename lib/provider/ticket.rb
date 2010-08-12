@@ -9,25 +9,28 @@ module TicketMaster::Provider
       API = Octopi::Issue
       # declare needed overloaded methods here
       
-      def initialize(object)
-      	unless object.is_a? Hash
-      	  hash = {:repository => object.repository.name,
-      	          :user => object.user,
-      	          :updated_at => object.updated_at,
-      	          :votes => object.votes,
-      	          :number => object.number,
-      	          :title => object.title,
-      	          :body => object.body,
-      	          :closed_at => object.closed_at,
-      	          :labels => object.labels,
-      	          :state => object.state,
-      	          :created_at => object.created_at
-      	    }
-      	else
-      	  hash = object
-      	end
+      def initialize(*object)
+        if object.first
+          object = object.first
+        	unless object.is_a? Hash
+        	  hash = {:repository => object.repository.name,
+        	          :user => object.user,
+        	          :updated_at => object.updated_at,
+        	          :votes => object.votes,
+        	          :number => object.number,
+        	          :title => object.title,
+        	          :body => object.body,
+        	          :closed_at => object.closed_at,
+        	          :labels => object.labels,
+        	          :state => object.state,
+        	          :created_at => object.created_at
+        	    }
+        	else
+        	  hash = object
+        	end
 
-      	super hash
+        	super hash
+      	end
       end
       
       def self.find_by_id(project_id, ticket_id)
@@ -41,7 +44,7 @@ module TicketMaster::Provider
       end
       
       def self.build_attributes(repo, options)
-      	hash = {:repo => repo, :user => Project.find(:first, [repo]).username}
+      	hash = {:repo => repo, :user => Octopi::Api.api.login}
       	hash.merge!(options)
       end
       
