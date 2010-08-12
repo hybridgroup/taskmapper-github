@@ -50,7 +50,7 @@ module TicketMaster::Provider
       end
       
       def self.find_by_id(id)
-        warn "It find by name actually"
+        warn "Github API only finds by name"
         self.new self::API.find({:user => Octopi::Api.api.login, :repo => id})
       end
       
