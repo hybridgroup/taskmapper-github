@@ -1,5 +1,5 @@
-Factory.define :ticket, :class => TicketMaster::Provider::Github::Ticket do |p|
-  p.repository  'project_name'
+Factory.define :issue, :class => Octopi::Issue do |p|
+  p.repository 'test-juange'
   p.user  'juanespinosa'
   p.updated_at  ''
   p.votes  ''

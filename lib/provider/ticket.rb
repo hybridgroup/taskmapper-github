@@ -49,7 +49,7 @@ module TicketMaster::Provider
       end
       
       def self.open(project_id, *options)
-	      self::API.open(build_attributes(project_id, options.first))
+	      self.new self::API.open(build_attributes(project_id, options.first))
       end
       
       def close
@@ -62,9 +62,14 @@ module TicketMaster::Provider
       
       def save
       	t = API.find(Ticket.build_attributes(repository, {:number => number}))
+      	
+      	return false if t.title == title and t.body = body
+      	
       	t.title = title
       	t.body = body
-      	Ticket.new t.save
+      	t.save
+      	
+      	true
       end
       
       def comments

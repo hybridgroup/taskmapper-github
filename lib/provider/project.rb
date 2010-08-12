@@ -50,7 +50,7 @@ module TicketMaster::Provider
       end
       
       def self.find_by_id(id)
-        warn "It find by name actually"
+        warn "Github API only finds by name"
         self.new self::API.find({:user => Octopi::Api.api.login, :repo => id})
       end
       
@@ -67,7 +67,7 @@ module TicketMaster::Provider
       
       def easy_finder(api, *options)
       	if api.is_a? Class
-      	  return api if options.length == 0 and symbol == :first
+      	  #return api if options.length == 0 and symbol == :first
       	  api.find(*options)
       	end
       end
@@ -90,7 +90,7 @@ module TicketMaster::Provider
       end
     
       def ticket!(*options)
-        TicketMaster::Provider::Github::Ticket.create(name, {:params => options.first})
+        TicketMaster::Provider::Github::Ticket.open(name, {:params => options.first})
       end
       
     end
