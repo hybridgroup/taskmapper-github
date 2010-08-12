@@ -22,7 +22,7 @@ module TicketMaster::Provider
       
       def self.find_by_attributes(project_id, ticket_id, attributes = {})
       	warn "Github API only gets all comments"
-      	self::API.find_all(Project.find(project_id), ticket_id).collect {|comment| self.new comment}
+      	self::API.find_all(Project.find(:first, [project_id]), ticket_id).collect {|comment| self.new comment}
       end
       
       def self.search(project_id, ticket_id, options = {}, limit = 1000)
@@ -30,7 +30,7 @@ module TicketMaster::Provider
       end
       
       def self.create(project_id, ticket_id, comment)
-	      self.new self::API.create(Project.find(project_id), ticket_id, comment)
+	      self.new self::API.create(Project.find(:first, [project_id]), ticket_id, comment)
       end
       
     end
