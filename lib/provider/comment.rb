@@ -6,7 +6,14 @@ module TicketMaster::Provider
     # versions of the ticket.
     #
     class Comment < TicketMaster::Provider::Base::Comment
+      attr_accessor :prefix_options
       API = GithubComment
+      
+      def initialize(*options)
+        if options.first.is_a? Hash
+          super options.first
+        end
+      end
       
       # declare needed overloaded methods here
       def self.find_by_id(project_id, ticket_id, id)
