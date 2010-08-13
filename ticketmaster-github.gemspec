@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ticketmaster-github}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = %q{2010-08-12}
+  s.date = %q{2010-08-13}
   s.description = %q{This provides an interface with github through the ticketmaster gem.}
   s.email = %q{hong.quach@abigfisch.com}
   s.extra_rdoc_files = [
@@ -37,7 +37,8 @@ Gem::Specification.new do |s|
      "spec/spec.opts",
      "spec/spec_helper.rb",
      "spec/ticket_spec.rb",
-     "spec/ticketmaster-github_spec.rb"
+     "spec/ticketmaster-github_spec.rb",
+     "ticketmaster-github.gemspec"
   ]
   s.homepage = %q{http://github.com/kiafaldorius/ticketmaster-github}
   s.rdoc_options = ["--charset=UTF-8"]
