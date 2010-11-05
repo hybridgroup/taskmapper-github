@@ -5,19 +5,55 @@ This is a provider for [ticketmaster](http://ticketrb.com). It provides interope
 # Usage and Examples
 
 First we have to instantiate a new ticketmaster instance:
-    github = TicketMaster.new(:github, {:username => "code", :password => "m4st3r!"})
+    github = TicketMaster.new(:github, {:username => "code", :token => "m4st3r!"})
 
-If you do not pass in the token or both the username and password, it will only access public information for the account.
+If you do not pass in the token and the username, it will only access public information for the account.
 
-== Finding Projects
+== Finding Projects(Repositories)
 
-    project = github.project['project_name']
-    project = github.project.find(:id => 505)
+You can find your own projects by doing:
 
-== Finding Tickets
+	projects = github.projects # Will return all your repositories
+    projects = github.projects(['your_repo1', 'your_repo2'])
+    project = github.project('your_repo')
 
-    tickets = project.tickets
+Also you can access other users repos
+	
+	project = github.project.find(:first, {:user => 'other_user', :repo => 'his_repo'})
+
+Or even make a search with an array
+
+	projects = github.project.find(:all, ['ruby','git'])
+	
+== Finding Tickets(Issues)
+
+    tickets = project.tickets # All open issues
+	tickets = project.tickets(:all, {:state => 'closed'}) # All closed tickets
+	ticket = project.ticket(<issue_number>)
+
+== Open Tickets
     
+	ticket = project.ticket!({:title => "New ticket", :body => "Body for the very new ticket"})
+
+== Close a ticket
+	
+	ticket = ticket.close
+	
+== Reopen a ticket
+
+	ticket = ticket.reopen
+	
+= Update a ticket
+	
+	ticket.title = "New title"
+	ticket.body =  "New body"
+	ticket.save
+
+== Finding Comments
+	comments = ticket.comments
+
+== Create Comment
+	comment = ticket.comment!(<comment text>)
 
 ## Requirements
 

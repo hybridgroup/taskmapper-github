@@ -24,10 +24,10 @@ module TicketMaster::Provider
     end
 
     def projects(*options)
-      unless options.empty?
-        options.collect{|name| Project.find(name)}.first if options.first.is_a?(Array)
-      else
+      if options.empty?
         PROJECT_API.find(:user => Octopi::Api.api.login).collect{|repo| Project.new repo}
+      elsif  options.first.is_a?(Array)
+        options.collect{|name| Project.find(name)}.first
       end
     end
     
