@@ -29,7 +29,7 @@ module TicketMaster::Provider
             'followers' => object.followers,
             'type' => object.type,
             'username' => object.username,
-            'id' => object.id,
+            'id' => object.name,
             'pushed' => object.pushed,
             'created' => object.created}
             
