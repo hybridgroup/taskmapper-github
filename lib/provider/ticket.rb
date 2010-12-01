@@ -12,6 +12,7 @@ module TicketMaster::Provider
       def initialize(*object)
         if object.first
           object = object.first
+          @system_data = {:client => object}
         	unless object.is_a? Hash
         	  hash = {:repository => object.repository.name,
         	          :user => object.user,
@@ -23,7 +24,13 @@ module TicketMaster::Provider
         	          :closed_at => object.closed_at,
         	          :labels => object.labels,
         	          :state => object.state,
-        	          :created_at => object.created_at
+        	          :created_at => object.created_at,
+        	          :id => object.number,
+        	          :project_id => object.repository.name,
+        	          :description => object.body,
+        	          :status => object.state,
+        	          :resolution => (object.state == 'closed' ? 'closed' : nil),
+        	          :requestor => object.user
         	    }
         	else
         	  hash = object

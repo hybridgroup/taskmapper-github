@@ -12,6 +12,7 @@ module TicketMaster::Provider
       def initialize(*object)
         if object.first
           object = object.first
+          @system_data = {:client => object}
           hash = {'description' => object.description,
   	        'url' => object.url,
             'forks' => object.forks,

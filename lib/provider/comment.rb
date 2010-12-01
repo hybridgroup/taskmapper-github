@@ -11,8 +11,29 @@ module TicketMaster::Provider
       
       def initialize(*options)
         if options.first.is_a? Hash
-          super options.first
+          object = options.first
+          @system_data = {:client => object}
+          object[:author] = object['user']
+          object[:project_id] = options[1]
+          object[:ticket_id] = options[2]
+          super object
         end
+      end
+
+      def created_at
+        @created_at ||= begin
+          Time.parse(self[:created_at])
+          rescue
+          self[:created_at]
+          end
+      end
+
+       def created_at
+        @updated_at ||= begin
+          Time.parse(self[:updated_at])
+          rescue
+          self[:updated_at]
+          end
       end
       
       # declare needed overloaded methods here
@@ -22,7 +43,7 @@ module TicketMaster::Provider
       
       def self.find_by_attributes(project_id, ticket_id, attributes = {})
       	warn "Github API only gets all comments"
-      	self::API.find_all(Project.find(:first, [project_id]), ticket_id).collect {|comment| self.new comment}
+      	self::API.find_all(Project.find(:first, [project_id]), ticket_id).collect {|comment| self.new comment, project_id, ticket_id}
       end
       
       def self.search(project_id, ticket_id, options = {}, limit = 1000)
