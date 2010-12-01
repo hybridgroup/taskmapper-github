@@ -39,8 +39,16 @@ module TicketMaster::Provider
       
       def self.find_by_attributes(project_id, attributes = {})
       	attributes ||= {}
-      	attributes[:state] ||= 'open'
-      	self::API.find_all(build_attributes(project_id, attributes)).collect{|issue| self.new issue}
+        issues = []
+      	if attributes[:state].nil?
+      	  attributes[:state] = 'open'
+          issues += self::API.find_all(build_attributes(project_id, attributes))
+          attributes[:state] = 'closed'
+          issues += self::API.find_all(build_attributes(project_id, attributes))
+        else
+      	  issues = self::API.find_all(build_attributes(project_id, attributes))
+      	end
+      	issues.collect { |issue| self.new issue }
       end
       
       def self.build_attributes(repo, options)
