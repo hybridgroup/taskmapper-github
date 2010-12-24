@@ -51,7 +51,11 @@ module TicketMaster::Provider
       	  attributes[:state] = 'open'
           issues += self::API.find_all(build_attributes(project_id, attributes))
           attributes[:state] = 'closed'
-          issues += self::API.find_all(build_attributes(project_id, attributes))
+          begin
+            issues += self::API.find_all(build_attributes(project_id, attributes))
+          rescue APICache::TimeoutError
+            warn "Unable to fetch closed issues due to timeout"
+          end
         else
       	  issues = self::API.find_all(build_attributes(project_id, attributes))
       	end
@@ -59,7 +63,7 @@ module TicketMaster::Provider
       end
       
       def self.build_attributes(repo, options)
-      	hash = {:repo => repo, :user => Octopi::Api.api.login}
+      	hash = {:repo => repo, :user => TicketMaster::Provider::Github.login}
       	hash.merge!(options)
       end
       

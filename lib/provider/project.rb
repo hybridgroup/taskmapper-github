@@ -52,7 +52,7 @@ module TicketMaster::Provider
       
       def self.find_by_id(id)
         warn "Github API only finds by name"
-        self.new self::API.find({:user => Octopi::Api.api.login, :repo => id})
+        self.new self::API.find({:user => TicketMaster::Provider::Github.login, :repo => id})
       end
       
       # copy from this.copy(that) copies that into this
@@ -72,22 +72,13 @@ module TicketMaster::Provider
       	  api.find(*options)
       	end
       end
+
+      def ticket(*options)
+        TicketMaster::Provider::Github::Ticket.find(self.id, *options)
+      end
       
       def tickets(*options)
-      	first = options.shift
-
-      	if first.nil? || (first == :all and options.nil?)
-      	  easy_finder(TicketMaster::Provider::Github::Ticket, name, :all)
-      	elsif first.is_a? Fixnum
-      	  easy_finder(TicketMaster::Provider::Github::Ticket, name, first)
-      	elsif first
-      	  unless options.blank?
-      	    options = options.first
-      	  else
-      	    options = {}
-      	  end
-      	  easy_finder(TicketMaster::Provider::Github::Ticket, name, first, options)
-      	end
+      	TicketMaster::Provider::Github::Ticket.find(self.id, *options)
       end
     
       def ticket!(*options)
