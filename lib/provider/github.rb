@@ -18,12 +18,15 @@ module TicketMaster::Provider
     def authorize(auth = {})
       @authentication ||= TicketMaster::Authenticator.new(auth)
       auth = @authentication
-      if auth.token.nil? or (auth.login.nil? and auth.username.nil?)
+      if auth.login.blank? and auth.username.blank?
+        raise TicketMaster::Exception.new('Please provide at least a username')
+      elsif auth.token.blank?
         TicketMaster::Provider::Github.login = auth.login || auth.username
-        return
+        Octopi::Api.api = Octopi::AnonymousApi.instance
       else
+        TicketMaster::Provider::Github.login = auth.login || auth.username
         Octopi::Api.api = Octopi::AuthApi.instance
-        Octopi::Api.api.token = auth.token unless auth.token.blank?
+        Octopi::Api.api.token = auth.token
         Octopi::Api.api.login = auth.login || auth.username
       end
     end
