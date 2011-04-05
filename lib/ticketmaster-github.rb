@@ -1,6 +1,5 @@
 #require YOUR_PROVIDER_API
-require 'octopi'
-require 'httparty'
+require 'octokit'
 
 %w{ github }.each do |f|
   require File.dirname(__FILE__) + '/github/' + f + '.rb';
