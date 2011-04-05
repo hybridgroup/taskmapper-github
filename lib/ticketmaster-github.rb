@@ -1,10 +1,5 @@
 #require YOUR_PROVIDER_API
-require 'octopi'
-require 'httparty'
-
-%w{ github }.each do |f|
-  require File.dirname(__FILE__) + '/github/' + f + '.rb';
-end
+require 'octokit'
 
 %w{ github ticket project comment }.each do |f|
   require File.dirname(__FILE__) + '/provider/' + f + '.rb';
