@@ -28,23 +28,6 @@ module TicketMaster::Provider
         TicketMaster::Provider::Github.api = Octokit.client(:login => auth.login, :token => auth.token)
       end
     end
-
-    def projects(*options)
-      if options.empty?
-        PROJECT_API.find(:user => TicketMaster::Provider::Github.login).collect{|repo| Project.new repo}
-      elsif  options.first.is_a?(Array)
-        options.collect{|name| Project.find(name)}.first
-      end
-    end
-    
-    def project(*name)
-      unless name.empty?
-        Project.find(name.first)
-      else
-        super
-      end
-    end
-    
   end
 end
 
