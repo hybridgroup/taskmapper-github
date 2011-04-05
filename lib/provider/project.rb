@@ -6,7 +6,7 @@ module TicketMaster::Provider
     class Project < TicketMaster::Provider::Base::Project
       attr_accessor :prefix_options, :name, :user
       
-      API = Octopi::Repository
+      API = Octokit
       # declare needed overloaded methods here
       
       def initialize(*object)
@@ -40,21 +40,6 @@ module TicketMaster::Provider
 	      end
       end
       
-      def self.search(options = {}, limit = 100)
-	      raise "Please supply arguments for search" if options.blank?
-      	if options.is_a? Hash
-      	  r = self.new self::API.find(options)
-      	  [] << r
-      	else
-      	  self::API.find_all(options)[0...limit].collect { |repo| self.new repo }
-      	end
-      end
-      
-      def self.find_by_id(id)
-        warn "Github API only finds by name"
-        self.new self::API.find({:user => TicketMaster::Provider::Github.login, :repo => id})
-      end
-      
       # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|
@@ -64,25 +49,6 @@ module TicketMaster::Provider
             sleep 1
           end
         end
-      end
-      
-      def easy_finder(api, *options)
-      	if api.is_a? Class
-      	  #return api if options.length == 0 and symbol == :first
-      	  api.find(*options)
-      	end
-      end
-
-      def ticket(*options)
-        TicketMaster::Provider::Github::Ticket.find(self.id, *options)
-      end
-      
-      def tickets(*options)
-      	TicketMaster::Provider::Github::Ticket.find(self.id, *options)
-      end
-    
-      def ticket!(*options)
-        TicketMaster::Provider::Github::Ticket.open(name, {:params => options.first})
       end
       
     end
