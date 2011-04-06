@@ -8,11 +8,12 @@ describe "Ticketmaster::Provider::Github::Project" do
   end
 
   before(:each) do
-    @github =  TicketMaster.new(:github, {:login => 'jquery'})
+    @github =  TicketMaster.new(:github, {:login => 'cored', :token => 'f7ce8b7b7fef0d3d9f8971db2490e090'})
   end
   
   it "should be able to load all projects" do
-    pending
+    @github.projects.should be_an_instance_of(Array)
+    @github.projects.first.should be_an_instance_of(@klass)
   end
   
   it "should be able to find by name(id)" do

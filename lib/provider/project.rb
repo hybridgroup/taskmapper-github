@@ -6,8 +6,23 @@ module TicketMaster::Provider
     class Project < TicketMaster::Provider::Base::Project
       
       # declare needed overloaded methods here
-      
-      
+      def initialize(*object) 
+        if object.first
+          object = object.first
+          unless object.is_a? Hash
+            @system_data = {:client => object} 
+            hash = {:description => object.description,
+                    :created_at => object.created_at,
+                    :name => object.name,
+                    :id => object.name,
+                    :owner => object.owner}
+          else 
+            hash = object
+          end 
+          super hash
+        end
+      end
+
       # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|

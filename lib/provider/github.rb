@@ -2,8 +2,6 @@ module TicketMaster::Provider
   # This is the Github Provider for ticketmaster
   module Github
     include TicketMaster::Provider::Base
-    PROJECT_API = Github::Project
-    ISSUE_API = Github::Ticket
 
     class << self
       attr_accessor :login, :api
@@ -26,6 +24,12 @@ module TicketMaster::Provider
       else
         TicketMaster::Provider::Github.login = auth.login || auth.username
         TicketMaster::Provider::Github.api = Octokit.client(:login => auth.login, :token => auth.token)
+      end
+    end
+
+    def projects(*options)
+      if options.empty?
+        TicketMaster::Provider::Github.api.repositories.collect { |repository| Project.new repository }
       end
     end
   end
