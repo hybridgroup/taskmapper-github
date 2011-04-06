@@ -3,12 +3,12 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Github::Project" do
 
   before(:all) do
-    @repo_name = "translator"
+    @repo_name = "jquery-mobile"
     @klass = TicketMaster::Provider::Github::Project
   end
 
   before(:each) do
-    @github =  TicketMaster.new(:github, {:login => 'cored', :token => 'f7ce8b7b7fef0d3d9f8971db2490e090'})
+    @github =  TicketMaster.new(:github, {:login => 'jquery' })
   end
   
   it "should be able to load all projects" do
@@ -16,16 +16,10 @@ describe "Ticketmaster::Provider::Github::Project" do
     @github.projects.first.should be_an_instance_of(@klass)
   end
 
-  it "should be able to load all projects without token" do 
-    @tm = TicketMaster.new(:github, {:login => 'jquery'})
-    @tm.projects.should be_an_instance_of(Array)
-    @tm.projects.first.name.should == 'sizzle'
-  end
-  
   it "should be able to find by name(id)" do
     p = @github.project(@repo_name)
     p.should be_an_instance_of(@klass)
-    p.name.should == 'translator'
+    p.name.should == 'jquery-mobile'
   end
   
   it "should be able to find by name(id) with find method" do
