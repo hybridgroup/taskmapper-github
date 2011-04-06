@@ -50,6 +50,10 @@ module TicketMaster::Provider
         TicketMaster::Provider::Github.api.repositories.collect { |repository| 
           self.new repository }
       end
+
+      def tickets(*options)
+        TicketMaster::Provider::Github::Ticket.find(self.id, options)
+      end
     end
 
   end

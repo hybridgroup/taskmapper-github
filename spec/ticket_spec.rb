@@ -2,13 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Github::Ticket" do
   before(:all) do
-  end
-  
-  before(:each) do
+    @github = TicketMaster.new(:github, {:login => 'jquery'})
+    @project = @github.project('jquery-mobile')
   end
   
   it "should be able to load all tickets" do
-    pending
+    @project.tickets.should be_an_instance_of(Array) 
+    @project.tickets.first.description.should == ''
   end
   
   it "should be able to load ticket from an array of ids" do
