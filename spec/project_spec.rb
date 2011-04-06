@@ -15,6 +15,12 @@ describe "Ticketmaster::Provider::Github::Project" do
     @github.projects.should be_an_instance_of(Array)
     @github.projects.first.should be_an_instance_of(@klass)
   end
+
+  it "should be able to load all projects without token" do 
+    @tm = TicketMaster.new(:github, {:login => 'jquery'})
+    @tm.projects.should be_an_instance_of(Array)
+    @tm.projects.first.name.should == 'sizzle'
+  end
   
   it "should be able to find by name(id)" do
     pending
