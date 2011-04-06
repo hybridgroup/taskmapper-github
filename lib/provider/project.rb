@@ -34,6 +34,12 @@ module TicketMaster::Provider
         end
       end
 
+      def self.find(*options)
+        if options.first.empty?
+          TicketMaster::Provider::Github.api.repositories.collect { |repository| self.new repository }
+        end
+      end
+
     end
   end
 end

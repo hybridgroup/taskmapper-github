@@ -28,9 +28,7 @@ module TicketMaster::Provider
     end
 
     def projects(*options)
-      if options.empty?
-        TicketMaster::Provider::Github.api.repositories.collect { |repository| Project.new repository }
-      end
+      Project.find(options)
     end
   end
 end
