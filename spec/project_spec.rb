@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Github::Project" do
 
   before(:all) do
-    @repo_name = "jquery-mobile"
+    @repo_name = "translator"
     @klass = TicketMaster::Provider::Github::Project
   end
 
@@ -23,7 +23,9 @@ describe "Ticketmaster::Provider::Github::Project" do
   end
   
   it "should be able to find by name(id)" do
-    pending
+    p = @github.project(@repo_name)
+    p.should be_an_instance_of(@klass)
+    p.name.should == 'translator'
   end
   
   it "should be able to find by name(id) with find method" do
