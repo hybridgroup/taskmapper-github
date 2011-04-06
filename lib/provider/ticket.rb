@@ -27,9 +27,15 @@ module TicketMaster::Provider
         end
       end
 
+      def self.find_by_id(project_id, number) 
+        self.new TicketMaster::Provider::Github.api.issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number)
+      end
+
       def self.find(project_id, *options)
         if options.first.empty?
           self.find_all(project_id).collect { |issue| self.new issue }
+        elsif options.first.is_a? Array
+          options.first.collect { |number| self.find_by_id(project_id, number)}
         end
       end
 
