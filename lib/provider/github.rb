@@ -28,14 +28,21 @@ module TicketMaster::Provider
     end
 
     def projects(*options)
-      Project.find(options)
-    end
-
-    def project(*options)
-      if options.first.is_a? String
-        Project.new TicketMaster::Provider::Github.api.repositories.select { |repo| repo.name == options.first }.first
+      if options.empty?
+        Project.find_all(options)
+      elsif options.first.is_a? Array
+        options.first.collect { |name| Project.find_by_id(name) }
       end
     end
+
+    def project(*project)
+      unless project.empty?
+        Project.find_by_id(project.first)
+      else
+        super
+      end
+    end
+
   end
 end
 

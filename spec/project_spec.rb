@@ -16,10 +16,17 @@ describe "Ticketmaster::Provider::Github::Project" do
     @github.projects.first.should be_an_instance_of(@klass)
   end
 
+  it "should be able to load all projects based on an array of name(id)" do 
+    projects = @github.projects([@repo_name])
+    projects.should be_an_instance_of(Array)
+    projects.first.should be_an_instance_of(@klass)
+    projects.first.id.should == @repo_name
+  end
+
   it "should be able to find by name(id)" do
     p = @github.project(@repo_name)
     p.should be_an_instance_of(@klass)
-    p.name.should == 'jquery-mobile'
+    p.name.should == @repo_name
   end
   
   it "should be able to find by name(id) with find method" do

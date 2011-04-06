@@ -23,6 +23,10 @@ module TicketMaster::Provider
         end
       end
 
+      def id
+        self[:name]
+      end
+
       # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|
@@ -34,12 +38,15 @@ module TicketMaster::Provider
         end
       end
 
-      def self.find(*options)
-        if options.first.empty?
-          TicketMaster::Provider::Github.api.repositories.collect { |repository| self.new repository }
-        end
+      def self.find_by_id(id)
+        self.new TicketMaster::Provider::Github.api.repository("#{TicketMaster::Provider::Github.login}/#{id}")
       end
 
+      def self.find_all(*options)
+        TicketMaster::Provider::Github.api.repositories.collect { |repository| 
+          self.new repository }
+      end
     end
+
   end
 end
