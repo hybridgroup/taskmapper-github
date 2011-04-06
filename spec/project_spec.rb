@@ -26,7 +26,13 @@ describe "Ticketmaster::Provider::Github::Project" do
   it "should be able to find by name(id)" do
     p = @github.project(@repo_name)
     p.should be_an_instance_of(@klass)
-    p.name.should == @repo_name
+    p.name.should be_eql(@repo_name)
+  end
+
+  it "should be able to find by name(id) with the find method" do 
+    p = @github.project.find(@repo_name)
+    p.should be_an_instance_of(@klass)
+    p.name.should be_eql(@repo_name)
   end
   
   it "should be able to find by attributes" do
