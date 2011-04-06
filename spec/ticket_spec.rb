@@ -19,8 +19,10 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     tickets.first.should be_an_instance_of(@klass)
   end
   
-  it "should be able to find a single ticket based on number attribute" do
-    pending
+  it "should be able to find a tickets based on attributes" do
+    tickets = @project.tickets(:number => @ticket_id)
+    tickets.should be_an_instance_of(Array)
+    tickets.first.should be_an_instance_of(@klass)
   end
   
   it "should find a ticket by id(number)" do

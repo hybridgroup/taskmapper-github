@@ -34,13 +34,16 @@ module TicketMaster::Provider
       def self.find(project_id, *options)
         if options.first.empty?
           self.find_all(project_id).collect { |issue| self.new issue }
-        elsif options.first.is_a? Array
-          options.first.collect { |number| self.find_by_id(project_id, number)}
+        elsif options[0].first.is_a? Array
+          options.first.collect { |number| self.find_by_id(project_id, number) }
+        elsif options[0].first.is_a? Hash
+          self.find_by_attributes(project_id, options[0].first)
         end
       end
 
       def self.find_by_attributes(project_id, attributes = {})
-        issues = search_by_attribute(issues, attributes)
+        issues = self.find_all(project_id)
+        search_by_attribute(issues, attributes).collect { |issue| self.new issue }
       end
 
       def self.find_all(project_id)
