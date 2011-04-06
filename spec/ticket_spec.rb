@@ -8,7 +8,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   
   it "should be able to load all tickets" do
     @project.tickets.should be_an_instance_of(Array) 
-    @project.tickets.first.description.should == ''
+    @project.tickets.first.title.should == 'Added unit tests for controlgroup module'
   end
   
   it "should be able to load ticket from an array of ids" do
