@@ -38,6 +38,10 @@ module TicketMaster::Provider
         end
       end
 
+      def self.find_by_attributes(attributes = {})
+        search_by_attribute(find_all, attributes).collect { |project| self.new project }
+      end
+
       def self.find_by_id(id)
         self.new TicketMaster::Provider::Github.api.repository("#{TicketMaster::Provider::Github.login}/#{id}")
       end

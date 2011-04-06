@@ -29,8 +29,10 @@ describe "Ticketmaster::Provider::Github::Project" do
     p.name.should == @repo_name
   end
   
-  it "should be able to find by name(id) with find method" do
-    pending
+  it "should be able to find by attributes" do
+    projects = @github.projects(:name => @repo_name)
+    projects.should be_an_instance_of(Array)
+    projects.first.id.should == @repo_name
   end
   
   it "should be able to get projects with array of names" do
