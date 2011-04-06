@@ -30,6 +30,12 @@ module TicketMaster::Provider
     def projects(*options)
       Project.find(options)
     end
+
+    def project(*options)
+      if options.first.is_a? String
+        Project.new TicketMaster::Provider::Github.api.repositories.select { |repo| repo.name == options.first }.first
+      end
+    end
   end
 end
 
