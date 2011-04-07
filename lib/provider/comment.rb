@@ -41,6 +41,10 @@ module TicketMaster::Provider
         TicketMaster::Provider::Github.api.issue_comments("#{TicketMaster::Provider::Github.login}/#{project_id}", ticket_id).collect { |comment| self.new comment }
       end
 
+      def self.create(project_id, ticket_id, comment)
+        self.new TicketMaster::Provider::Github.api.add_comment("#{TicketMaster::Provider::Github.login}/#{project_id}", ticket_id, comment)
+      end
+
     end
   end
 end
