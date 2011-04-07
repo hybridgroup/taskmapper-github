@@ -36,6 +36,11 @@ module TicketMaster::Provider
       end
       
       # declare needed overloaded methods here
+       
+      def self.find(project_id, ticket_id)
+        TicketMaster::Provider::Github.api.issue_comments("#{TicketMaster::Provider::Github.login}/#{project_id}", ticket_id).collect { |comment| self.new comment }
+      end
+
     end
   end
 end
