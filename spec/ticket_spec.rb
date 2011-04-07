@@ -5,7 +5,9 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     @github = TicketMaster.new(:github, {:login => 'jquery'})
     @project = @github.project('jquery-mobile')
     @ticket_id = 1
+    @ticket = {:body => 'Creating a ticket from API', :title => 'Ticket for jquery', :number => 1}
     @klass = TicketMaster::Provider::Github::Ticket
+    @api = Octokit::Client
   end
   
   it "should be able to load all tickets" do
@@ -31,13 +33,15 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   end
   
   it "should be able to open a new ticket" do
-    pending
+    @api.stub!('create_issue').and_return(@ticket)
+    tick = @project.ticket!(:body => 'Creating a ticket from API', :title => 'Ticket for jquery')
+    tick.should be_an_instance_of(@klass)
   end
-  
+
   it "should be able to update a existing ticket" do
     pending
   end
-  
+
   it "should be able to close a ticket" do
     pending
   end

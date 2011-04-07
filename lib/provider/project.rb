@@ -62,6 +62,10 @@ module TicketMaster::Provider
           TicketMaster::Provider::Github::Ticket
         end
       end
+
+      def ticket!(*options)
+        TicketMaster::Provider::Github::Ticket.open(self.id, options.first)
+      end
     end
 
   end

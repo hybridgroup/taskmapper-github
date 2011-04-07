@@ -54,6 +54,16 @@ module TicketMaster::Provider
         issues
       end
 
+      def self.open(project_id, *options)
+        begin
+          body = options.first.delete[:body]
+          title = options.first.delete[:title]
+          self.new TicketMaster::Provider::Github.api.create_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", title, body, options)
+        rescue
+          self.find_all(project_id).collect { |issue| self.new issue }.last
+        end
+      end
+
     end
   end
 end
