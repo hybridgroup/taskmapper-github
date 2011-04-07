@@ -19,7 +19,8 @@ module TicketMaster::Provider
                     :id => object.number,
                     :html_url => object.html_url,
                     :position => object.position,
-                    :description => object.body}
+                    :description => object.body,
+                    :project_id => object.project_id}
           else 
             hash = object
           end 
@@ -66,6 +67,15 @@ module TicketMaster::Provider
         rescue
           self.find_all(project_id).last
         end
+      end
+
+      def save
+        t = Ticket.find_by_id(project_id, number)
+        return false if t.title == title and t.body == body
+        t.title = title
+        t.body = body
+        t.save
+        true
       end
 
     end
