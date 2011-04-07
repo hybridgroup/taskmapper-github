@@ -21,7 +21,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     tickets.first.should be_an_instance_of(@klass)
   end
   
-  it "should be able to find a tickets based on attributes" do
+  it "should be able to find tickets based on attributes" do
     tickets = @project.tickets(:number => @ticket_id)
     tickets.should be_an_instance_of(Array)
     tickets.first.should be_an_instance_of(@klass)
@@ -29,7 +29,6 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   
   it "should find a ticket by id(number)" do
     ticket = @project.ticket(@ticket_id)
-    puts ticket.inspect
     ticket.should be_an_instance_of(@klass)
     ticket.title.should be_eql('Move Ajax Test to Core')
   end

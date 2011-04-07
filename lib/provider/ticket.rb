@@ -34,7 +34,7 @@ module TicketMaster::Provider
       end
 
       def self.find_by_id(project_id, number) 
-        self.new [project_id, TicketMaster::Provider::Github.api.issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number)]
+        self.new(project_id, TicketMaster::Provider::Github.api.issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number))
       end
 
       def self.find(project_id, *options)
@@ -57,14 +57,14 @@ module TicketMaster::Provider
         issues += TicketMaster::Provider::Github.api.issues("#{TicketMaster::Provider::Github.login}/#{project_id}")
         state = 'closed'
         issues += TicketMaster::Provider::Github.api.issues("#{TicketMaster::Provider::Github.login}/#{project_id}", state)
-        issues.collect { |issue| self.new issue }
+        issues.collect { |issue| self.new(project_id, issue) }
       end
 
       def self.open(project_id, *options)
         begin
           body = options.first.delete[:body]
           title = options.first.delete[:title]
-          self.new [project_id, TicketMaster::Provider::Github.api.create_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", title, body, options)]
+          self.new(project_id, TicketMaster::Provider::Github.api.create_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", title, body, options))
         rescue
           self.find_all(project_id).last
         end
