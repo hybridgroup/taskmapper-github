@@ -33,11 +33,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     ticket.title.should be_eql('Move Ajax Test to Core')
   end
   
-  it "should be able to open a new ticket" do
-    @api.stub!('create_issue').and_return(@ticket)
-    tick = @project.ticket!(:body => 'Creating a ticket from API', :title => 'Ticket for jquery')
-    tick.should be_an_instance_of(@klass)
-  end
+  it "should be able to open a new ticket" 
 
   it "should be able to update a existing ticket" do
     @api.stub!('issue').and_return(@ticket)
@@ -47,13 +43,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     tick.save.should be_eql(true)
   end
 
-  it "should be able to reopen a ticket" do
-    @api.stub_chain('issue', 'reopen_issue').and_return(@ticket)
-    tick = @project.ticket(@ticket_id)
-    tick.reopen.should be_an_instance_of(@klass)
-  end
+  it "should be able to reopen a ticket" 
 
-  it "should be able to close a ticket" do
-    pending
-  end
+  it "should be able to close a ticket" 
 end

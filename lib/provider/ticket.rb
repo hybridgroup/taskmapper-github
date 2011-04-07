@@ -78,7 +78,11 @@ module TicketMaster::Provider
       end
 
       def reopen
-        Ticket.new [project_id, TicketMaster::Provider::Github.api.reopen_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number)]
+        Ticket.new(project_id, TicketMaster::Provider::Github.api.reopen_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number))
+      end
+
+      def close
+        Ticket.new(project_id, TicketMaster::Provider::Github.api.close_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number)) 
       end
 
     end
