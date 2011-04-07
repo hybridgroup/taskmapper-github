@@ -48,7 +48,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   end
 
   it "should be able to reopen a ticket" do
-    @api.stub('reopen_issue').and_return(@ticket)
+    @api.stub_chain('issue', 'reopen_issue').and_return(@ticket)
     tick = @project.ticket(@ticket_id)
     tick.reopen.should be_an_instance_of(@klass)
   end

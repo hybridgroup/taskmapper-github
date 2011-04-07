@@ -9,8 +9,8 @@ module TicketMaster::Provider
       def initialize(*object) 
         if object.first
           object = object.first
+          @system_data = {:client => object} 
           unless object.is_a? Hash
-            @system_data = {:client => object} 
             hash = {:description => object.description,
                     :created_at => object.created_at,
                     :name => object.name,
