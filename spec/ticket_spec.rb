@@ -26,7 +26,8 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   end
   
   it "should find a ticket by id(number)" do
-    pending
+    ticket = @project.ticket(@ticket_id)
+    ticket.should be_an_instance_of(@klass)
   end
   
   it "should be able to open a new ticket" do

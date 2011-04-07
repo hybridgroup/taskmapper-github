@@ -54,6 +54,14 @@ module TicketMaster::Provider
       def tickets(*options)
         TicketMaster::Provider::Github::Ticket.find(self.id, options)
       end
+
+      def ticket(*options)
+        unless options.empty?
+          TicketMaster::Provider::Github::Ticket.find_by_id(self.id, options.first)
+        else
+          TicketMaster::Provider::Github::Ticket
+        end
+      end
     end
 
   end
