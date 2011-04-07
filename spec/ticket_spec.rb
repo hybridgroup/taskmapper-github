@@ -30,6 +30,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   it "should find a ticket by id(number)" do
     ticket = @project.ticket(@ticket_id)
     ticket.should be_an_instance_of(@klass)
+    ticket.title.should == ''
   end
   
   it "should be able to open a new ticket" do
@@ -39,7 +40,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   end
 
   it "should be able to update a existing ticket" do
-    pending
+    tick = @project.ticket(@project.id, @ticket_id)
   end
 
   it "should be able to close a ticket" do
