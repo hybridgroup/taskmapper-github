@@ -9,6 +9,7 @@ module TicketMaster::Provider
       # declare needed overloaded methods here
       
       def initialize(*object) 
+        project_id = object.shift
         if object.first
           object = object.first
           unless object.is_a? Hash
@@ -20,7 +21,7 @@ module TicketMaster::Provider
                     :html_url => object.html_url,
                     :position => object.position,
                     :description => object.body,
-                    :project_id => object.project_id}
+                    :project_id => project_id}
           else 
             hash = object
           end 
@@ -33,12 +34,12 @@ module TicketMaster::Provider
       end
 
       def self.find_by_id(project_id, number) 
-        self.new TicketMaster::Provider::Github.api.issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number)
+        self.new [project_id, TicketMaster::Provider::Github.api.issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number)]
       end
 
       def self.find(project_id, *options)
         if options.first.empty?
-          self.find_all(project_id).collect { |issue| self.new issue }
+          self.find_all(project_id)
         elsif options[0].first.is_a? Array
           options.first.collect { |number| self.find_by_id(project_id, number) }
         elsif options[0].first.is_a? Hash
@@ -63,7 +64,7 @@ module TicketMaster::Provider
         begin
           body = options.first.delete[:body]
           title = options.first.delete[:title]
-          self.new TicketMaster::Provider::Github.api.create_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", title, body, options)
+          self.new [project_id, TicketMaster::Provider::Github.api.create_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", title, body, options)]
         rescue
           self.find_all(project_id).last
         end
@@ -76,6 +77,10 @@ module TicketMaster::Provider
         t.body = body
         t.save
         true
+      end
+
+      def reopen
+        Ticket.new [project_id, TicketMaster::Provider::Github.api.reopen_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number)]
       end
 
     end

@@ -29,6 +29,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   
   it "should find a ticket by id(number)" do
     ticket = @project.ticket(@ticket_id)
+    puts ticket.inspect
     ticket.should be_an_instance_of(@klass)
     ticket.title.should be_eql('Move Ajax Test to Core')
   end
@@ -47,11 +48,13 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     tick.save.should be_eql(true)
   end
 
-  it "should be able to close a ticket" do
-    pending
+  it "should be able to reopen a ticket" do
+    @api.stub('reopen_issue').and_return(@ticket)
+    tick = @project.ticket(@ticket_id)
+    tick.reopen.should be_an_instance_of(@klass)
   end
 
-  it "should be able to reopen a ticket" do
+  it "should be able to close a ticket" do
     pending
   end
 end
