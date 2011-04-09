@@ -38,10 +38,10 @@ Gem::Specification.new do |s|
     "spec/ticketmaster-github_spec.rb",
     "ticketmaster-github.gemspec"
   ]
-  s.homepage = %q{http://github.com/kiafaldorius/ticketmaster-github}
+  s.homepage = %q{http://github.com/hybridgroup/ticketmaster-github}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.1}
-  s.summary = %q{The github provider for ticketmaster}
+  s.summary = %q{Ticketmaster provider for Github Issues}
   s.test_files = [
     "spec/comment_spec.rb",
     "spec/factories/comment.rb",
@@ -58,14 +58,14 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
-      s.add_runtime_dependency(%q<xn-octokit>, [">= 0"])
+      s.add_runtime_dependency(%q<hybridgroup-octokit>, [">= 0"])
     else
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
-      s.add_dependency(%q<xn-octokit>, [">= 0"])
+      s.add_dependency(%q<hybridgroup-octokit>, [">= 0"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
-    s.add_dependency(%q<xn-octokit>, [">= 0"])
+    s.add_dependency(%q<hybridgroup-octokit>, [">= 0"])
   end
 end
 
