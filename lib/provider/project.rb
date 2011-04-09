@@ -34,9 +34,9 @@ module TicketMaster::Provider
 
       def updated_at
         begin
-          Time.parse(self[:updated_at]) 
+          Time.parse(self[:created_at]) 
         rescue
-          self[:updated_at]
+          self[:created_at]
         end
       end
 
