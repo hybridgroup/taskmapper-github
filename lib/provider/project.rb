@@ -13,6 +13,7 @@ module TicketMaster::Provider
           unless object.is_a? Hash
             hash = {:description => object.description,
                     :created_at => object.created_at,
+                    :updated_at => object.created_at,
                     :name => object.name,
                     :id => object.name,
                     :owner => object.owner}
@@ -20,6 +21,22 @@ module TicketMaster::Provider
             hash = object
           end 
           super hash
+        end
+      end
+
+      def created_at
+        begin 
+          Time.parse(self[:created_at]) 
+        rescue
+          self[:created_at]
+        end
+      end
+
+      def updated_at
+        begin
+          Time.parse(self[:updated_at]) 
+        rescue
+          self[:updated_at]
         end
       end
 

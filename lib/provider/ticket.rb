@@ -70,6 +70,22 @@ module TicketMaster::Provider
         TicketMaster::Provider::Github.api.create_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", title, body, options.first)
       end
 
+      def created_at
+        begin 
+          Time.parse(self[:created_at]) 
+        rescue
+          self[:created_at]
+        end
+      end
+
+      def updated_at
+        begin
+          Time.parse(self[:updated_at]) 
+        rescue
+          self[:updated_at]
+        end
+      end
+
       def save
         t = Ticket.find_by_id(project_id, number)
         return false if t.title == title and t.body == body

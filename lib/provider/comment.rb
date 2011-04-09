@@ -27,7 +27,7 @@ module TicketMaster::Provider
           end
       end
 
-       def created_at
+       def updated_at
         @updated_at ||= begin
           Time.parse(self[:updated_at])
           rescue
