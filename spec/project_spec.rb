@@ -3,12 +3,12 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Github::Project" do
 
   before(:all) do
-    @repo_name = "jquery-mobile"
+    @repo_name = "flying_robot"
     @klass = TicketMaster::Provider::Github::Project
   end
 
   before(:each) do
-    @github =  TicketMaster.new(:github, {:login => 'jquery' })
+    @github =  TicketMaster.new(:github, {:login => 'deadprogrammer' })
   end
   
   it "should be able to load all projects" do

@@ -4,7 +4,7 @@ module TicketMaster::Provider
     include TicketMaster::Provider::Base
 
     class << self
-      attr_accessor :login, :api
+      attr_accessor :login, :api, :user_token
     end
     
     # This is for cases when you want to instantiate using TicketMaster::Provider::Github.new(auth)
@@ -20,9 +20,11 @@ module TicketMaster::Provider
         raise TicketMaster::Exception.new('Please provide at least a username')
       elsif auth.token.blank?
         TicketMaster::Provider::Github.login = auth.login || auth.username
+        TicketMaster::Provider::Github.user_token = nil
         TicketMaster::Provider::Github.api = Octokit.client(:login => auth.login)
       else
         TicketMaster::Provider::Github.login = auth.login || auth.username
+        TicketMaster::Provider::Github.user_token = auth.token
         TicketMaster::Provider::Github.api = Octokit.client(:login => auth.login, :token => auth.token)
       end
     end
