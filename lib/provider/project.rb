@@ -64,8 +64,12 @@ module TicketMaster::Provider
       end
 
       def self.find_all(*options)
-        TicketMaster::Provider::Github.api.repositories(TicketMaster::Provider::Github.login).collect { |repository| 
+        repos = []
+        user_repos = TicketMaster::Provider::Github.api.repositories(TicketMaster::Provider::Github.login).collect { |repository| 
           self.new repository }
+        org_repos = TicketMaster::Provider::Github.api.organization_repositories(TicketMaster::Provider::Github.login).collect { |repository| 
+          self.new repository }
+        repos = repos + user_repos + org_repos
       end
 
       def tickets(*options)

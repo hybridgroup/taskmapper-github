@@ -11,7 +11,7 @@ begin
     gem.homepage = "http://github.com/kiafaldorius/ticketmaster-github"
     gem.authors = ["HybridGroup"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
-    gem.add_dependency "octokit" 
+    gem.add_dependency "hybridgroup-octokit" 
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
