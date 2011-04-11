@@ -58,9 +58,9 @@ module TicketMaster::Provider
 
       def self.find_all(project_id)
         issues = []
-        issues += TicketMaster::Provider::Github.api.issues("#{TicketMaster::Provider::Github.login}/#{project_id}")
+        issues += TicketMaster::Provider::Github.api.issues(project_id)
         state = 'closed'
-        issues += TicketMaster::Provider::Github.api.issues("#{TicketMaster::Provider::Github.login}/#{project_id}", state)
+        issues += TicketMaster::Provider::Github.api.issues(project_id, state)
         issues.collect { |issue| Ticket.new(project_id, issue) }
       end
 
