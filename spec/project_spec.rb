@@ -38,7 +38,7 @@ describe "Ticketmaster::Provider::Github::Project" do
   it "should be able to find by attributes" do
     projects = @github.projects(:name => @repo_name)
     projects.should be_an_instance_of(Array)
-    projects.first.id.should be_eql(@repo_name)
+    projects.first.name.should be_eql(@repo_name)
   end
 end
 
