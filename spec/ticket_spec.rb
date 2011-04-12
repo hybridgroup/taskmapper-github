@@ -2,8 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Github::Ticket" do
   before(:each) do
-    @github = TicketMaster.new(:github, {:login => 'jquery'})
-    @project = @github.project('jquery-mobile')
+    @github = TicketMaster.new(:github, {:login => 'cored'})
+    @project = @github.project('jquery/jquery-mobile')
     @ticket_id = 1
     @ticket = {:body => 'Creating a ticket from API', :title => 'Ticket for jquery', :number => 1}
     @klass = TicketMaster::Provider::Github::Ticket

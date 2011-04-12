@@ -74,6 +74,7 @@ module TicketMaster::Provider
             self.new repository }
           repos = repos + org_repos
         end
+        puts repos.inspect
         repos
       end
 
