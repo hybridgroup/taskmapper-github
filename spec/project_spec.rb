@@ -20,7 +20,7 @@ describe "Ticketmaster::Provider::Github::Project" do
     projects = @github.projects([@repo_name])
     projects.should be_an_instance_of(Array)
     projects.first.should be_an_instance_of(@klass)
-    projects.first.id.should == @repo_name
+    projects.first.name.should == @repo_name
   end
 
   it "should be able to find by name(id)" do
