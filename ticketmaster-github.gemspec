@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ticketmaster-github}
-  s.version = "0.4.7"
+  s.version = "0.4.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = %q{2011-04-11}
-  s.description = %q{Ticketmaster provider for Github Issues tracking.}
-  s.email = %q{hong@hybridgroup.com}
+  s.date = %q{2011-04-12}
+  s.description = %q{This provides an interface with github through the ticketmaster gem.}
+  s.email = %q{hong.quach@abigfisch.com}
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md"
@@ -38,10 +38,10 @@ Gem::Specification.new do |s|
     "spec/ticketmaster-github_spec.rb",
     "ticketmaster-github.gemspec"
   ]
-  s.homepage = %q{http://github.com/hybridgroup/ticketmaster-github}
+  s.homepage = %q{http://github.com/kiafaldorius/ticketmaster-github}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.1}
-  s.summary = %q{Ticketmaster provider for Github Issues}
+  s.rubygems_version = %q{1.6.0}
+  s.summary = %q{The github provider for ticketmaster}
   s.test_files = [
     "spec/comment_spec.rb",
     "spec/factories/comment.rb",
