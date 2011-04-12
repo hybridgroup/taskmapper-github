@@ -5,7 +5,7 @@ This is a provider for [ticketmaster](http://ticketrb.com). It provides interope
 # Usage and Examples
 
 First we have to instantiate a new ticketmaster instance:
-    github = TicketMaster.new(:github, {:username => "code", :token => "m4st3r!"})
+  github = TicketMaster.new(:github, {:login => "coder", :token => "m4st3r!"})
 
 If you do not pass in the token and the username, it will only access public information for the account.
 
@@ -14,8 +14,8 @@ If you do not pass in the token and the username, it will only access public inf
 You can find your own projects by doing:
 
 	projects = github.projects # Will return all your repositories
-    projects = github.projects(['your_repo1', 'your_repo2'])
-    project = github.project('your_repo')
+  projects = github.projects(['your_repo1', 'your_repo2'])
+  project = github.project('your_repo')
 
 Also you can access other users repos
 	
@@ -27,7 +27,7 @@ Or even make a search with an array
 	
 == Finding Tickets(Issues)
 
-    tickets = project.tickets # All open issues
+  tickets = project.tickets # All open issues
 	tickets = project.tickets(:all, {:state => 'closed'}) # All closed tickets
 	ticket = project.ticket(<issue_number>)
 
@@ -53,7 +53,7 @@ Or even make a search with an array
 	comments = ticket.comments
 
 == Create Comment
-	comment = ticket.comment!(<comment text>)
+	comment = ticket.comment!("your comment goes here")
 
 ## Requirements
 
@@ -83,4 +83,4 @@ If you see or find any issues, feel free to open up an issue report.
 
 ## Copyright
 
-Copyright (c) 2010 The Hybrid Group. See LICENSE for details.
+Copyright (c) 2010-2011 The Hybrid Group. See LICENSE for details.
