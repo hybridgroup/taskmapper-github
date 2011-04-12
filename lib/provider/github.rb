@@ -34,6 +34,8 @@ module TicketMaster::Provider
         Project.find_all(options)
       elsif options.first.is_a? Array
         options.first.collect { |name| Project.find_by_id(name) }
+      elsif options.first.is_a? String
+        Project.find_by_id(options.first)
       elsif options.first.is_a? Hash
         Project.find_by_attributes(options.first)
       end

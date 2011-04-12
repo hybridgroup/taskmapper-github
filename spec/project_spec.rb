@@ -23,6 +23,12 @@ describe "Ticketmaster::Provider::Github::Project" do
     projects.first.name.should == @repo_name
   end
 
+  it "should be able to load a single project based on a single name(id)" do 
+    project = @github.projects(@repo_name)
+    project.should be_an_instance_of(@klass)
+    project.name.should == @repo_name
+  end
+
   it "should be able to find by name(id)" do
     p = @github.project(@repo_name)
     p.should be_an_instance_of(@klass)
