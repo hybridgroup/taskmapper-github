@@ -56,7 +56,9 @@ module TicketMaster::Provider
       end
 
       def self.find_by_attributes(attributes = {})
-        search_by_attribute(find_all, attributes).collect { |project| self.new project }
+        projects = find_all
+        puts projects.inspect
+        search_by_attribute(projects, attributes).collect { |project| self.new project }
       end
 
       def self.find_by_id(id)
@@ -74,7 +76,6 @@ module TicketMaster::Provider
             self.new repository }
           repos = repos + org_repos
         end
-        puts repos.inspect
         repos
       end
 
