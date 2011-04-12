@@ -14,25 +14,25 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     @project.tickets.should be_an_instance_of(Array) 
     @project.tickets.first.should be_an_instance_of(@klass)
   end
-  
+
   it "should be able to load tickets from an array of ids" do
     tickets = @project.tickets([@ticket_id])
     tickets.should be_an_instance_of(Array)
     tickets.first.should be_an_instance_of(@klass)
   end
-  
+
   it "should be able to find tickets based on attributes" do
     tickets = @project.tickets(:number => @ticket_id)
     tickets.should be_an_instance_of(Array)
     tickets.first.should be_an_instance_of(@klass)
   end
-  
+
   it "should find a ticket by id(number)" do
     ticket = @project.ticket(@ticket_id)
     ticket.should be_an_instance_of(@klass)
     ticket.title.should be_eql('Move Ajax Test to Core')
   end
-  
+
   it "should be able to open a new ticket" 
 
   it "should be able to update a existing ticket" 
