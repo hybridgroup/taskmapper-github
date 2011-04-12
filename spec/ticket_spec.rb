@@ -35,13 +35,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   
   it "should be able to open a new ticket" 
 
-  it "should be able to update a existing ticket" do
-    @api.stub!('issue').and_return(@ticket)
-    tick = @project.ticket(@ticket_id)
-    tick.stub!('save').and_return(true)
-    tick.title = 'hello'
-    tick.save.should be_eql(true)
-  end
+  it "should be able to update a existing ticket" 
 
   it "should be able to reopen a ticket" 
 

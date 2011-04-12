@@ -60,7 +60,7 @@ module TicketMaster::Provider
       end
 
       def self.find_by_id(id)
-        # id = "#{TicketMaster::Provider::Github.login}/#{id}" unless id.include?("/")
+        id = "#{TicketMaster::Provider::Github.login}/#{id}" unless id.include?("/")
         self.new TicketMaster::Provider::Github.api.repository(id)
       end
 
