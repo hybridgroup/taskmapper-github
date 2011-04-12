@@ -38,7 +38,7 @@ module TicketMaster::Provider
       end
 
       def self.find_by_id(project_id, number) 
-        self.new(project_id, TicketMaster::Provider::Github.api.issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number))
+        self.new(project_id, TicketMaster::Provider::Github.api.issue(project_id, number))
       end
 
       def self.find(project_id, *options)
@@ -67,7 +67,7 @@ module TicketMaster::Provider
       def self.open(project_id, *options)
         body = options.first.delete(:body)
         title = options.first.delete(:title)
-        TicketMaster::Provider::Github.api.create_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", title, body, options.first)
+        TicketMaster::Provider::Github.api.create_issue(project_id, title, body, options.first)
       end
 
       def created_at
@@ -89,16 +89,16 @@ module TicketMaster::Provider
       def save
         t = Ticket.find_by_id(project_id, number)
         return false if t.title == title and t.body == body
-        Ticket.new(project_id, TicketMaster::Provider::Github.api.update_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number, title, body))
+        Ticket.new(project_id, TicketMaster::Provider::Github.api.update_issue(project_id, number, title, body))
         true
       end
 
       def reopen
-        Ticket.new(project_id, TicketMaster::Provider::Github.api.reopen_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number))
+        Ticket.new(project_id, TicketMaster::Provider::Github.api.reopen_issue(project_id, number))
       end
 
       def close
-        Ticket.new(project_id, TicketMaster::Provider::Github.api.close_issue("#{TicketMaster::Provider::Github.login}/#{project_id}", number)) 
+        Ticket.new(project_id, TicketMaster::Provider::Github.api.close_issue(project_id, number)) 
       end
 
       def comments
