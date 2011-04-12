@@ -18,14 +18,15 @@ module TicketMaster::Provider
       auth = @authentication
       if auth.login.blank? and auth.username.blank?
         raise TicketMaster::Exception.new('Please provide at least a username')
-      elsif auth.token.blank?
+      elsif auth.token.blank? || auth.password.blank?
         TicketMaster::Provider::Github.login = auth.login || auth.username
         TicketMaster::Provider::Github.user_token = nil
         TicketMaster::Provider::Github.api = Octokit.client(:login => auth.login)
       else
+        token = auth.token || auth.password
         TicketMaster::Provider::Github.login = auth.login || auth.username
         TicketMaster::Provider::Github.user_token = auth.token
-        TicketMaster::Provider::Github.api = Octokit.client(:login => auth.login, :token => auth.token)
+        TicketMaster::Provider::Github.api = Octokit.client(:login => auth.login, :token => token)
       end
     end
 
