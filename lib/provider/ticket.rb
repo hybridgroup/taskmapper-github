@@ -24,6 +24,7 @@ module TicketMaster::Provider
                     :html_url => object.html_url,
                     :position => object.position,
                     :description => object.body,
+                    :body =>object.body,
                     :project_id => project_id}
           else 
             object.merge!(:project_id => project_id)
@@ -35,6 +36,10 @@ module TicketMaster::Provider
 
       def id
         self[:number]
+      end
+
+      def description
+        self[:body]
       end
 
       def self.find_by_id(project_id, number) 
