@@ -57,7 +57,6 @@ module TicketMaster::Provider
 
       def self.find_by_attributes(attributes = {})
         projects = find_all
-        puts projects.inspect
         search_by_attribute(projects, attributes).collect { |project| self.new project }
       end
 
