@@ -9,10 +9,8 @@ describe "Ticketmaster::Provider::Github::Project" do
   end
 
   it "should be able to load all projects" do
-    pending("get loading of projects working") do 
-      @github.projects.should be_an_instance_of(Array)
-      @github.projects.first.should be_an_instance_of(@klass)
-    end
+    @github.projects.should be_an_instance_of(Array)
+    @github.projects.first.should be_an_instance_of(@klass)
   end
 
   it "should be able to load all projects based on an array of name(id)" do 
@@ -41,11 +39,9 @@ describe "Ticketmaster::Provider::Github::Project" do
   end
 
   it "should be able to find by attributes" do
-    pending('get find by attributes working') do 
-      projects = @github.projects(:name => 'translator')
-      projects.should be_an_instance_of(Array)
-      projects.first.id.should be_eql('cored/translator')
-    end
+    projects = @github.projects(:name => 'translator')
+    projects.should be_an_instance_of(Array)
+    projects.first.id.should be_eql('cored/translator')
   end
 end
 
