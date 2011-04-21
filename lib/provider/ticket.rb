@@ -25,7 +25,8 @@ module TicketMaster::Provider
                     :position => object.position,
                     :description => object.body,
                     :body =>object.body,
-                    :project_id => project_id}
+                    :project_id => project_id,
+                    :requestor => object.user}
           else 
             object.merge!(:project_id => project_id)
             hash = object
@@ -40,6 +41,10 @@ module TicketMaster::Provider
 
       def description
         self[:body]
+      end
+
+      def requestor
+        self[:user]
       end
 
       def self.find_by_id(project_id, number) 
