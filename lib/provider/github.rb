@@ -2,11 +2,9 @@ module TicketMaster::Provider
   # This is the Github Provider for ticketmaster
   module Github
     include TicketMaster::Provider::Base
-    PROJECT_API = Octopi::Repository
-    ISSUE_API = Octopi::Issue
 
     class << self
-      attr_accessor :login
+      attr_accessor :login, :api, :user_token
     end
     
     # This is for cases when you want to instantiate using TicketMaster::Provider::Github.new(auth)
@@ -18,35 +16,44 @@ module TicketMaster::Provider
     def authorize(auth = {})
       @authentication ||= TicketMaster::Authenticator.new(auth)
       auth = @authentication
+      login = auth.login || auth.username
       if auth.login.blank? and auth.username.blank?
         raise TicketMaster::Exception.new('Please provide at least a username')
-      elsif auth.token.blank?
-        TicketMaster::Provider::Github.login = auth.login || auth.username
-        Octopi::Api.api = Octopi::AnonymousApi.instance
-      else
-        TicketMaster::Provider::Github.login = auth.login || auth.username
-        Octopi::Api.api = Octopi::AuthApi.instance
-        Octopi::Api.api.token = auth.token
-        Octopi::Api.api.login = auth.login || auth.username
+      elsif auth.token
+        TicketMaster::Provider::Github.login = login
+        TicketMaster::Provider::Github.user_token = auth.token
+        TicketMaster::Provider::Github.api = Octokit.client(:login => login, :token => auth.token)
+      elsif auth.password
+        TicketMaster::Provider::Github.login = login
+        TicketMaster::Provider::Github.user_token = auth.token
+        TicketMaster::Provider::Github.api = Octokit.client(:login => login, :password => auth.password)
+      else 
+        TicketMaster::Provider::Github.login = login
+        TicketMaster::Provider::Github.user_token = nil
+        TicketMaster::Provider::Github.api = Octokit.client(:login => login)
       end
     end
 
     def projects(*options)
       if options.empty?
-        PROJECT_API.find(:user => TicketMaster::Provider::Github.login).collect{|repo| Project.new repo}
-      elsif  options.first.is_a?(Array)
-        options.collect{|name| Project.find(name)}.first
+        Project.find_all(options)
+      elsif options.first.is_a? Array
+        options.first.collect { |name| Project.find_by_id(name) }
+      elsif options.first.is_a? String
+        Project.find_by_id(options.first)
+      elsif options.first.is_a? Hash
+        Project.find_by_attributes(options.first)
       end
     end
-    
-    def project(*name)
-      unless name.empty?
-        Project.find(name.first)
+
+    def project(*project)
+      unless project.empty?
+        Project.find_by_id(project.first)
       else
         super
       end
     end
-    
+
   end
 end
 

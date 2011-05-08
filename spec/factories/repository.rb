@@ -1,4 +1,4 @@
-Factory.define :repository, :class => Octopi::Repository do |p|
+Factory.define :repository do |p|
     p.description ''
     p.url '' 
     p.forks '' 

@@ -1,4 +1,4 @@
-Factory.define :issue, :class => Octopi::Issue do |p|
+Factory.define :issue do |p|
   p.repository 'test-juange'
   p.user  'juanespinosa'
   p.updated_at  ''

@@ -6,103 +6,119 @@ module TicketMaster::Provider
       
       @@allowed_states = %w{open close}
       attr_accessor :prefix_options
-      API = Octopi::Issue
       # declare needed overloaded methods here
       
-      def initialize(*object)
+      def initialize(*object) 
+        project_id = object.shift
         if object.first
           object = object.first
-        	unless object.is_a? Hash
-          	  @system_data = {:client => object}
-        	  hash = {:repository => object.repository.name,
-        	          :user => object.user,
-        	          :updated_at => object.updated_at,
-        	          :votes => object.votes,
-        	          :number => object.number,
-        	          :title => object.title,
-        	          :body => object.body,
-        	          :closed_at => object.closed_at,
-        	          :labels => object.labels,
-        	          :state => object.state,
-        	          :created_at => object.created_at,
-        	          :id => object.number,
-        	          :project_id => object.repository.name,
-        	          :description => object.body,
-        	          :status => object.state,
-        	          :resolution => (object.state == 'closed' ? 'closed' : nil),
-        	          :requestor => object.user
-        	    }
-        	else
-        	  hash = object
-        	end
-
-        	super hash
-      	end
-      end
-      
-      def self.find_by_id(project_id, ticket_id)
-	      self.new self::API.find(build_attributes(project_id, {:number => ticket_id}))
-      end
-      
-      def self.find_by_attributes(project_id, attributes = {})
-      	attributes ||= {}
-        issues = []
-      	if attributes[:state].nil?
-      	  attributes[:state] = 'open'
-          issues += self::API.find_all(build_attributes(project_id, attributes))
-          attributes[:state] = 'closed'
-          begin
-            issues += self::API.find_all(build_attributes(project_id, attributes))
-          rescue APICache::TimeoutError
-            warn "Unable to fetch closed issues due to timeout"
-          end
-        else
-      	  issues = self::API.find_all(build_attributes(project_id, attributes))
-      	end
-      	issues.collect { |issue| self.new issue }
-      end
-      
-      def self.build_attributes(repo, options)
-      	hash = {:repo => repo, :user => TicketMaster::Provider::Github.login}
-      	hash.merge!(options)
-      end
-      
-      def self.open(project_id, *options)
-        begin
-	        self.new self::API.open(build_attributes(project_id, options.first))
-        rescue
-          self.find(project_id, :all).last
+          unless object.is_a? Hash
+            @system_data = {:client => object} 
+            hash = {:title => object.title,
+                    :created_at => object.created_at,
+                    :updated_at => object.updated_at,
+                    :number => object.number,
+                    :user => object.user,
+                    :id => object.number,
+                    :state => object.state,
+                    :html_url => object.html_url,
+                    :position => object.position,
+                    :description => object.body,
+                    :body =>object.body,
+                    :project_id => project_id,
+                    :requestor => object.user}
+          else 
+            object.merge!(:project_id => project_id)
+            hash = object
+          end 
+          super hash
         end
       end
-      
-      def close
-	      Ticket.new API.find(Ticket.build_attributes(repository, {:number => number})).close!
+
+      def id
+        self[:number]
       end
-      
-      def reopen
-	      Ticket.new API.find(Ticket.build_attributes(repository, {:number => number})).reopen!
+
+      def description
+        self[:body]
       end
-      
+
+      def requestor
+        self[:user]
+      end
+
+      def self.find_by_id(project_id, number) 
+        self.new(project_id, TicketMaster::Provider::Github.api.issue(project_id, number))
+      end
+
+      def self.find(project_id, *options)
+        if options.first.empty?
+          self.find_all(project_id)
+        elsif options[0].first.is_a? Array
+          options.first.collect { |number| self.find_by_id(project_id, number) }
+        elsif options[0].first.is_a? Hash
+          self.find_by_attributes(project_id, options[0].first)
+        end
+      end
+
+      def self.find_by_attributes(project_id, attributes = {})
+        issues = self.find_all(project_id)
+        search_by_attribute(issues, attributes)
+      end
+
+      def self.find_all(project_id)
+        issues = []
+        issues += TicketMaster::Provider::Github.api.issues(project_id)
+        state = 'closed'
+        issues += TicketMaster::Provider::Github.api.issues(project_id, state)
+        issues.collect { |issue| Ticket.new(project_id, issue) }
+      end
+
+      def self.open(project_id, *options)
+        body = options.first.delete(:body)
+        title = options.first.delete(:title)
+        TicketMaster::Provider::Github.api.create_issue(project_id, title, body, options.first)
+      end
+
+      def created_at
+        begin 
+          Time.parse(self[:created_at]) 
+        rescue
+          self[:created_at]
+        end
+      end
+
+      def updated_at
+        begin
+          Time.parse(self[:updated_at]) 
+        rescue
+          self[:updated_at]
+        end
+      end
+
       def save
-      	t = API.find(Ticket.build_attributes(repository, {:number => number}))
-      	
-      	return false if t.title == title and t.body == body
-      	
-      	t.title = title
-      	t.body = body
-      	t.save
-      	
-      	true
+        t = Ticket.find_by_id(project_id, number)
+        return false if t.title == title and t.body == body
+        Ticket.new(project_id, TicketMaster::Provider::Github.api.update_issue(project_id, number, title, body))
+        true
       end
-      
+
+      def reopen
+        Ticket.new(project_id, TicketMaster::Provider::Github.api.reopen_issue(project_id, number))
+      end
+
+      def close
+        Ticket.new(project_id, TicketMaster::Provider::Github.api.close_issue(project_id, number)) 
+      end
+
       def comments
-	      Comment.find(repository, number, :all)
+        Comment.find(project_id, number) 
       end
-      
+
       def comment!(comment)
-	      Comment.create(repository, number, comment)
+        Comment.create(project_id, number, comment)
       end
-      
+
     end
   end
 end
