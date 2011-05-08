@@ -12,8 +12,8 @@ module TicketMaster::Provider
       def initialize(*object)
         if object.first
           object = object.first
-          @system_data = {:client => object}
         	unless object.is_a? Hash
+          	  @system_data = {:client => object}
         	  hash = {:repository => object.repository.name,
         	          :user => object.user,
         	          :updated_at => object.updated_at,
