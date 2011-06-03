@@ -35,7 +35,11 @@ module TicketMaster::Provider
     end
 
     def valid?
-      TicketMaster::Provider::Github.api.authenticated?
+      begin
+        TicketMaster::Provider::Github.api.user.total_private_repo_count >= 0
+      rescue
+        false
+      end
     end
 
     def projects(*options)
