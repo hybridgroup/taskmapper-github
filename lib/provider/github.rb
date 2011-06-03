@@ -34,6 +34,10 @@ module TicketMaster::Provider
       end
     end
 
+    def valid?
+      TicketMaster::Provider::Github.api.authenticated?
+    end
+
     def projects(*options)
       if options.empty?
         Project.find_all(options)
