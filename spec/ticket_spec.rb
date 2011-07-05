@@ -22,7 +22,8 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   end
 
   it "should be able to find tickets based on attributes" do
-    tickets = @project.tickets(:number => @ticket_id)
+    pending
+    tickets = @project.tickets(:id => @ticket_id)
     tickets.should be_an_instance_of(Array)
     tickets.first.should be_an_instance_of(@klass)
   end
