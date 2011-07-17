@@ -18,4 +18,18 @@ describe "Ticketmaster::Provider::Github" do
     TicketMaster::Provider::Github.api.authenticated?.should be_true
   end
 
+  context 'when calling #valid?' do
+    it 'should test #total_private_repos number' do
+      user = mock 'user'
+      user.should_receive(:total_private_repos).and_return 0
+      TicketMaster::Provider::Github.api.should_receive(:user).and_return user
+      @github.valid?.should be_true
+    end
+
+    it 'should return false when the user provides wrong credentials' do
+      TicketMaster::Provider::Github.api.should_receive(:user).
+        and_raise 'some error'
+      @github.valid?.should_not be_true
+    end
+  end
 end

@@ -36,7 +36,7 @@ module TicketMaster::Provider
 
     def valid?
       begin
-        TicketMaster::Provider::Github.api.user.total_private_repo_count >= 0
+        TicketMaster::Provider::Github.api.user.total_private_repos >= 0
       rescue
         false
       end
