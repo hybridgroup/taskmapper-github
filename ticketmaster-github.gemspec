@@ -58,6 +58,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
+      s.add_development_dependency(%q<factory_girl>, ["~> 1.3.3"])
       s.add_runtime_dependency(%q<ticketmaster>, [">= 0.6.0"])
       s.add_runtime_dependency(%q<octokit>, [">= 0.6.4"])
     else
