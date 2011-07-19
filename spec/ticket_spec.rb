@@ -34,10 +34,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     ticket.title.should be_eql('Move Ajax Test to Core')
   end
 
-  it "should return author in ticket" do 
-    ticket = @project.ticket(@ticket_id)
-    ticket.author.should == 'jeresig'
-  end
+  it "should return author in ticket" 
 
   it "should be able to open a new ticket" 
 
