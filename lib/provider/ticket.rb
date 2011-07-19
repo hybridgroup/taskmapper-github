@@ -8,6 +8,18 @@ module TicketMaster::Provider
       attr_accessor :prefix_options
       # declare needed overloaded methods here
       
+      def id
+        self.number
+      end
+
+      def status
+        self.state
+      end
+
+      def description
+        self.body
+      end
+
       def author
         self.user.login
       end
