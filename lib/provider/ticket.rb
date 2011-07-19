@@ -21,11 +21,11 @@ module TicketMaster::Provider
       end
 
       def author
-        self.user.login
+        self.user.respond_to?('login') ? self.user.login : self.user
       end
 
       def requestor
-        self.user.login
+        self.user.respond_to?('login') ? self.user.login : self.user
       end
 
       def self.find_by_id(project_id, number) 
