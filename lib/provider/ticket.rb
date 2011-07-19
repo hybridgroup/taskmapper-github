@@ -8,52 +8,18 @@ module TicketMaster::Provider
       attr_accessor :prefix_options
       # declare needed overloaded methods here
       
-      def initialize(*object) 
-        project_id = object.shift
-        if object.first
-          object = object.first
-          unless object.is_a? Hash
-            @system_data = {:client => object} 
-            hash = {:title => object.title,
-                    :created_at => object.created_at,
-                    :updated_at => object.updated_at,
-                    :number => object.number,
-                    :user => object.user,
-                    :id => object.number,
-                    :state => object.state,
-                    :html_url => object.html_url,
-                    :position => object.position,
-                    :description => object.body,
-                    :body =>object.body,
-                    :project_id => project_id,
-                    :requestor => object.user,
-                    :author => object.user}
-          else 
-            object.merge!(:project_id => project_id)
-            hash = object
-          end 
-          super hash
-        end
-      end
-
-      def id
-        self[:number]
-      end
-
-      def description
-        self[:body]
+      def author
+        self.user.login
       end
 
       def requestor
-        self[:user]
-      end
-
-      def author
-        self[:user]
+        self.user.login
       end
 
       def self.find_by_id(project_id, number) 
-        self.new(project_id, TicketMaster::Provider::Github.api.issue(project_id, number))
+        issue = TicketMaster::Provider::Github.api.issue(project_id, number)
+        issue.merge!(:project_id => project_id)
+        self.new issue
       end
 
       def self.find(project_id, *options)
@@ -76,7 +42,10 @@ module TicketMaster::Provider
         issues += TicketMaster::Provider::Github.api.issues(project_id)
         state = 'closed'
         issues += TicketMaster::Provider::Github.api.issues(project_id, state)
-        issues.collect { |issue| Ticket.new(project_id, issue) }
+        issues.collect do |issue| 
+          issue.merge!(:project_id => project_id)
+          Ticket.new issue
+        end
       end
 
       def self.open(project_id, *options)
