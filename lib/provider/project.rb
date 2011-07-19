@@ -70,7 +70,7 @@ module TicketMaster::Provider
         user_repos = TicketMaster::Provider::Github.api.repositories(TicketMaster::Provider::Github.login).collect { |repository| 
           self.new repository }
         repos = repos + user_repos
-        unless TicketMaster::Provider::Github.user_token.nil?
+        if TicketMaster::Provider::Github.valid_user
           org_repos = TicketMaster::Provider::Github.api.organization_repositories.collect { |repository| 
             self.new repository }
           repos = repos + org_repos

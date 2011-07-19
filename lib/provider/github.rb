@@ -4,7 +4,7 @@ module TicketMaster::Provider
     include TicketMaster::Provider::Base
 
     class << self
-      attr_accessor :login, :api, :user_token
+      attr_accessor :login, :api, :user_token, :valid_user
     end
     
     # This is for cases when you want to instantiate using TicketMaster::Provider::Github.new(auth)
@@ -36,7 +36,7 @@ module TicketMaster::Provider
 
     def valid?
       begin
-        TicketMaster::Provider::Github.api.user.total_private_repos >= 0
+        TicketMaster::Provider::Github.valid_user = TicketMaster::Provider::Github.api.user.total_private_repos >= 0
       rescue
         false
       end
