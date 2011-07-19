@@ -7,16 +7,9 @@ module TicketMaster::Provider
     #
     class Comment < TicketMaster::Provider::Base::Comment
       attr_accessor :prefix_options
-      
-      def initialize(*options)
-        if options.first.is_a? Hash
-          object = options.first
-          @system_data = {:client => object}
-          object[:author] = object['user']
-          object[:project_id] = options[1]
-          object[:ticket_id] = options[2]
-          super object
-        end
+
+      def author
+        self.user.login
       end
 
       def created_at
@@ -38,11 +31,16 @@ module TicketMaster::Provider
       # declare needed overloaded methods here
        
       def self.find(project_id, ticket_id)
-        TicketMaster::Provider::Github.api.issue_comments(project_id, ticket_id).collect { |comment| self.new comment }
+        TicketMaster::Provider::Github.api.issue_comments(project_id, ticket_id).collect do |comment| 
+          comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
+          self.new comment
+        end
       end
 
       def self.create(project_id, ticket_id, comment)
-        self.new TicketMaster::Provider::Github.api.add_comment(project_id, ticket_id, comment)
+        github_comment = TicketMaster::Provider::Github.api.add_comment(project_id, ticket_id, comment)
+        github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
+        self.new github_comment
       end
 
     end
