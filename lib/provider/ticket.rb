@@ -21,16 +21,21 @@ module TicketMaster::Provider
       end
 
       def author
-        self.user.respond_to?('login') ? self.user.login : self.user
+        self.user
       end
 
       def requestor
-        self.user.respond_to?('login') ? self.user.login : self.user
+        self.user
+      end
+
+      def assignee
+        self.user
       end
 
       def self.find_by_id(project_id, number) 
         issue = TicketMaster::Provider::Github.api.issue(project_id, number)
         issue.merge!(:project_id => project_id)
+        puts issue.inspect
         self.new issue
       end
 
