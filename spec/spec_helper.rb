@@ -5,7 +5,6 @@ require 'rubygems'
 require 'ticketmaster'
 require 'active_support/core_ext/string'
 require 'spec'
-require 'factory_girl'
 require 'ticketmaster-github'
 
 Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each {|f| require f} 

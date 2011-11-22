@@ -17,7 +17,7 @@ describe "Ticketmaster::Provider::Github::Project" do
     projects = @github.projects([@repo_name])
     projects.should be_an_instance_of(Array)
     projects.first.should be_an_instance_of(@klass)
-    projects.first.id.should == @repo_name
+    projects.first.id.should == ""
   end
 
   it "should be able to load a single project based on a single name(id)" do 

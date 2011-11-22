@@ -41,7 +41,7 @@ module TicketMaster::Provider
       end
 
       def id
-        "#{self[:owner]}/#{self[:name]}"
+        "#{self[:login]}/#{self[:name]}"
       end
 
       # copy from this.copy(that) copies that into this
