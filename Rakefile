@@ -12,7 +12,7 @@ begin
     gem.authors = ["HybridGroup"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_dependency "ticketmaster", ">= 0.6.0"
-    gem.add_dependency "octokit", ">= 0.6.4" 
+    gem.add_dependency "octokit", ">= 0.6.5" 
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
