@@ -4,4 +4,6 @@ gem "octokit", "0.6.5"
 gem "jeweler", "1.6.4"
 group :development do 
   gem "rspec", "1.3.0"
+  gem "fakeweb", "~> 1.3.0"
+  gem "vcr", "~> 1.11.3"
 end
