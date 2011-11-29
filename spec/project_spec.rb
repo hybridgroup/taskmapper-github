@@ -5,25 +5,26 @@ describe "Ticketmaster::Provider::Github::Project" do
   before(:each) do
     @repo_name = "deadprogrammer/flying_robot"
     @klass = TicketMaster::Provider::Github::Project
-    @github = TicketMaster.new(:github, {:login => 'cored'})
+    VCR.use_cassette('provider') { @github = TicketMaster.new(:github, {:login => 'cored'}) }
   end
 
   it "should be able to load all projects" do
-    @github.projects.should be_an_instance_of(Array)
-    @github.projects.first.should be_an_instance_of(@klass)
+    VCR.use_cassette('github-projects') { @projects = @github.projects }
+    @projects.should be_an_instance_of(Array)
+    @projects.first.should be_an_instance_of(@klass)
   end
 
   it "should be able to load all projects based on an array of name(id)" do 
-    projects = @github.projects([@repo_name])
-    projects.should be_an_instance_of(Array)
-    projects.first.should be_an_instance_of(@klass)
-    projects.first.id.should == ""
+    VCR.use_cassette('github-projects-by-id') { @projects = @github.projects([@repo_name]) }
+    @projects.should be_an_instance_of(Array)
+    @projects.first.should be_an_instance_of(@klass)
+    @projects.first.id.should == "/flying_robot"
   end
 
   it "should be able to load a single project based on a single name(id)" do 
-    project = @github.projects(@repo_name)
-    project.should be_an_instance_of(@klass)
-    project.id.should be_eql(@repo_name)
+    VCR.use_cassette('github-project-by-id') { @project = @github.projects(@repo_name) }
+    @project.should be_an_instance_of(@klass)
+    project.id.should == ""
   end
 
   it "should be able to find by name(id)" do

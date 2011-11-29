@@ -1,0 +1,47 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://api.github.com:443/repos/deadprogrammer/flying_robot
+    body: !!null 
+    headers:
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.4
+      date:
+      - Tue, 29 Nov 2011 00:46:33 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      etag:
+      - ! '"c74d6caeca45e5c593e7c656b1b79a84"'
+      x-ratelimit-remaining:
+      - '4998'
+      content-encoding:
+      - gzip
+    body: !binary |-
+      H4sIAAAAAAAAA51U24rbMBD9FSMotOD47mwiKG3o0g9Y0j7si1GsiS0iS0aX
+      hHTZf++oTrpJHpq24AdZ0pw5M+eMXsiBubYHYwktFjFppVbQeCMJJb1zo6Vp
+      2gnX+03S6iHlwPhodGfYMIBJt/IoVNcYvdEuwWskJnavbsJxJ5z9BQSG6xFU
+      I6z1gISymAjlALM5aDaGqbYnVHkpYzIw68DcbHKwrRGjE1oh/S8GWFhGeht9
+      UwNTCni0AiOYjL5DL1oJNvIWC4ie/OYYrQz3QunoEfYg9TiActH7p9XjB6R1
+      3RA2isuKDIza/qk1CNAz23B9UFIzjpU54yEmW212hG6ZtPjTBrrAG+aQe5Fl
+      y1lWzPLFOn+gWUHr7PmEcm7OBCGZ6jzrAGNCEXhnNGKPQL9xre1PgqAIn9+E
+      oPe1DPwmGaz4gYh1UcUEEd7w/tUdvR5gnOgGd2H4NQurWwHuGLwWzHBQYAh9
+      IegArImZRvDQnO28qKtNXbcl5PNlueE5zCteVPMW7VmW9/TyFu1+kxhjTimu
+      pbbQegPJmcCvIZgupvdofOIfzxPEimqRQMJ2bGAiUeBSZi04e+Gid8VXMWBn
+      LC7O2S7Xs7zKklF1SFTqTgSDX7cOD0J36rrIXmOi2BA8cTmgJ/8cxE6cDehH
+      fum5PJ/lGX7rvKT1klbL4LkAmpf5okTtB2GMNpP80xz2bpD/9VwEp3rbXxk+
+      5H9YFyWt5rScP5PXn5qYs0meBAAA
+    http_version: '1.1'
