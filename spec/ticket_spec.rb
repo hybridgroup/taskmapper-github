@@ -2,8 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Github::Ticket" do
   before(:each) do
-    @github = TicketMaster.new(:github, {:login => 'cored'})
-    @project = @github.project('jquery/jquery-mobile')
+    VCR.use_cassette('tickets-instance')  { @github = TicketMaster.new(:github, {:login => 'cored'}) }
+    VCR.use_cassette('github-projects') { @project = @github.project('jquery/jquery-mobile') }
     @ticket_id = 1
     @ticket = {:body => 'Creating a ticket from API', :title => 'Ticket for jquery', :number => 1}
     @klass = TicketMaster::Provider::Github::Ticket
@@ -11,8 +11,8 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   end
   
   it "should be able to load all tickets" do
-    @project.tickets.should be_an_instance_of(Array) 
-    @project.tickets.first.should be_an_instance_of(@klass)
+    VCR.use_cassette('github-tickets') { @tickets = @project.tickets.should be_an_instance_of(Array)  }
+    @tickets.first.should be_an_instance_of(@klass)
   end
 
   it "should be able to load tickets from an array of ids" do
