@@ -2,9 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Github::Project" do
 
-  before(:each) do
+  before(:all) do 
     @repo_name = "deadprogrammer/flying_robot"
+    @returned_repo = "/flying_robot"
     @klass = TicketMaster::Provider::Github::Project
+  end
+
+  before(:each) do
     VCR.use_cassette('provider') { @github = TicketMaster.new(:github, {:login => 'cored'}) }
   end
 
@@ -18,31 +22,31 @@ describe "Ticketmaster::Provider::Github::Project" do
     VCR.use_cassette('github-projects-by-id') { @projects = @github.projects([@repo_name]) }
     @projects.should be_an_instance_of(Array)
     @projects.first.should be_an_instance_of(@klass)
-    @projects.first.id.should == "/flying_robot"
+    @projects.first.id.should == @returned_repo
   end
 
   it "should be able to load a single project based on a single name(id)" do 
     VCR.use_cassette('github-project-by-id') { @project = @github.projects(@repo_name) }
     @project.should be_an_instance_of(@klass)
-    project.id.should == ""
+    @project.id.should == @returned_repo
   end
 
   it "should be able to find by name(id)" do
-    p = @github.project(@repo_name)
-    p.should be_an_instance_of(@klass)
-    p.id.should be_eql(@repo_name)
+    VCR.use_cassette('github-project-by-name') { @p = @github.project(@repo_name) }
+    @p.should be_an_instance_of(@klass)
+    @p.id.should == @returned_repo
   end
 
   it "should be able to find by name(id) with the find method" do 
-    p = @github.project.find(@repo_name)
-    p.should be_an_instance_of(@klass)
-    p.id.should be_eql(@repo_name)
+    VCR.use_cassette('github-project-with-find') { @p = @github.project.find(@repo_name) }
+    @p.should be_an_instance_of(@klass)
+    @p.id.should be_eql(@returned_repo)
   end
 
   it "should be able to find by attributes" do
-    projects = @github.projects(:name => 'translator')
-    projects.should be_an_instance_of(Array)
-    projects.first.id.should be_eql('cored/translator')
+    VCR.use_cassette('github-project-find-attributes') { @projects = @github.projects(:name => 'translator') }
+    @projects.should be_an_instance_of(Array)
+    @projects.first.id.should be_eql('/translator')
   end
 end
 
