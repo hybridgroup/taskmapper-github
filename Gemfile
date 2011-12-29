@@ -7,4 +7,6 @@ group :development do
   gem "fakeweb", "~> 1.3.0"
   gem "vcr", "~> 1.11.3"
   gem "guard", "~> 0.9.4"
+  gem "guard-rspec", "~> 0.5.10"
+  gem "libnotify", "~> 0.6.0"
 end
