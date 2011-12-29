@@ -1,0 +1,36 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://github.com:443/api/v2/json/issues/show//jquery-mobile/1
+    body: !!null 
+    headers:
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 401
+      message: Unauthorized
+    headers:
+      server:
+      - nginx/1.0.4
+      date:
+      - Thu, 29 Dec 2011 21:51:09 GMT
+      content-type:
+      - application/json; charset=utf-8
+      status:
+      - 401 Unauthorized
+      x-ratelimit-limit:
+      - '60'
+      x-frame-options:
+      - deny
+      x-ratelimit-remaining:
+      - '57'
+      x-runtime:
+      - '24'
+      content-length:
+      - '36'
+      cache-control:
+      - no-cache
+    body: ! '{"error":"api route not recognized"}'
+    http_version: '1.1'

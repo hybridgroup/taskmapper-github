@@ -1,0 +1,46 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://api.github.com:443/repos/jquery/jquery-mobile
+    body: !!null 
+    headers:
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.4
+      date:
+      - Thu, 29 Dec 2011 21:51:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      etag:
+      - ! '"aa5db2abecfa76929fc57e9f2e725d02"'
+      x-ratelimit-remaining:
+      - '4998'
+      content-encoding:
+      - gzip
+    body: !binary |-
+      H4sIAAAAAAAAA+1UTW+cMBD9K5Gl3vgwhl0WS1V7yqFSD1Vz6gV5YQBnwaa2
+      yaqJ8t87XiDZjdRuc+/Nhvl47808PxFtWqHko3BSK8KfSGvEg3DClLImnGwL
+      um3SJBdZnqZNlubFnm6rlDFWQENZQwIymR4DO+dGy+NYjDJqpeumfVTpIZ4s
+      GBvf/5zA/MLYpfRlioVqMhCtjU95c2B8rf2n+uNLY5btIojEQQxCRgpcLKwF
+      Z8/QfGC3chAtWDys3c7PIWpho1G1iNSzz2mSsYD0upUoDVlYPAcECZYzBzwh
+      6TPCc9DCOBz0XvZITTos2QlbHuVBEu7MBHh3Q7+UWUlcKYRFjsJVHWpKeLZj
+      Gao/1sJBXQqHCBlNkjBhISvuWMJZzin9gTmDNEabuZWa+j4g1navBD6/duV/
+      gW8f1LvRNtocEGpBvYxCtROqjzi/4Hi/V0aOXhYfQ3gjeoua6BFUKa2dwDPM
+      NjgI5QCH5aDcG6GqjvCZQg32VOG0tuT+m9+wm68nvW9ujRjg6OsGpDJwIRAN
+      aREm6V2y4ZRxxrxAo5G484hsQWHlI16yrNjiv8l2f9B3yzc7n66PCsx/7/yb
+      dxSO5sVMi0FQQ2+Ode6LPfBLjdL2WtS4DPPHQVgH5s0qeK8WNM8SeuU1MjDq
+      9TW6tKhflF4reN+Gr8bWA4zzZnsj44Mw22hxv3/PyPNvHzTV7WoFAAA=
+    http_version: '1.1'

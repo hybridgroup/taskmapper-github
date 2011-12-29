@@ -6,4 +6,5 @@ group :development do
   gem "rspec", "1.3.0"
   gem "fakeweb", "~> 1.3.0"
   gem "vcr", "~> 1.11.3"
+  gem "guard", "~> 0.9.4"
 end
