@@ -35,17 +35,16 @@ module TicketMaster::Provider
       def self.find_by_id(project_id, number) 
         issue = TicketMaster::Provider::Github.api.issue(project_id, number)
         issue.merge!(:project_id => project_id)
-        puts issue.inspect
         self.new issue
       end
 
       def self.find(project_id, *options)
-        if options.first.empty?
+        if options.empty?
           self.find_all(project_id)
-        elsif options[0].first.is_a? Array
+        elsif options.first.is_a? Array
           options.first.collect { |number| self.find_by_id(project_id, number) }
-        elsif options[0].first.is_a? Hash
-          self.find_by_attributes(project_id, options[0].first)
+        elsif options.first.is_a? Hash
+          self.find_by_attributes(project_id, options.first)
         end
       end
 

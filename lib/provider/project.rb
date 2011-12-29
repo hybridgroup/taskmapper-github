@@ -79,7 +79,7 @@ module TicketMaster::Provider
       end
 
       def tickets(*options)
-        TicketMaster::Provider::Github::Ticket.find(self.id, options)
+        TicketMaster::Provider::Github::Ticket.find(self.id, options.first)
       end
 
       def ticket(*options)
