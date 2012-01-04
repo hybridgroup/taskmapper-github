@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Github::Project" do
 
   before(:all) do 
-    @repo_name = "deadprogrammer/flying_robot"
+    @repo_name = "cored/translate"
     @returned_repo = "/flying_robot"
     @klass = TicketMaster::Provider::Github::Project
   end
