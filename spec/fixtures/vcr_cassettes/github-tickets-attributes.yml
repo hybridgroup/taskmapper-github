@@ -1,0 +1,77 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://api.github.com:443/repos/cored/translator/issues
+    body: !!null 
+    headers:
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.4
+      date:
+      - Wed, 04 Jan 2012 22:49:27 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      etag:
+      - ! '"5bde99263ab7c21ae05ca764e6248077"'
+      x-ratelimit-remaining:
+      - '4996'
+      content-encoding:
+      - gzip
+    body: !binary |-
+      H4sIAAAAAAAAA+2Uz26cMBDGXwVZ6o0FDIQ/lqre+gR7ahStjBlYN8amtqnU
+      Rnn3jsNusom0TaRsbrl5gPnmm/GPub4j3Dk5agDC9KJUTBTvQDnCrm9iopep
+      A0tYEZPO9H8IIyQmQhkH/Y77Y8YkFThv9KOE89xjQMwMGhOWucd4zSB5Rukm
+      Kze03WYZy3KWXf0IomaaQHusm2GCC0XR2m/uud0tVqHY3vvZsTR1IBYLyWjX
+      twlmpusxbeqhKXhZC8hKqKuKgihE2w+iKLriqhPf+q9HFZ6XTQIJv+UTl4kG
+      n+IcwLtklH6/dEH1S/5dTnwEh4djtdPzhpZZMusR3SszSo0ehbHQY3z8fCd7
+      fPqarTCiZy3yWZ74SMM4XHrUDpKU1rS9j3Emk3oxnif/a0bqLddOcW9sKp1b
+      wKUFFvTSq3BFWyluwUem+wnCR1JLL7mSfyHqeI/hYKLB2Chc6OKiQYIK7f3X
+      rYXZHNyeqT0jZzsLv9ALMnRHZu7Ffm1jRfCprTXu5TA8vce+wwzqpqoaBFNY
+      eIWu+/htlOePlHt0Jh9u9qKwU1a2z2Gnn7B/MOz5CexcG78HG4XrfR/GQfVC
+      GJd5m53DOKu3OWVFw3Lk5q0YI1OHZX1pjIOdgmXlg53TnY1/zufO/tCdTU8w
+      3oNS5n38BrmL8du05Zk1fOC3YnmF/N78A5cG6vhuCAAA
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://api.github.com:443/repos/cored/translator/issues?state=closed
+    body: !!null 
+    headers:
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.4
+      date:
+      - Wed, 04 Jan 2012 22:49:28 GMT
+      content-type:
+      - application/json; charset=utf-8
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      etag:
+      - ! '"d751713988987e9331980363e24189ce"'
+      x-ratelimit-remaining:
+      - '4995'
+      content-length:
+      - '2'
+    body: ! '[]'
+    http_version: '1.1'

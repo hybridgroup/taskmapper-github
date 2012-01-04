@@ -41,7 +41,7 @@ module TicketMaster::Provider
       end
 
       def id
-        "#{self[:login]}/#{self[:name]}"
+        "#{TicketMaster::Provider::Github.login}/#{self[:name]}"
       end
 
       # copy from this.copy(that) copies that into this
@@ -79,7 +79,7 @@ module TicketMaster::Provider
       end
 
       def tickets(*options)
-        TicketMaster::Provider::Github::Ticket.find(self.id, options.first)
+        TicketMaster::Provider::Github::Ticket.find(self.id, options)
       end
 
       def ticket(*options)

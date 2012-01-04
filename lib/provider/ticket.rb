@@ -8,6 +8,22 @@ module TicketMaster::Provider
       attr_accessor :prefix_options
       # declare needed overloaded methods here
       
+      def initialize(*object) 
+        if object.first
+          object = object.first
+          unless object.is_a? Hash
+            hash = {:id => object.id,
+                    :status => object.state,
+                    :description => object.body,
+                    :user => object.user,
+                    :project_id => object.project_id}
+          else 
+            hash = object
+          end
+          super hash
+        end
+      end
+
       def id
         self.number
       end
@@ -39,12 +55,12 @@ module TicketMaster::Provider
       end
 
       def self.find(project_id, *options)
-        if options.empty?
+        if options[0].empty?
           self.find_all(project_id)
-        elsif options.first.is_a? Array
-          options.first.collect { |number| self.find_by_id(project_id, number) }
-        elsif options.first.is_a? Hash
-          self.find_by_attributes(project_id, options.first)
+        elsif options[0].first.is_a? Array
+          options[0].first.collect { |number| self.find_by_id(project_id, number) }
+        elsif options[0].first.is_a? Hash
+          self.find_by_attributes(project_id, options[0].first)
         end
       end
 
@@ -56,8 +72,7 @@ module TicketMaster::Provider
       def self.find_all(project_id)
         issues = []
         issues += TicketMaster::Provider::Github.api.issues(project_id)
-        state = 'closed'
-        issues += TicketMaster::Provider::Github.api.issues(project_id, state)
+        issues += TicketMaster::Provider::Github.api.issues(project_id, {:state => "closed"})
         issues.collect do |issue| 
           issue.merge!(:project_id => project_id)
           Ticket.new issue
