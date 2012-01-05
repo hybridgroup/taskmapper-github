@@ -15,7 +15,7 @@
       server:
       - nginx/1.0.4
       date:
-      - Wed, 04 Jan 2012 22:01:55 GMT
+      - Thu, 05 Jan 2012 23:18:20 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -29,9 +29,9 @@
       x-frame-options:
       - deny
       x-ratelimit-remaining:
-      - '59'
+      - '56'
       x-runtime:
-      - '17'
+      - '14'
       cache-control:
       - private, max-age=0, must-revalidate
       content-encoding:

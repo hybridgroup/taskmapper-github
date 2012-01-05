@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Github" do
 
   before(:each) do 
-    @github = TicketMaster.new(:github, {:login => 'juanespinosa', :password => 'asdfghk'})
+    @github = TicketMaster.new(:github, :login => 'cored')
   end
 
   it "should be able to instantiate a new instance" do

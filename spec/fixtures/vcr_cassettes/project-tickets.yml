@@ -15,7 +15,7 @@
       server:
       - nginx/1.0.4
       date:
-      - Wed, 04 Jan 2012 22:01:54 GMT
+      - Thu, 05 Jan 2012 23:18:18 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -27,7 +27,7 @@
       etag:
       - ! '"5fecf331945376a8a46dfb1f63660e97"'
       x-ratelimit-remaining:
-      - '4998'
+      - '4985'
       content-encoding:
       - gzip
     body: !binary |-
@@ -60,7 +60,7 @@
       server:
       - nginx/1.0.4
       date:
-      - Wed, 04 Jan 2012 22:01:54 GMT
+      - Thu, 05 Jan 2012 23:18:19 GMT
       content-type:
       - application/json; charset=utf-8
       status:
@@ -70,7 +70,7 @@
       etag:
       - ! '"d751713988987e9331980363e24189ce"'
       x-ratelimit-remaining:
-      - '4997'
+      - '4984'
       content-length:
       - '2'
     body: ! '[]'

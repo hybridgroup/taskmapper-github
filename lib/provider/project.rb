@@ -55,27 +55,39 @@ module TicketMaster::Provider
         end
       end
 
+      def self.find(*options)
+        if options[0].empty?
+          projects = self.find_all
+        elsif options[0].first.is_a? Array
+          options[0].first.collect { |name| self.find_by_id(name) }
+        elsif options[0].first.is_a? String
+          self.find_by_id(options[0].first)
+        elsif options[0].first.is_a? Hash
+          self.find_by_attributes(options.first)
+        end
+      end
+
       def self.find_by_attributes(attributes = {})
-        projects = find_all
-        search_by_attribute(projects, attributes).collect { |project| self.new project }
+        search_by_attribute(self.find_all, attributes)
       end
 
       def self.find_by_id(id)
         id = "#{TicketMaster::Provider::Github.login}/#{id}" unless id.include?("/")
-        self.new TicketMaster::Provider::Github.api.repository(id)
+        self.new TicketMaster::Provider::Github.api.repository(id) 
       end
 
-      def self.find_all(*options)
+      def self.find_all
         repos = []
         user_repos = TicketMaster::Provider::Github.api.repositories(TicketMaster::Provider::Github.login).collect { |repository| 
           self.new repository }
-        repos = repos + user_repos
-        if TicketMaster::Provider::Github.valid_user
-          org_repos = TicketMaster::Provider::Github.api.organization_repositories.collect { |repository| 
-            self.new repository }
-          repos = repos + org_repos
-        end
-        repos
+          repos = repos + user_repos
+          if TicketMaster::Provider::Github.valid_user
+            puts "Si"
+            org_repos = TicketMaster::Provider::Github.api.organization_repositories.collect { |repository| 
+              self.new repository }
+              repos = repos + org_repos
+          end
+          repos
       end
 
       def tickets(*options)
