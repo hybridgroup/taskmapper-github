@@ -2,9 +2,11 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: https://api.github.com:443/repos/cored/translator
+    uri: https://ticketmaster-user:Tm123456@api.github.com:443/repos/ticketmaster-user/tmtest-repo
     body: !!null 
     headers:
+      authorization:
+      - Basic dGlja2V0bWFzdGVyLXVzZXI6VG0xMjM0NTY=
       accept-encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response: !ruby/struct:VCR::Response
@@ -15,7 +17,7 @@
       server:
       - nginx/1.0.4
       date:
-      - Thu, 05 Jan 2012 23:18:17 GMT
+      - Mon, 13 Feb 2012 22:45:53 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -25,22 +27,20 @@
       x-ratelimit-limit:
       - '5000'
       etag:
-      - ! '"7c55965a36db085c1c3df09a6b7d4c45"'
+      - ! '"eed229a8dda80b4aced71d1383369b13"'
       x-ratelimit-remaining:
-      - '4986'
+      - '4983'
       content-encoding:
       - gzip
     body: !binary |-
-      H4sIAAAAAAAAA41TXWvbMBT9K0Yw2CCxJct1EsHY9rKxPZXRp74YRb6xRWzJ
-      SHLDVvrfd1XbSSjd1geDpPt17jnHj+Qkg2rBeSL4injfVqPriCCNDp/xa8d9
-      qmwvlHVQZ8FJ4zsZrEsxRlbkYN0RK+mKtNJXJ33URAQ3At5tD4NsAFvNeUQc
-      ZOcxZAcwlfZ+hGlor52zbpprxq5bEW0CNE4GqPY4UbVETO9t6LsZXxvC4EWW
-      XTBmLzHi3F76AO5Fl2H0LdSVDIgtp3S3pnxN8zvKRFEIXt5j3TjUOP2cw9ia
-      UUy7y7nIqeA3MWdw+gGTzmt5/RsvW4pkTBQuEOWgI10zlZmDwfrXwEYKF1om
-      ErHqIse/l50F6aRpxon2n+P+F8K0JwOOiEfS2UYbXPmZJgxIRC9n2smC1YMa
-      HaRI/nM0ap9Nx2y7OWy5LDYKaAGbsmSguNrVB8X5nt/s1af643njvNimkMqj
-      7KVODYRMeg/BX9HwLv+qewTq8bBMuz6vWUHTwTQIdAlXukb4/4MR1Xt28F/o
-      Hz2afaIfU2NLxjZs97QiRvbRrheTYzxqUiOFnZU1unWSRXXWwNt9OEsTR5V5
-      uSnxN3swby9HFDV45fQQtI0CRmGTb9Y2HSQLWEjQZcn7W+tCcnC2T0ILyQ9U
-      Lvly+/0DtlAOrh1Nt9HRDB3N0M6C7+7J0x9Odas1DAQAAA==
+      H4sIAAAAAAAAA51Ty27cMAz8FwG9+SkLTdZA0J7yBTn1Ymgl2hbWlgRRzgIN
+      8u+l1t5H0GJT5Cab5HDIGb6x3oUDsrbOmF9wBN3JyFq7TFPGljCxlo0xemzL
+      UnpTDCaOy75Qbi4DeIdlNOoAcZYYIeQLQijjHAFjnsIsY0cZ1QhhbTCbEFzo
+      TrBrBxVAxq0n41XN84rndfPCecurtq5+EYTzYDuDuMCKgjiuEIzY/Lwyau9y
+      SdQJDF/tVnwe62akuwBUrAFVMD4aZ2kv9GOUeGEWwwLZaZus7eWE9JHC2h3t
+      5KQm7muGD+aVZr4mxXn6OqXRzeDlQHCJD5rf9KoytgrS7YO0arzI6fXnyz5a
+      CKx9u699Evof2hODIUiaTobOaKIk+F7Xj6LeibrR/V5/hwdQoodeg9oJCVSw
+      pX+0GoJaAhRnsJPf1sTyM8gf+uliWC4eCyjkQc7SFBZiKREh4o2Lv/FnM9P6
+      kB7nbrfvvBZV4e1ARCc3mCT7XyahWBq2Fo3YVfw9Y1bOSY+Ph6AmZ+GLOm/e
+      TV0a6vLQCFq0idcroOv8XxtvWMmaR3MwZ1dO0g7LyUfpMN//AFJbqJYXBAAA
     http_version: '1.1'

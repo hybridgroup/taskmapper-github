@@ -2,8 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Github::Ticket" do
   before(:each) do
-    VCR.use_cassette('tickets-instance')  { @github = TicketMaster.new(:github, {:login => 'cored'}) }
-    VCR.use_cassette('github-public-project-jquery') { @project = @github.project('translator') }
+    VCR.use_cassette('tickets-instance')  { @github = TicketMaster.new(:github, {:login => 'ticketmaster-user', :password => 'Tm123456'}) }
+    VCR.use_cassette('github-public-project-jquery') { @project = @github.project('tmtest-repo') }
     @ticket_id = 1
     @klass = TicketMaster::Provider::Github::Ticket
   end
@@ -29,7 +29,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   it "should find a ticket by id(number)" do
     VCR.use_cassette('github-by-id') { @ticket = @project.ticket(@ticket_id) }
     @ticket.should be_an_instance_of(@klass)
-    @ticket.title.should be_eql('hello')
+    @ticket.title.should be_eql('for testing')
   end
 
 # it "should return author in ticket" 

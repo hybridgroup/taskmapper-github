@@ -2,9 +2,11 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: https://github.com:443/api/v2/json/issues/show/cored/translator/1
+    uri: https://ticketmaster-user:Tm123456@github.com:443/api/v2/json/issues/show/ticketmaster-user/tmtest-repo/1
     body: !!null 
     headers:
+      authorization:
+      - Basic dGlja2V0bWFzdGVyLXVzZXI6VG0xMjM0NTY=
       accept-encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response: !ruby/struct:VCR::Response
@@ -15,7 +17,7 @@
       server:
       - nginx/1.0.4
       date:
-      - Thu, 05 Jan 2012 23:18:22 GMT
+      - Mon, 13 Feb 2012 22:45:59 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -25,22 +27,25 @@
       x-ratelimit-limit:
       - '60'
       etag:
-      - ! '"8b159693cc1a835c46017cbf0d0fe803"'
+      - ! '"b0e1706ff8d7775516510f3f4219401e"'
       x-frame-options:
       - deny
       x-ratelimit-remaining:
-      - '55'
+      - '56'
       x-runtime:
-      - '18'
+      - '22'
+      set-cookie:
+      - _gh_sess=BAh7CDoQZmluZ2VycHJpbnQiJWYzYTZlZjYyYjg3OGY4ZjU1ODA5NzA2N2MwZDkzOWE0Og9zZXNzaW9uX2lkIiVkYjk5ZjEzNzE2ODNlMjQ2NTVhMGQ5Mzk0NTNlOTM5MjoJdXNlcmkDFuUV--d019641bc09aada695b5323ac609950df8502c1d;
+        path=/; expires=Sat, 01-Jan-2022 00:00:00 GMT; secure; HttpOnly
       cache-control:
       - private, max-age=0, must-revalidate
       content-encoding:
       - gzip
     body: !binary |-
-      H4sIAAAAAAAAA22QS27DMAxErxJw7UaS5dqJrhIUhj6MI0CWDIkOUAS5e+ku
-      uupy+Hkz5AtiazuCecFS7dOSrXMMYOAy3S/aDpNHOeA0jgq99tdw91o7/ek8
-      dLCVFimWDEadZQd5Xx1WFh08C2EDw0Vf0RKG2RIze6mUkIOQ00kNRo+mH08f
-      cpKSYb6sK2birb4DV8I3zzOEYl64S5ESh4QHplRY71v4HzsaOZj++od90Jrm
-      vaZjl2hrRogl0mN3ZzYUvlQMgqrNLVkqVfw+owl1WLTjGM7FIyyTdZg43e2r
-      g0Zszr2yYYb3+we9JTHLRAEAAA==
+      H4sIAAAAAAAAA42QwW7DIBBEf8Xasx3AoU3Cr0SVBWZtoxpjwRKpivLv2aTH
+      Xnrc2dk3o71DKKUimDvM2d4s2TwEDwZ077w6a3XR6ugn5z/xhKOecPI4XrRF
+      aGFPJVBIGxh1kC1sNTrMPLRwS4QFDItjRkvoB0vM7KXqheyFOjZKG/1h+lPT
+      ybOUDBtTjLjR75VL/of9LFOgldvBlHLDTArbzGrd/f+oC8V1qHllwkK0FyPE
+      HGip7sB5gsL4jRRtIcxdLZgFxVdIl3FP4v2YItQrj3eM+OPn1Wodrtz6+tVC
+      IW7FvrTjBo/HE+5n4E5cAQAA
     http_version: '1.1'

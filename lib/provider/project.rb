@@ -63,7 +63,6 @@ module TicketMaster::Provider
         elsif options[0].first.is_a? String
           self.find_by_id(options[0].first)
         elsif options[0].first.is_a? Hash
-          puts "DBG: entered"
           self.find_by_attributes(options[0].first)
         end
       end
