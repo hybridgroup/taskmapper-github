@@ -2,34 +2,46 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: https://api.github.com:443/repos/cored/translate
+    uri: https://ticketmaster-user:Tm123456@api.github.com:443/repos/ticketmaster-user/tmtest-repo
     body: !!null 
     headers:
+      authorization:
+      - Basic dGlja2V0bWFzdGVyLXVzZXI6VG0xMjM0NTY=
       accept-encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response: !ruby/struct:VCR::Response
     status: !ruby/struct:VCR::ResponseStatus
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
     headers:
       server:
       - nginx/1.0.4
       date:
-      - Wed, 04 Jan 2012 22:53:20 GMT
+      - Mon, 13 Feb 2012 22:39:45 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
       - chunked
       status:
-      - 404 Not Found
+      - 200 OK
       x-ratelimit-limit:
       - '5000'
       etag:
-      - ! '"e66a7a6c91e2c26803f3f49feb7a883f"'
+      - ! '"b4216edd6b7a45b8b6564aba3fd76049"'
       x-ratelimit-remaining:
-      - '4986'
+      - '4991'
       content-encoding:
       - gzip
     body: !binary |-
-      H4sIAAAAAAAAA6tWyk0tLk5MT1WyUvLLL1Fwyy/NS1GqBQB8+Ys1FwAAAA==
+      H4sIAAAAAAAAA51TXWvcMBD8L4K++VMWTc4Q2qf+gj71xeiktS3OloRWykFD
+      /ntX8Tl3pSUJeTFrtDs7Mxo9scnEIYWF9bnq65q+czpWyq11NOoEcZUYIZQJ
+      IdRxjYCxDOBdRY2sYKMLJ2R9W7ANZI7RI8FIb3LHDpUn8G1AAjvLqGYIG57z
+      YAeDmID+m4KpADKCHmQkrrxpednwsu1+ct7zpm+bXwSwmhBc2PTYtCwFQ5yv
+      8r5fGfUfEacBVTA+GmdpJ+HPEl8pxZCgYD7hfCG1LcyGsH6UC9Jp7tfubBcn
+      NanYRjZDh2OQVs2s38Z8MI8k7zoZ1+VCfLf0ozdDPPHRfn54dit4ORGXLBnN
+      b6rI/+T1u/6TVAisf3o7DDlK/wkDLZuCJBdkGIym7YIfdXsv2oNoOz0e9Ve4
+      AyVGGDWog5BAA5f2v7OHoFKAagd7yfLWWL8H+U0/vCaYi/sKKnmSqzSVhVhL
+      RIh4E+sv/IdZySmkYt92W5etaCpvJyK6uMnkEP0TOzrLYlvRiUPDnwtm5Zqt
+      v3lq1KIWZ+GTV3p5qTmLZ3Myewzz1o623nWC6Ek7pZc7z3F8/gMIVZ93FwQA
+      AA==
     http_version: '1.1'

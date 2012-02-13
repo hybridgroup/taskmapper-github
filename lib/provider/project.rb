@@ -63,7 +63,8 @@ module TicketMaster::Provider
         elsif options[0].first.is_a? String
           self.find_by_id(options[0].first)
         elsif options[0].first.is_a? Hash
-          self.find_by_attributes(options.first)
+          puts "DBG: entered"
+          self.find_by_attributes(options[0].first)
         end
       end
 
@@ -82,7 +83,6 @@ module TicketMaster::Provider
           self.new repository }
           repos = repos + user_repos
           if TicketMaster::Provider::Github.valid_user
-            puts "Si"
             org_repos = TicketMaster::Provider::Github.api.organization_repositories.collect { |repository| 
               self.new repository }
               repos = repos + org_repos
