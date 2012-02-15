@@ -116,10 +116,6 @@ module TicketMaster::Provider
         Ticket.new(project_id, TicketMaster::Provider::Github.api.close_issue(project_id, number)) 
       end
 
-      def comments
-        Comment.find(project_id, number) 
-      end
-
       def comment!(comment)
         Comment.create(project_id, number, comment)
       end

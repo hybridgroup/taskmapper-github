@@ -1,0 +1,47 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://ticketmaster-user:Tm123456@api.github.com:443/users/ticketmaster-user/repos
+    body: !!null 
+    headers:
+      authorization:
+      - Basic dGlja2V0bWFzdGVyLXVzZXI6VG0xMjM0NTY=
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.12
+      date:
+      - Wed, 15 Feb 2012 00:57:47 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      etag:
+      - ! '"a2ab09e5ce9c42a47da51c47be053c62"'
+      x-ratelimit-remaining:
+      - '4998'
+      content-encoding:
+      - gzip
+    body: !binary |-
+      H4sIAAAAAAAAA51Ty27bMBD8FwK96UkRTSygaE75gp5aFAJNriXCEklwyRho
+      kX/v0rISBy3qNreFqJ2d2Z359pOlMLOeTTF67OtaelONJk5pXym31AG8wzoa
+      dYS4SIwQyoQQ6rhEwFjmZ1awk4xqgoCsbwumAsgIepCRYHnT8rLhZdt94bzn
+      Td82X6lhMSG4MJxH2zTPBXMe7GAQE6woiNP6zIjNwyuj/q9cMnWC14AqGB+N
+      s8SBPqjZWbjgbUqvVP4Lpk84XVStjA8uHFl/kDNCQetb5nfiE71J4qDdyc5O
+      apIfQyJIH8wTLfJlBPF93Qhd6j/5T24BL0fCywtB84Oqhoon+37eqyOGfZBW
+      Tdslk9c3709aIbD+hvmy0/5gPqI/Bkm7kWEwmvQIvtftvWh3ou30Ya8/wh0o
+      cYCDBrUTEqhhdqPJXvjt0vR2gXqbAwSVAlTboHMY1h/rW+M+608vaeLivoJK
+      HuUiTWUh1hIRIl5F7AN/NAvdBanYpl3XZSuaytuRiGaxrejEruHPBbNyycd8
+      m8TspC1Fq41yU0dNd50oWPbsmq/848kczea2Wdoxne2R3f38/ReclMZfGQQA
+      AA==
+    http_version: '1.1'

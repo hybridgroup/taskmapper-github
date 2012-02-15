@@ -8,6 +8,22 @@ module TicketMaster::Provider
     class Comment < TicketMaster::Provider::Base::Comment
       attr_accessor :prefix_options
 
+      def initialize(*object) 
+        if object.first 
+          object = object.first
+          unless object.is_a? Hash
+            hash = {:id => object.id,
+                    :body => object.body,
+                    :created_at => object.created_at,
+                    :author => object.user.login}
+
+          else
+            hash = object
+          end
+          super hash
+        end
+      end
+
       def author
         self.user.login
       end
@@ -30,18 +46,22 @@ module TicketMaster::Provider
       
       # declare needed overloaded methods here
        
-      def self.find(project_id, ticket_id)
-        TicketMaster::Provider::Github.api.issue_comments(project_id, ticket_id).collect do |comment| 
-          comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
-          self.new comment
-        end
-      end
+     def self.find_by_attributes(project_id, ticket_id, attributes = {})
+       search_by_attribute(self.find_all(project_id, ticket_id), attributes)
+     end
 
-      def self.create(project_id, ticket_id, comment)
-        github_comment = TicketMaster::Provider::Github.api.add_comment(project_id, ticket_id, comment)
-        github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
-        self.new github_comment
-      end
+     def self.find_all(project_id, ticket_id)
+       TicketMaster::Provider::Github.api.issue_comments(project_id, ticket_id).collect do |comment|
+         comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
+         self.new comment
+       end
+     end
+
+     def self.create(project_id, ticket_id, comment)
+       github_comment = TicketMaster::Provider::Github.api.add_comment(project_id, ticket_id, comment)
+       github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
+       self.new github_comment
+     end
 
     end
   end

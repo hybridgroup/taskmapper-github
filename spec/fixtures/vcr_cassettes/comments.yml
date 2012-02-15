@@ -1,0 +1,43 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://ticketmaster-user:Tm123456@api.github.com:443/repos/ticketmaster-user/tmtest-repo/issues/1/comments
+    body: !!null 
+    headers:
+      authorization:
+      - Basic dGlja2V0bWFzdGVyLXVzZXI6VG0xMjM0NTY=
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.12
+      date:
+      - Wed, 15 Feb 2012 00:57:49 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      etag:
+      - ! '"3cb7fb2201e0ccb980c43a38bcff1e11"'
+      x-ratelimit-remaining:
+      - '4995'
+      content-encoding:
+      - gzip
+    body: !binary |-
+      H4sIAAAAAAAAA4VRXUvEMBD8KxLwzSZNmmpbOHzzF/ikSNk221646wfZrSBy
+      /930zpMThXsbMjOZ3dnXT7GEvajElnmmSimYvew9b5dGttOgAs4TKfbtDnkA
+      YgzJQhgUD4zEyUorT7QgqSgfcGRSWZlrUxhxJ9qAwOhq4JhgUm2S1CQ6ezam
+      smWV5y9R00zuI7LdFG7WL/3Yx8dldleN3onqOyoa4lCiurLMKvpnmZi3n3o/
+      xin+LBo5eAeGUP+uibBdAso+nNhjVyeorGmcLqwurc5c17h7fMDWdtg5bEsL
+      +Og2P2UbW0iUsIMBvByRFRAh08UFbs2TH6BHiuCcdokTbVM5H0s70/XajLg2
+      RjSsOm0zW6bmcHj7AoCxePULAgAA
+    http_version: '1.1'
