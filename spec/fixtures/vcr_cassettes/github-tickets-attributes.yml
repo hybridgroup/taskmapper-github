@@ -15,9 +15,9 @@
       message: OK
     headers:
       server:
-      - nginx/1.0.4
+      - nginx/1.0.12
       date:
-      - Mon, 13 Feb 2012 22:45:57 GMT
+      - Wed, 15 Feb 2012 01:03:19 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -27,21 +27,21 @@
       x-ratelimit-limit:
       - '5000'
       etag:
-      - ! '"7b2169ed7203586a1242df27d9ee4ea6"'
+      - ! '"c69c7f1d2b721f7c536dc6972cb6e73e"'
       x-ratelimit-remaining:
-      - '4980'
+      - '4982'
       content-encoding:
       - gzip
     body: !binary |-
-      H4sIAAAAAAAAA42SwU7DMAyGXwVF4tY2TRYYq4S48QScQNOUNm4XkaQlcZEQ
-      2rvjrhsMgRi3JLZ/f/7jp3eGFh2wirV9vEBIaEPHMjZGR29bxCFVnOvBFp3F
-      7VgXTe95hKFPHG3zDOh1Qoj5mCBy9JNAPoW5TWmExAVpNa5PYDYaWRVG5+gh
-      gsbDC5OlkHkpc7F4kLJSV5VcPlKRt460+kBoc5HTNbjEqqd1xsLoa4isEhmr
-      e/NGpFSxRe8237lPmP9NOxDiJsIL0RPwOxs0NttZdwb56jPfjW3br/iOvBvM
-      2fHIRg8BaZ4yYwkpn4boBwg0iDWsWkhRLuUqYzol2wX4tGEyesL684OmpF8+
-      iLS7qF816riZmjAlayNulFgpsTBtba5hCY1qoTXQrJQGKnB9ZwOl/vCPYgep
-      7ygJmjFCcWy0X5g5kZ9rd2duPzdOqpsCCv2svbZFAORkBGA6WcNLeW+97iDR
-      4djt9JwLVRbDfpunYYVaqFUpd7v1B+ese+P1AgAA
+      H4sIAAAAAAAAA42S0U7cMBBFfwVZ4i2JY6+3u4lU8cYX8FSEVk48yVrYTrAn
+      lRDaf2fcFFgEhb45met7z4zn9omhRQesZcMULxAS2jCygi3R0b8j4pxazvVs
+      q9HicemqfvI8wjwljra/B/Q6IcRySRA5+mxQ5jK3KS2QuCCvPoJGMAeNZClr
+      IctalmJzI2Wrtq3c/SKNt46uToFIwuJcwZzuwCXW3t4VLCy+g8haURCRd4f3
+      cGdg/43UTeaRYDKcm9JftjV4mc0/aZt2u820NAQPAQmPkBKSnsymGQLVZsI/
+      RHig7qnfJzZr7I8r8hrw1sL6bewwvNVPBbOGtRsp6p1sCqZTsmOA17nkQWfb
+      Lx8oiz55IKIbo/6tUcdDDmFKdkbslWiU2JihMz9gB70aYDDQN0oDXXDTaANJ
+      P4yWatlDqI1qakmgq+97rgT9EqF6Sf2zPauQf5d9ZX6+rp9U+woqfa+9tlUA
+      5DQVwHS2k5fy2no9QqLDS9r5uRSqrmZa7dPp7hmI6zxf9QIAAA==
     http_version: '1.1'
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
@@ -59,9 +59,9 @@
       message: OK
     headers:
       server:
-      - nginx/1.0.4
+      - nginx/1.0.12
       date:
-      - Mon, 13 Feb 2012 22:45:58 GMT
+      - Wed, 15 Feb 2012 01:03:20 GMT
       content-type:
       - application/json; charset=utf-8
       status:
@@ -71,7 +71,7 @@
       etag:
       - ! '"d751713988987e9331980363e24189ce"'
       x-ratelimit-remaining:
-      - '4979'
+      - '4981'
       content-length:
       - '2'
     body: ! '[]'

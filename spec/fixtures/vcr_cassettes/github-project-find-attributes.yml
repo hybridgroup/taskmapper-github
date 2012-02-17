@@ -15,9 +15,9 @@
       message: OK
     headers:
       server:
-      - nginx/1.0.4
+      - nginx/1.0.12
       date:
-      - Mon, 13 Feb 2012 22:39:47 GMT
+      - Wed, 15 Feb 2012 01:03:14 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -27,21 +27,62 @@
       x-ratelimit-limit:
       - '5000'
       etag:
-      - ! '"78640a2add472bec72c6a2afc9ac0a54"'
+      - ! '"266aebf40a0ed150c930810675957fa6"'
       x-ratelimit-remaining:
-      - '4989'
+      - '4986'
       content-encoding:
       - gzip
     body: !binary |-
-      H4sIAAAAAAAAA51TXWvcMBD8L4K++VMWTc4Q2qf8gjy1FKOT9mxxtiS0Ug4a
-      8t+7is+5Ky1JyItZo93ZmdHo5xMbTRxSmFmfq76u6TulfaXcUkejjhAXiRFC
-      mRBCHZcIGMsA3lXUyAp2cOGIrG8LtoJMMXokGOlN7tig8gS+DUhgJxnVBGHF
-      cx7sYBAT0H9TMBVARtCDjMSVNy0vG1623QPnPW/6tvlBAIsJwYVVj03zXDDE
-      6SLv+4VR/xFxGlAF46NxlnYS/iTxlVIMCQrmE05nUuvCbAjrD3JGOs392p3s
-      7KQmFevIauiwD9KqifXrmA/mkeRdJuMyn4lvln70ZognPtrPD09uAS9H4pIl
-      o/lNFfmfvH7Xf5IKgfVPb4chR+k/YaBlY5DkggyD0bRd8L1ub0W7E22nD3v9
-      FW5AiQMcNKidkEAD5/a/s4egUoBqA3vJ8tpYvwf5Td+9JpiL2woqeZSLNJWF
-      WEtEiHgV6y/83izkFFKxbbuuy1Y0lbcjEZ3daHKI/okdnWWxrejEruHPBbNy
-      ydZfPTVqUbOz8MkrPb/UnMWTOZothnlrR1tvOkH0pB3Ty53nOD7/+gM+PyIo
-      GQQAAA==
+      H4sIAAAAAAAAA51T22rcMBT8F0HefJVFkzWU9qlf0KeGYrTWsS3WloSOlIWE
+      /HuPYu8ltHRD3o518MxoNPP4wqKfWcumEBy2ZSmdLkYdprgveruUHpzFMuj+
+      AGGRGMDnEcGXYQmAIU9rlrGjDP0EHllbZ2yS2GnECPQZfISM9R5kANXJQES8
+      qnle8bxufnLe8qqtq18EMYVl7t5LuZJxS0DiVPZoZivVmRZx2hAJ6fsFrf0v
+      Wro96cEn83k5CrD32gVtDd2Y0BbtvfUroInzTJ7M1sAnGTaJg/WH1fI0sXaQ
+      M5LbyYujPuiT+87rJ7L/srcLODnSQVKG+pmmKmPRqZuPRA6DZ+2NzKSA/CMz
+      RCZJiNxsOCcOoY8eitGv27fYrWMp+F7VD6LeibpRw159gXvoxQCDgn4nJHxT
+      X8+55eKhgEIe5CJ1YSCUEhECXoX5jv/QC10caTixXc95LarCmZGEntadVmTT
+      LRn0w2xHnd76r2jRLmHUohG7ir9mzMglWf++QNaBOZeGOrRWrdt7afqJtWtk
+      XMRpa9F6kIAbAr5vBEnW4ZJ2KvJH27OFaZZmjG+pSNivv/8AR64oRxkEAAA=
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://ticketmaster-user:Tm123456@github.com:443/api/v2/json/organizations/repositories
+    body: !!null 
+    headers:
+      authorization:
+      - Basic dGlja2V0bWFzdGVyLXVzZXI6VG0xMjM0NTY=
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.12
+      date:
+      - Wed, 15 Feb 2012 01:03:15 GMT
+      content-type:
+      - application/json; charset=utf-8
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '60'
+      etag:
+      - ! '"56b08340755bc2851ce6c91d650b849f"'
+      x-frame-options:
+      - deny
+      x-ratelimit-remaining:
+      - '58'
+      x-runtime:
+      - '6'
+      content-length:
+      - '19'
+      set-cookie:
+      - _gh_sess=BAh7CDoPc2Vzc2lvbl9pZCIlOWMwOTQ3YTlkNzk5MjgwZmZiNDY1NmZiNDZjNzMwM2Y6EGZpbmdlcnByaW50IiVmM2E2ZWY2MmI4NzhmOGY1NTgwOTcwNjdjMGQ5MzlhNDoJdXNlcmkDFuUV--9d3f345a829ddd7306a199cbe140bd5d81834e95;
+        path=/; expires=Sat, 01-Jan-2022 00:00:00 GMT; secure; HttpOnly
+      cache-control:
+      - private, max-age=0, must-revalidate
+    body: ! '{"repositories":[]}'
     http_version: '1.1'
