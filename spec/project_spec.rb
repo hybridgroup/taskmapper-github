@@ -14,6 +14,7 @@ describe "Ticketmaster::Provider::Github::Project" do
 
   it "should be able to load all projects" do
     stub_get('https://ticketmaster-user:Tm123456@api.github.com/users/ticketmaster-user/repos', 'projects.json')
+    stub_get('https://ticketmaster-user:Tm123456@github.com/api/v2/json/organizations/repositories', 'repositories.json')
     @projects = @github.projects
     @projects.should be_an_instance_of(Array)
     @projects.first.should be_an_instance_of(@klass)
