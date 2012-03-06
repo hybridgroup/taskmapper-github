@@ -30,6 +30,10 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     @tickets.first.should be_an_instance_of(@klass)
   end
 
+  it "should retrieve tickets from a private repo" do 
+
+  end
+
   it "should find a ticket by id(number)" do
     @ticket = @project.ticket(@ticket_id)
     @ticket.should be_an_instance_of(@klass)

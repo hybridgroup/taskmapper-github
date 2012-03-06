@@ -41,7 +41,7 @@ module TicketMaster::Provider
       end
 
       def id
-        "#{TicketMaster::Provider::Github.login}/#{self[:name]}"
+        "#{self.owner.login}/#{self[:name]}"
       end
 
       # copy from this.copy(that) copies that into this
