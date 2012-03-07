@@ -12,7 +12,7 @@ module TicketMaster::Provider
         if object.first
           object = object.first
           unless object.is_a? Hash
-            hash = {:id => object.id,
+            hash = {:id => object.number,
                     :status => object.state,
                     :description => object.body,
                     :user => object.user,
@@ -102,9 +102,11 @@ module TicketMaster::Provider
       end
 
       def save
-        t = Ticket.find_by_id(project_id, number)
-        return false if t.title == title and t.body == body
-        Ticket.new(project_id, TicketMaster::Provider::Github.api.update_issue(project_id, number, title, body))
+        issue = Ticket.find_by_id(project_id, number)
+        return false if issue.title == title and issue.body == body
+        ticket_update = TicketMaster::Provider::Github.api.update_issue(project_id, number, title, body)
+        ticket_update.merge!(:project_id => project_id)
+        Ticket.new ticket_update
         true
       end
 
