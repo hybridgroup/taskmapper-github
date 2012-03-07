@@ -82,7 +82,9 @@ module TicketMaster::Provider
       def self.open(project_id, *options)
         body = options.first.delete(:body)
         title = options.first.delete(:title)
-        TicketMaster::Provider::Github.api.create_issue(project_id, title, body, options.first)
+        new_issue = TicketMaster::Provider::Github.api.create_issue(project_id, title, body, options.first)
+        new_issue.merge!(:project_id => project_id)
+        self.new new_issue
       end
 
       def created_at

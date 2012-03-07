@@ -13,6 +13,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     stub_get('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues?state=closed', 'closed_issues.json')
     stub_get('https://ticketmaster-user:Tm123456@github.com/api/v2/json/issues/show/ticketmaster-user/tmtest-repo/1', 'issues/1.json')
     stub_post('https://ticketmaster-user:Tm123456@github.com/api/v2/json/issues/edit/ticketmaster-user/tmtest-repo/1', 'issues/1.json')
+    stub_post('https://ticketmaster-user:Tm123456@github.com/api/v2/json/issues/open/ticketmaster-user/tmtest-repo', 'issues/new_ticket.json')
   end
 
   it "should be able to load all tickets" do
@@ -44,6 +45,11 @@ describe "Ticketmaster::Provider::Github::Ticket" do
     @ticket.save.should be_false
     @ticket.title = "Testing"
     @ticket.save.should be_true
+  end
+
+  it "should create a ticket" do 
+    ticket = @project.ticket!(:title => 'new ticket', :body => 'testing')
+    ticket.should be_an_instance_of(@klass)
   end
 
 end
