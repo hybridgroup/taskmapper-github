@@ -11,13 +11,6 @@ describe "Ticketmaster::Provider::Github" do
     @github.should be_a_kind_of(TicketMaster::Provider::Github)
   end
 
-  it "should show attempted authenticated if a token is present" do
-    pending
-    @github = TicketMaster.new(:github, {:login => 'juanespinosa', :token => 'asdfghk'})
-    @github.authorize
-    TicketMaster::Provider::Github.api.authenticated?.should be_true
-  end
-
   context 'when calling #valid?' do
     it 'should test #total_private_repos number' do
       user = mock 'user'
