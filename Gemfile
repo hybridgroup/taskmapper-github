@@ -1,8 +1,10 @@
 source "http://rubygems.org"
-gem "ticketmaster", "0.6.7" 
-gem "octokit", "0.6.5"
-gem "jeweler", "1.6.4"
+gem "ticketmaster", "0.6.10" 
+gem "octokit", "~> 0.6"
 group :development do 
-  gem "rspec", "1.3.0"
-  gem "fakeweb", "~> 1.3.0"
+  gem "jeweler", "~> 1.6"
+  gem "rspec", "~> 2.3"
+  gem "fakeweb", "~> 1.3"
+  gem "simplecov", "~> 0.5", :platforms => :ruby_19
+  gem "rcov", "~> 1.0", :platforms => :ruby_18
 end
