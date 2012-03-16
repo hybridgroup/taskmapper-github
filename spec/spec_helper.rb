@@ -4,9 +4,13 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rubygems'
 require 'ticketmaster'
 require 'active_support/core_ext/string'
-require 'spec'
+require 'rspec'
 require 'ticketmaster-github'
 require 'fakeweb'
+
+RSpec.configure do |config|
+  config.color_enabled = true
+end
 
 FakeWeb.allow_net_connect = false
 
