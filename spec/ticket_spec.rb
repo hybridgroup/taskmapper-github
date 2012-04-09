@@ -48,7 +48,7 @@ describe "Ticketmaster::Provider::Github::Ticket" do
   end
 
   it "should create a ticket" do 
-    ticket = @project.ticket!(:title => 'new ticket', :body => 'testing')
+    ticket = @project.ticket!(:title => 'new ticket', :description => 'testing')
     ticket.should be_an_instance_of(@klass)
   end
 
