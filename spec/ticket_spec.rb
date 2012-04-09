@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Github::Ticket" do
   before(:each) do
     @github = TicketMaster.new(:github, {:login => 'ticketmaster-user', :password => 'Tm123456'})
-    @project = @github.project('tmtest-repo')
+    @project = @github.projects.first
     @ticket_id = 1
     @klass = TicketMaster::Provider::Github::Ticket
 
