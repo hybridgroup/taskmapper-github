@@ -35,7 +35,11 @@ module TicketMaster::Provider
       def description
         self.body
       end
-
+      
+      def description=(val)
+        self.body = val
+      end
+      
       def author
         self.user.respond_to?('login') ? self.user.login : self.user
       end
@@ -105,11 +109,7 @@ module TicketMaster::Provider
       end
 
       def save
-        issue = Ticket.find_by_id(project_id, number)
-        return false if issue.title == title and issue.body == body
-        ticket_update = TicketMaster::Provider::Github.api.update_issue(project_id, number, title, body)
-        ticket_update.merge!(:project_id => project_id)
-        Ticket.new ticket_update
+        TicketMaster::Provider::Github.api.update_issue(project_id, number, title, description)
         true
       end
 
