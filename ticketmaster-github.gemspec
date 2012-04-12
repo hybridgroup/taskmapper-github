@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "ticketmaster-github"
-  s.version = "0.7.1"
+  s.version = "0.8.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2012-03-16"
+  s.date = "2012-04-12"
   s.description = "This provides an interface with github through the ticketmaster gem."
   s.email = "hong.quach@abigfisch.com"
   s.extra_rdoc_files = [
