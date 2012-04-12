@@ -42,8 +42,6 @@ describe "Ticketmaster::Provider::Github::Ticket" do
 
   it "should update a ticket" do 
     @ticket = @project.ticket(@ticket_id)
-    @ticket.save.should be_false
-    @ticket.title = "Testing"
     @ticket.save.should be_true
   end
 
