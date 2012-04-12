@@ -59,7 +59,7 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ticketmaster>, ["= 0.6.10"])
+      s.add_runtime_dependency(%q<ticketmaster>, ["= 0.7.0"])
       s.add_runtime_dependency(%q<octokit>, ["~> 0.6"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_development_dependency(%q<rspec>, ["~> 2.3"])
@@ -67,7 +67,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_development_dependency(%q<rcov>, ["~> 1.0"])
     else
-      s.add_dependency(%q<ticketmaster>, ["= 0.6.10"])
+      s.add_dependency(%q<ticketmaster>, ["= 0.7.0"])
       s.add_dependency(%q<octokit>, ["~> 0.6"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_dependency(%q<rspec>, ["~> 2.3"])
@@ -76,7 +76,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rcov>, ["~> 1.0"])
     end
   else
-    s.add_dependency(%q<ticketmaster>, ["= 0.6.10"])
+    s.add_dependency(%q<ticketmaster>, ["= 0.7.0"])
     s.add_dependency(%q<octokit>, ["~> 0.6"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
     s.add_dependency(%q<rspec>, ["~> 2.3"])
