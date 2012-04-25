@@ -32,4 +32,12 @@ describe "Ticketmaster::Provider::Github::Comment" do
   it "should be able to load a ticket and clean comment body" do
     comments = @ticket.comments.map(&:body).should == ["for testing", "test comment"]
   end
+  
+  it "should be able to update comments" do
+    comment = @ticket.comments.first
+    comment.body = "updated comment"
+    comment.save.should be_true
+    comment.body.should == "updated comment"
+  end
+
 end
