@@ -20,10 +20,17 @@ describe "Ticketmaster::Provider::Github::Comment" do
     @comments.should be_an_instance_of(Array)
     @comments.first.should be_an_instance_of(@klass)
   end
-
+  
   it "should be able to create a new comment" do  
     comment = @ticket.comment!(:body => 'new comment')
     comment.should be_an_instance_of(@klass)
+  end
+  
+  it "should be able to update comments" do
+    comment = @ticket.comments.first
+    comment.body = "updated comment"
+    comment.save.should be_true
+    comment.body.should == "updated comment"
   end
 
 end
