@@ -121,9 +121,8 @@ module TicketMaster::Provider
       end
 
       def comment!(attributes)
-        Comment.create(project_id, number, attribute)
+        Comment.create(project_id, number, attributes)
       end
-
     end
   end
 end
