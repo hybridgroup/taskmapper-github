@@ -60,10 +60,17 @@ module TicketMaster::Provider
      def self.create(project_id, ticket_id, comment)
        github_comment = TicketMaster::Provider::Github.api.add_comment(project_id, ticket_id, comment)
        github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
+       flat_body github_comment
        self.new github_comment
      end
      
      private
+      
+      #See https://www.kanbanpad.com/projects/31edb8d134e7967c1f0d#!xt-4f994d17014289000707433f
+      def self.flat_body(comment_hashie)
+        comment_hashie.body = comment_hashie.body.body
+        comment_hashie
+      end
       
       # See https://www.kanbanpad.com/projects/31edb8d134e7967c1f0d#!xt-4f994f2101428900070759fd
       def self.clean_body!(comment)
