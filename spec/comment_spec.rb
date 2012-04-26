@@ -9,6 +9,7 @@ describe "Ticketmaster::Provider::Github::Comment" do
     stub_get('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues?state=closed','closed_issues.json')
     stub_get('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues/1/comments', 'comments.json')
     stub_post('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues/1/comments', 'comments/3951282.json')
+    stub_post('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues/comments/3951282', 'comments/3951282_update.json')
     @project = @github.projects.first
     @ticket = @project.tickets.first
     @klass = TicketMaster::Provider::Github::Comment
@@ -37,7 +38,6 @@ describe "Ticketmaster::Provider::Github::Comment" do
     comment = @ticket.comments.first
     comment.body = "updated comment"
     comment.save.should be_true
-    comment.body.should == "updated comment"
   end
 
 end
