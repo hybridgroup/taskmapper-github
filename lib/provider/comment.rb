@@ -16,14 +16,13 @@ module TicketMaster::Provider
                     :body => object.body,
                     :created_at => object.created_at,
                     :author => object.user.login}
-
           else
             hash = object
           end
           super hash
         end
       end
-
+      
       def author
         self.user.login
       end
@@ -53,6 +52,7 @@ module TicketMaster::Provider
      def self.find_all(project_id, ticket_id)
        TicketMaster::Provider::Github.api.issue_comments(project_id, ticket_id).collect do |comment|
          comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
+         clean_body! comment
          self.new comment
        end
      end
@@ -62,6 +62,13 @@ module TicketMaster::Provider
        github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
        self.new github_comment
      end
+     
+     private
+      
+      # See https://www.kanbanpad.com/projects/31edb8d134e7967c1f0d#!xt-4f994f2101428900070759fd
+      def self.clean_body!(comment)
+        comment.body = comment.body.sub(/\A---\s\sbody:\s/, '').gsub(/\s\z/, '')
+      end
 
     end
   end
