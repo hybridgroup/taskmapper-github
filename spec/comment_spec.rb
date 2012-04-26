@@ -23,9 +23,9 @@ describe "Ticketmaster::Provider::Github::Comment" do
   end
   
   it "should be able to create a new comment" do  
-    comment = @ticket.comment!(:body => 'new comment')
+    comment = @ticket.comment!(:body => 'for testing')
     comment.should be_an_instance_of(@klass)
-    comment.body.should == 'new comment'
+    comment.body.should == 'for testing'
   end
   
   #see bug 116 tm-github: Bug Ticket#comments returning comments with weird text in the body
