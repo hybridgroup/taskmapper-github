@@ -16,11 +16,12 @@ describe "Ticketmaster::Provider::Github::Comment" do
   end
 
   it "should be able to load all comments" do
-    @comments = @ticket.comments
-    @comments.should be_an_instance_of(Array)
-    @comments.first.should be_an_instance_of(@klass)
+    comments = @ticket.comments
+    comments.should be_an_instance_of(Array)
+    comments.first.should be_an_instance_of(@klass)
+    comments.first.body.should == "for testing"
   end
-
+  
   it "should be able to create a new comment" do  
     comment = @ticket.comment!(:body => 'new comment')
     comment.should be_an_instance_of(@klass)
