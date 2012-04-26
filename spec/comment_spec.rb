@@ -26,5 +26,9 @@ describe "Ticketmaster::Provider::Github::Comment" do
     comment = @ticket.comment!(:body => 'new comment')
     comment.should be_an_instance_of(@klass)
   end
-
+  
+  #see bug 116 tm-github: Bug Ticket#comments returning comments with weird text in the body
+  it "should be able to load a ticket and clean comment body" do
+    comments = @ticket.comments.map(&:body).should == ["for testing", "test comment"]
+  end
 end
