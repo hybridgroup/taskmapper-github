@@ -62,7 +62,25 @@ module TicketMaster::Provider
        github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
        self.new github_comment
      end
-
+     
+     def save
+      update_comment(project_id, id, body)
+     end
+     
+     private
+      def update_comment(repo, number, comment, options = {})
+        TicketMaster::Provider::Github.api.update_comment repo, number, comment, options
+        raise "Request sent"
+      end
     end
+  end
+end
+
+class Net::HTTP
+  def send(*args)
+    p "<<< seding #{args.inspect}"
+    response = super *args
+    p "<<< response #{response}"
+    response
   end
 end
