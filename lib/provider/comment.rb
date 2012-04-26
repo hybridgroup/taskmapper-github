@@ -64,8 +64,6 @@ module TicketMaster::Provider
        self.new github_comment
      end
      
-     private
-      
       #See https://www.kanbanpad.com/projects/31edb8d134e7967c1f0d#!xt-4f994d17014289000707433f
       def self.flat_body(comment_hashie)
         comment_hashie.body = comment_hashie.body.body
@@ -80,12 +78,14 @@ module TicketMaster::Provider
      def save
       update_comment(project_id, id, body)
      end
-     
+
      private
       def update_comment(repo, number, comment, options = {})
         TicketMaster::Provider::Github.api.update_comment repo, number, comment, options
-        raise "Request sent"
+        true
       end
+      
+     
     end
   end
 end
