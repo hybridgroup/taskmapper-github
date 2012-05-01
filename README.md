@@ -1,72 +1,102 @@
 # ticketmaster-github
 
-This is a provider for [ticketmaster](http://ticketrb.com). It provides interoperability with [Github](http://www.github.com/) and its issue tracking system through the ticketmaster gem.
+This is a provider for [ticketmaster](http://ticketrb.com). It provides
+interoperability with [Github](http://www.github.com/) and its issue tracking
+system through the ticketmaster gem.
 
 # Usage and Examples
 
 First we have to instantiate a new ticketmaster instance:
-  github = TicketMaster.new(:github, {:login => "coder", :token => "m4st3r!"})
 
-If you do not pass in the token and the username, it will only access public information for the account.
+```ruby
+github = TicketMaster.new(:github, {:login => "coder", :token => "m4st3r!"})
+```
 
-== Finding Projects(Repositories)
+If you do not pass in the token and the username, it will only access public
+information for the account.
+
+## Finding Projects(Repositories)
 
 You can find your own projects by doing:
 
-	projects = github.projects # Will return all your repositories
-  projects = github.projects(['your_repo1', 'your_repo2'])
-  project = github.project('your_repo')
+```ruby
+projects = github.projects # Will return all your repositories
+projects = github.projects(['your_repo1', 'your_repo2'])
+project = github.project('your_repo')
+```
 
-Also you can access other users repos
+Also you can access other users repos:
 	
-	project = github.project.find(:first, {:user => 'other_user', :repo => 'his_repo'})
+```ruby
+project = github.project.find(:first, {:user => 'other_user', :repo => 'his_repo'})
+```
 
-Or even make a search with an array
+Or even make a search with an array:
 
-	projects = github.project.find(:all, ['ruby','git'])
+```ruby
+projects = github.project.find(:all, ['ruby','git'])
+```
 	
-== Finding Tickets(Issues)
+## Finding Tickets (Issues)
 
-  tickets = project.tickets # All open issues
-	tickets = project.tickets(:all, {:state => 'closed'}) # All closed tickets
-	ticket = project.ticket(<issue_number>)
+```ruby
+tickets = project.tickets # All open issues
+tickets = project.tickets(:all, {:state => 'closed'}) # All closed tickets
+ticket = project.ticket(<issue_number>)
+```
 
-== Open Tickets
+## Open Tickets
     
-	ticket = project.ticket!({:title => "New ticket", :body => "Body for the very new ticket"})
+```ruby
+ticket = project.ticket!({:title => "New ticket", :body => "Body for the very new ticket"})
+```
 
-== Close a ticket
+## Close a ticket
 	
-	ticket = ticket.close
+```ruby
+ticket = ticket.close
+```
 	
-== Reopen a ticket
+## Reopen a ticket
 
-	ticket = ticket.reopen
+```ruby
+ticket = ticket.reopen
+```
 	
-= Update a ticket
+## Update a ticket
 	
-	ticket.title = "New title"
-	ticket.body =  "New body"
-	ticket.save
+```ruby
+ticket.title = "New title"
+ticket.body =  "New body"
+ticket.save
+```
 
-== Finding Comments
-	comments = ticket.comments
+## Finding Comments
+```ruby
+comments = ticket.comments
+```
 
-== Create Comment
-	comment = ticket.comment!("your comment goes here")
+## Create Comment
+
+```ruby
+comment = ticket.comment!("your comment goes here")
+```
 
 ## Requirements
 
 * rubygems (obviously)
 * ticketmaster gem (latest version preferred)
 * jeweler gem (only if you want to repackage and develop)
-* Octopi gem provdes interface to Github
+* Octopi gem provides interface to Github
 
-The ticketmaster gem should automatically be installed during the installation of this gem if it is not already installed.
+The ticketmaster gem should automatically be installed during the installation
+of this gem if it is not already installed.
 
 ## Other Notes
 
-Since this and the ticketmaster gem is still primarily a work-in-progress, minor changes may be incompatible with previous versions. Please be careful about using and updating this gem in production.
+Since this and the ticketmaster gem is still primarily a work-in-progress,
+minor changes may be incompatible with previous versions. Please be careful
+about using and updating this gem in production.
 
 If you see or find any issues, feel free to open up an issue report.
 
