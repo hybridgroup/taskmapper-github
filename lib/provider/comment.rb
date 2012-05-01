@@ -89,12 +89,3 @@ module TicketMaster::Provider
     end
   end
 end
-
-class Net::HTTP
-  def send(*args)
-    p "<<< seding #{args.inspect}"
-    response = super *args
-    p "<<< response #{response}"
-    response
-  end
-end
