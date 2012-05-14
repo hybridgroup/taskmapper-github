@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-github"
-  s.version = "0.9.0"
+  s.version = "0.10.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2012-05-01"
+  s.date = "2012-05-14"
   s.description = "This provides an interface with github through the taskmapper gem."
   s.email = "hong.quach@abigfisch.com"
   s.extra_rdoc_files = [
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
     "README.md"
   ]
   s.files = [
+    ".bundle/config",
     ".document",
     ".rbenv-gemsets",
     ".rbenv-version",
@@ -47,8 +48,8 @@ Gem::Specification.new do |s|
     "spec/project_spec.rb",
     "spec/spec.opts",
     "spec/spec_helper.rb",
-    "spec/ticket_spec.rb",
     "spec/taskmapper-github_spec.rb",
+    "spec/ticket_spec.rb",
     "taskmapper-github.gemspec"
   ]
   s.homepage = "http://github.com/kiafaldorius/taskmapper-github"
@@ -60,7 +61,7 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<taskmapper>, ["= 0.7.0"])
+      s.add_runtime_dependency(%q<taskmapper>, ["~> 0.8"])
       s.add_runtime_dependency(%q<octokit>, ["~> 0.6"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_development_dependency(%q<rspec>, ["~> 2.3"])
@@ -68,7 +69,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_development_dependency(%q<rcov>, ["~> 1.0"])
     else
-      s.add_dependency(%q<taskmapper>, ["= 0.7.0"])
+      s.add_dependency(%q<taskmapper>, ["~> 0.8"])
       s.add_dependency(%q<octokit>, ["~> 0.6"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_dependency(%q<rspec>, ["~> 2.3"])
@@ -77,7 +78,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rcov>, ["~> 1.0"])
     end
   else
-    s.add_dependency(%q<taskmapper>, ["= 0.7.0"])
+    s.add_dependency(%q<taskmapper>, ["~> 0.8"])
     s.add_dependency(%q<octokit>, ["~> 0.6"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
     s.add_dependency(%q<rspec>, ["~> 2.3"])
