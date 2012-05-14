@@ -1,8 +1,8 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Github
-    # Ticket class for ticketmaster-github
+    # Ticket class for taskmapper-github
     
-    class Ticket < TicketMaster::Provider::Base::Ticket
+    class Ticket < TaskMapper::Provider::Base::Ticket
       
       @@allowed_states = %w{open close}
       attr_accessor :prefix_options
@@ -53,7 +53,7 @@ module TicketMaster::Provider
       end
 
       def self.find_by_id(project_id, number) 
-        issue = TicketMaster::Provider::Github.api.issue(project_id, number)
+        issue = TaskMapper::Provider::Github.api.issue(project_id, number)
         issue.merge!(:project_id => project_id)
         self.new issue
       end
@@ -75,8 +75,8 @@ module TicketMaster::Provider
 
       def self.find_all(project_id)
         issues = []
-        issues += TicketMaster::Provider::Github.api.issues(project_id)
-        issues += TicketMaster::Provider::Github.api.issues(project_id, {:state => "closed"})
+        issues += TaskMapper::Provider::Github.api.issues(project_id)
+        issues += TaskMapper::Provider::Github.api.issues(project_id, {:state => "closed"})
         issues.collect do |issue| 
           issue.merge!(:project_id => project_id)
           Ticket.new issue
@@ -87,7 +87,7 @@ module TicketMaster::Provider
         ticket_hash = options.first
         body = ticket_hash.delete(:description)
         title = ticket_hash.delete(:title)
-        new_issue = TicketMaster::Provider::Github.api.create_issue(project_id, title, body, options.first)
+        new_issue = TaskMapper::Provider::Github.api.create_issue(project_id, title, body, options.first)
         new_issue.merge!(:project_id => project_id)
         self.new new_issue
       end
@@ -109,16 +109,16 @@ module TicketMaster::Provider
       end
 
       def save
-        TicketMaster::Provider::Github.api.update_issue(project_id, number, title, description)
+        TaskMapper::Provider::Github.api.update_issue(project_id, number, title, description)
         true
       end
 
       def reopen
-        Ticket.new(project_id, TicketMaster::Provider::Github.api.reopen_issue(project_id, number))
+        Ticket.new(project_id, TaskMapper::Provider::Github.api.reopen_issue(project_id, number))
       end
 
       def close
-        Ticket.new(project_id, TicketMaster::Provider::Github.api.close_issue(project_id, number)) 
+        Ticket.new(project_id, TaskMapper::Provider::Github.api.close_issue(project_id, number)) 
       end
 
       def comment!(attributes)

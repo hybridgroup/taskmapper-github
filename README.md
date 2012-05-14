@@ -1,11 +1,11 @@
-# ticketmaster-github
+# taskmapper-github
 
-This is a provider for [ticketmaster](http://ticketrb.com). It provides interoperability with [Github](http://www.github.com/) and its issue tracking system through the ticketmaster gem.
+This is a provider for [taskmapper](http://ticketrb.com). It provides interoperability with [Github](http://www.github.com/) and its issue tracking system through the taskmapper gem.
 
 # Usage and Examples
 
-First we have to instantiate a new ticketmaster instance:
-  github = TicketMaster.new(:github, {:login => "coder", :token => "m4st3r!"})
+First we have to instantiate a new taskmapper instance:
+  github = TaskMapper.new(:github, {:login => "coder", :token => "m4st3r!"})
 
 If you do not pass in the token and the username, it will only access public information for the account.
 
@@ -58,15 +58,15 @@ Or even make a search with an array
 ## Requirements
 
 * rubygems (obviously)
-* ticketmaster gem (latest version preferred)
+* taskmapper gem (latest version preferred)
 * jeweler gem (only if you want to repackage and develop)
 * Octopi gem provdes interface to Github
 
-The ticketmaster gem should automatically be installed during the installation of this gem if it is not already installed.
+The taskmapper gem should automatically be installed during the installation of this gem if it is not already installed.
 
 ## Other Notes
 
-Since this and the ticketmaster gem is still primarily a work-in-progress, minor changes may be incompatible with previous versions. Please be careful about using and updating this gem in production.
+Since this and the taskmapper gem is still primarily a work-in-progress, minor changes may be incompatible with previous versions. Please be careful about using and updating this gem in production.
 
 If you see or find any issues, feel free to open up an issue report.
 

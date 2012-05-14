@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "ticketmaster-github"
-    gem.summary = %Q{The github provider for ticketmaster}
-    gem.description = %Q{This provides an interface with github through the ticketmaster gem.}
+    gem.name = "taskmapper-github"
+    gem.summary = %Q{The github provider for taskmapper}
+    gem.description = %Q{This provides an interface with github through the taskmapper gem.}
     gem.email = "hong.quach@abigfisch.com"
-    gem.homepage = "http://github.com/kiafaldorius/ticketmaster-github"
+    gem.homepage = "http://github.com/kiafaldorius/taskmapper-github"
     gem.authors = ["HybridGroup"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

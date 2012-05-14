@@ -1,11 +1,11 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Github
-    # The comment class for ticketmaster-github
+    # The comment class for taskmapper-github
     #
-    # Do any mapping between Ticketmaster and your system's comment model here
+    # Do any mapping between TaskMapper and your system's comment model here
     # versions of the ticket.
     #
-    class Comment < TicketMaster::Provider::Base::Comment
+    class Comment < TaskMapper::Provider::Base::Comment
       attr_accessor :prefix_options
 
       def initialize(*object) 
@@ -50,7 +50,7 @@ module TicketMaster::Provider
       end
 
       def self.find_all(project_id, ticket_id)
-        TicketMaster::Provider::Github.api.issue_comments(project_id, ticket_id).collect do |comment|
+        TaskMapper::Provider::Github.api.issue_comments(project_id, ticket_id).collect do |comment|
           comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
           clean_body! comment
           self.new comment
@@ -58,7 +58,7 @@ module TicketMaster::Provider
       end
 
       def self.create(project_id, ticket_id, comment)
-        github_comment = TicketMaster::Provider::Github.api.add_comment(project_id, ticket_id, comment)
+        github_comment = TaskMapper::Provider::Github.api.add_comment(project_id, ticket_id, comment)
         github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
         flat_body github_comment
         self.new github_comment
@@ -81,7 +81,7 @@ module TicketMaster::Provider
 
       private
       def update_comment(repo, number, comment, options = {})
-        TicketMaster::Provider::Github.api.update_comment repo, number, comment, options
+        TaskMapper::Provider::Github.api.update_comment repo, number, comment, options
         true
       end
 

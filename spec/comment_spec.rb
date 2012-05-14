@@ -1,18 +1,19 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Ticketmaster::Provider::Github::Comment" do
+describe TaskMapper::Provider::Github::Comment do
 
   before(:each) do
-    @github = TicketMaster.new(:github, {:login => 'ticketmaster-user', :password => 'Tm123456'})
-    stub_get('https://ticketmaster-user:Tm123456@api.github.com/users/ticketmaster-user/repos', 'projects.json')
-    stub_get('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues','issues.json')
-    stub_get('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues?state=closed','closed_issues.json')
-    stub_get('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues/1/comments', 'comments.json')
-    stub_post('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues/1/comments', 'comments/3951282.json')
-    stub_post('https://ticketmaster-user:Tm123456@api.github.com/repos/ticketmaster-user/tmtest-repo/issues/comments/3951282', 'comments/3951282_update.json')
-    @project = @github.projects.first
+    @github = TaskMapper.new(:github, {:login => 'taskmapper-user', :password => 'Tm123456'})
+    stub_get('https://taskmapper-user:Tm123456@github.com/api/v2/json/organizations/repositories', 'repositories.json')
+    stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo', 'project.json')
+    stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues','issues.json')
+    stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues?state=closed','closed_issues.json')
+    stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/1/comments', 'comments.json')
+    stub_post('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/1/comments', 'comments/3951282.json')
+    stub_post('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/comments/3951282', 'comments/3951282_update.json')
+    @project = @github.project('tmtest-repo')
     @ticket = @project.tickets.first
-    @klass = TicketMaster::Provider::Github::Comment
+    @klass = TaskMapper::Provider::Github::Comment
     @api = Octokit::Client
   end
 

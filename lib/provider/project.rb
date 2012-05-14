@@ -1,9 +1,9 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Github
-    # Project class for ticketmaster-github
+    # Project class for taskmapper-github
     #
     #
-    class Project < TicketMaster::Provider::Base::Project
+    class Project < TaskMapper::Provider::Base::Project
       
       # declare needed overloaded methods here
       def initialize(*object) 
@@ -72,17 +72,17 @@ module TicketMaster::Provider
       end
 
       def self.find_by_id(id)
-        id = "#{TicketMaster::Provider::Github.login}/#{id}" unless id.include?("/")
-        self.new TicketMaster::Provider::Github.api.repository(id) 
+        id = "#{TaskMapper::Provider::Github.login}/#{id}" unless id.include?("/")
+        self.new TaskMapper::Provider::Github.api.repository(id) 
       end
 
       def self.find_all
         repos = []
-        user_repos = TicketMaster::Provider::Github.api.repositories(TicketMaster::Provider::Github.login).collect { |repository| 
+        user_repos = TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login).collect { |repository| 
           self.new repository }
           repos = repos + user_repos
-          if TicketMaster::Provider::Github.valid_user
-            org_repos = TicketMaster::Provider::Github.api.organization_repositories.collect { |repository| 
+          if TaskMapper::Provider::Github.valid_user
+            org_repos = TaskMapper::Provider::Github.api.organization_repositories.collect { |repository| 
               self.new repository }
               repos = repos + org_repos
           end
@@ -90,19 +90,19 @@ module TicketMaster::Provider
       end
 
       def tickets(*options)
-        TicketMaster::Provider::Github::Ticket.find(self.id, options)
+        TaskMapper::Provider::Github::Ticket.find(self.id, options)
       end
 
       def ticket(*options)
         unless options.empty?
-          TicketMaster::Provider::Github::Ticket.find_by_id(self.id, options.first)
+          TaskMapper::Provider::Github::Ticket.find_by_id(self.id, options.first)
         else
-          TicketMaster::Provider::Github::Ticket
+          TaskMapper::Provider::Github::Ticket
         end
       end
 
       def ticket!(*options)
-        TicketMaster::Provider::Github::Ticket.open(self.id, options.first)
+        TaskMapper::Provider::Github::Ticket.open(self.id, options.first)
       end
     end
 

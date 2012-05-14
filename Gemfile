@@ -1,5 +1,5 @@
 source "http://rubygems.org"
-gem "ticketmaster", "0.7.0" 
+gem "taskmapper", "~> 0.8" 
 gem "octokit", "~> 0.6"
 group :development do 
   gem "jeweler", "~> 1.6"
