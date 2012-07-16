@@ -67,12 +67,7 @@ module TaskMapper::Provider
 
         def find_all
           repos = [] + user_repos
-          if TaskMapper::Provider::Github.valid_user
-            org_repos = TaskMapper::Provider::Github.api.organization_repositories.collect do |repository| 
-              self.new repository 
-            end 
-            repos = repos + org_repos
-          end
+          repos = repos + org_repos  if TaskMapper::Provider::Github.valid_user
           repos
         end
 
@@ -80,6 +75,12 @@ module TaskMapper::Provider
         def user_repos
           TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login).collect do |repository| 
             self.new repository
+          end
+        end
+
+        def org_repos
+          TaskMapper::Provider::Github.api.organization_repositories.collect do |repository| 
+            self.new repository 
           end
         end
       end
