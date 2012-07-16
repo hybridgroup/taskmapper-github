@@ -55,28 +55,33 @@ module TaskMapper::Provider
         end
       end
 
-      def self.find_by_attributes(attributes = {})
-        search_by_attribute(self.find_all, attributes)
-      end
-
-      def self.find_by_id(id)
-        id = "#{TaskMapper::Provider::Github.login}/#{id}" unless id.include?("/")
-        self.new TaskMapper::Provider::Github.api.repository(id) 
-      end
-
-      def self.find_all
-        repos = []
-        user_repos = TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login).collect do |repository| 
-          self.new repository
-        end 
-        repos = repos + user_repos
-        if TaskMapper::Provider::Github.valid_user
-          org_repos = TaskMapper::Provider::Github.api.organization_repositories.collect do |repository| 
-            self.new repository 
-          end 
-          repos = repos + org_repos
+      class << self
+        def find_by_attributes(attributes = {})
+          search_by_attribute(self.find_all, attributes)
         end
-        repos
+
+        def find_by_id(id)
+          id = "#{TaskMapper::Provider::Github.login}/#{id}" unless id.include?("/")
+          self.new TaskMapper::Provider::Github.api.repository(id) 
+        end
+
+        def find_all
+          repos = [] + user_repos
+          if TaskMapper::Provider::Github.valid_user
+            org_repos = TaskMapper::Provider::Github.api.organization_repositories.collect do |repository| 
+              self.new repository 
+            end 
+            repos = repos + org_repos
+          end
+          repos
+        end
+
+        private
+        def user_repos
+          TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login).collect do |repository| 
+            self.new repository
+          end
+        end
       end
 
       def tickets(*options)
