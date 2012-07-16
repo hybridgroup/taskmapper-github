@@ -79,8 +79,12 @@ module TaskMapper::Provider
         end
 
         def org_repos
-          TaskMapper::Provider::Github.api.organization_repositories.collect do |repository| 
-            self.new repository 
+          user_orgs = TaskMapper::Provider::Github.api.organizations(TaskMapper::Provider::Github.login)
+          puts "DBG: #{user_orgs.inspect}"
+          user_orgs.each do |organization| 
+            TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository| 
+              self.new repository 
+            end
           end
         end
       end
