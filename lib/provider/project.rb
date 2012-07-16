@@ -4,7 +4,7 @@ module TaskMapper::Provider
     #
     #
     class Project < TaskMapper::Provider::Base::Project
-      
+
       # declare needed overloaded methods here
       def initialize(*object) 
         if object.first
@@ -55,18 +55,6 @@ module TaskMapper::Provider
         end
       end
 
-      def self.find(*options)
-        if options[0].empty?
-          projects = self.find_all
-        elsif options[0].first.is_a? Array
-          options[0].first.collect { |name| self.find_by_id(name) }
-        elsif options[0].first.is_a? String
-          self.find_by_id(options[0].first)
-        elsif options[0].first.is_a? Hash
-          self.find_by_attributes(options[0].first)
-        end
-      end
-
       def self.find_by_attributes(attributes = {})
         search_by_attribute(self.find_all, attributes)
       end
@@ -78,15 +66,17 @@ module TaskMapper::Provider
 
       def self.find_all
         repos = []
-        user_repos = TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login).collect { |repository| 
-          self.new repository }
-          repos = repos + user_repos
-          if TaskMapper::Provider::Github.valid_user
-            org_repos = TaskMapper::Provider::Github.api.organization_repositories.collect { |repository| 
-              self.new repository }
-              repos = repos + org_repos
-          end
-          repos
+        user_repos = TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login).collect do |repository| 
+          self.new repository
+        end 
+        repos = repos + user_repos
+        if TaskMapper::Provider::Github.valid_user
+          org_repos = TaskMapper::Provider::Github.api.organization_repositories.collect do |repository| 
+            self.new repository 
+          end 
+          repos = repos + org_repos
+        end
+        repos
       end
 
       def tickets(*options)
