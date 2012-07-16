@@ -7,16 +7,6 @@ describe TaskMapper::Provider::Github::Project do
   let(:returned_repo) { 'taskmapper-user/tmtest-repo' }
   let(:project_class) { TaskMapper::Provider::Github::Project }
 
-  before(:all) do 
-    @repo_name = "tmtest-repo"
-    @returned_repo = "taskmapper-user/tmtest-repo"
-    @klass = TaskMapper::Provider::Github::Project
-  end
-
-  before(:each) do
-    @github = TaskMapper.new(:github, :login => 'taskmapper-user', :password => 'Tm123456')
-  end
-
   describe "Retrieving projects" do 
     before(:each) do 
       stub_get('https://taskmapper-user:Tm123456@api.github.com/users/taskmapper-user/repos', 'projects.json')
