@@ -42,14 +42,6 @@ module TaskMapper::Provider
       end
     end
 
-    def project(*project)
-      unless project.empty?
-        Project.find_by_id(project.first)
-      else
-        super
-      end
-    end
-
   end
 end
 

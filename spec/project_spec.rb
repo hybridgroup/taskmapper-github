@@ -38,27 +38,24 @@ describe TaskMapper::Provider::Github::Project do
       it { should be_an_instance_of Array }
     end
 
+    context "when #projects with attributes" do 
+      subject { tm.projects :name =>  project_name } 
+      it { should be_an_instance_of Array }
+    end
+
+    describe "Retrieve a single project" do 
+      context "when #project with name" do 
+        subject { tm.project project_name } 
+        it { should be_an_instance_of project_class }
+      end
+
+      context "when #project with attribute" do 
+        subject { tm.project :name => project_name } 
+        it { should be_an_instance_of project_class }
+      end
+    end
+
   end
 
-  it "should be able to load a single project based on a single name(id)" do 
-    pending
-    @project = @github.projects(@repo_name)
-    @project.should be_an_instance_of(@klass)
-    @project.id.should == @returned_repo
-  end
-
-  it "should be able to find by name(id)" do
-    pending
-    @project = @github.project(@repo_name)
-    @project.should be_an_instance_of(@klass)
-    @project.id.should == @returned_repo
-  end
-
-  it "should be able to find by attributes" do
-    pending
-    @projects = @github.projects(:name => 'tmtest-repo')
-    @projects.should be_an_instance_of(Array)
-    @projects.first.id.should be_eql(@returned_repo)
-  end
 end
 
