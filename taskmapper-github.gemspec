@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-github"
-  s.version = "0.10.0"
+  s.version = "0.10.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2012-05-14"
+  s.date = "2012-07-17"
   s.description = "This provides an interface with github through the taskmapper gem."
   s.email = "hong.quach@abigfisch.com"
   s.extra_rdoc_files = [
@@ -42,6 +42,8 @@ Gem::Specification.new do |s|
     "spec/fixtures/issues.json",
     "spec/fixtures/issues/1.json",
     "spec/fixtures/issues/new_ticket.json",
+    "spec/fixtures/org_repos.json",
+    "spec/fixtures/organizations.json",
     "spec/fixtures/project.json",
     "spec/fixtures/projects.json",
     "spec/fixtures/repositories.json",
@@ -54,7 +56,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/kiafaldorius/taskmapper-github"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.15"
+  s.rubygems_version = "1.8.24"
   s.summary = "The github provider for taskmapper"
 
   if s.respond_to? :specification_version then
@@ -62,7 +64,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<taskmapper>, ["~> 0.8"])
-      s.add_runtime_dependency(%q<octokit>, ["~> 0.6"])
+      s.add_runtime_dependency(%q<octokit>, ["~> 1.9"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_development_dependency(%q<rspec>, ["~> 2.3"])
       s.add_development_dependency(%q<fakeweb>, ["~> 1.3"])
@@ -70,7 +72,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rcov>, ["~> 1.0"])
     else
       s.add_dependency(%q<taskmapper>, ["~> 0.8"])
-      s.add_dependency(%q<octokit>, ["~> 0.6"])
+      s.add_dependency(%q<octokit>, ["~> 1.9"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_dependency(%q<rspec>, ["~> 2.3"])
       s.add_dependency(%q<fakeweb>, ["~> 1.3"])
@@ -79,7 +81,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<taskmapper>, ["~> 0.8"])
-    s.add_dependency(%q<octokit>, ["~> 0.6"])
+    s.add_dependency(%q<octokit>, ["~> 1.9"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
     s.add_dependency(%q<rspec>, ["~> 2.3"])
     s.add_dependency(%q<fakeweb>, ["~> 1.3"])
