@@ -4,7 +4,7 @@ module TaskMapper::Provider
     include TaskMapper::Provider::Base
 
     class << self
-      attr_accessor :login, :api, :user_token, :valid_user
+      attr_accessor :login, :api, :user_token 
     end
     
     # This is for cases when you want to instantiate using TaskMapper::Provider::Github.new(auth)
@@ -35,11 +35,7 @@ module TaskMapper::Provider
     end
 
     def valid?
-      begin
-        TaskMapper::Provider::Github.valid_user = TaskMapper::Provider::Github.api.user.total_private_repos >= 0
-      rescue
-        false
-      end
+      TaskMapper::Provider::Github.api.authenticated? 
     end
 
   end

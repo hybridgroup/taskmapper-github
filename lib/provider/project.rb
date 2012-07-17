@@ -66,8 +66,8 @@ module TaskMapper::Provider
         end
 
         def find_all
-          repos = [] + user_repos
-          repos = repos + org_repos  if TaskMapper::Provider::Github.valid_user
+          repos = user_repos
+          repos += org_repos if TaskMapper::Provider::Github.api.authenticated?
           repos
         end
 
@@ -79,11 +79,13 @@ module TaskMapper::Provider
         end
 
         def org_repos
-          user_orgs.collect do |organization| 
-            TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository| 
+          repos =  []
+          user_orgs.each do |organization| 
+            repos += TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository| 
               self.new(repository)
             end
-          end.flatten
+          end
+          repos.flatten
         end
 
         def user_orgs
