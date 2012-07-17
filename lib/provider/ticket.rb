@@ -58,16 +58,6 @@ module TaskMapper::Provider
         self.new issue
       end
 
-      def self.find(project_id, *options)
-        if options[0].empty?
-          self.find_all(project_id)
-        elsif options[0].first.is_a? Array
-          options[0].first.collect { |number| self.find_by_id(project_id, number) }
-        elsif options[0].first.is_a? Hash
-          self.find_by_attributes(project_id, options[0].first)
-        end
-      end
-
       def self.find_by_attributes(project_id, attributes = {})
         issues = self.find_all(project_id)
         search_by_attribute(issues, attributes)

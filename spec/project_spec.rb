@@ -11,6 +11,8 @@ describe TaskMapper::Provider::Github::Project do
     before(:each) do 
       stub_get('https://taskmapper-user:Tm123456@api.github.com/users/taskmapper-user/repos', 'projects.json')
       stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo', 'project.json')
+      stub_get('https://taskmapper-user:Tm123456@api.github.com/users/taskmapper-user/orgs', 'organizations.json')
+      stub_get('https://taskmapper-user:Tm123456@api.github.com/orgs/2hf/repos', 'org_repos.json')
     end
 
     context "when #projects" do 

@@ -80,17 +80,12 @@ module TaskMapper::Provider
 
         def org_repos
           user_orgs = TaskMapper::Provider::Github.api.organizations(TaskMapper::Provider::Github.login)
-          puts "DBG: #{user_orgs.inspect}"
           user_orgs.each do |organization| 
             TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository| 
               self.new repository 
             end
           end
         end
-      end
-
-      def tickets(*options)
-        TaskMapper::Provider::Github::Ticket.find(self.id, options)
       end
 
       def ticket(*options)
