@@ -79,12 +79,15 @@ module TaskMapper::Provider
         end
 
         def org_repos
-          user_orgs = TaskMapper::Provider::Github.api.organizations(TaskMapper::Provider::Github.login)
           user_orgs.each do |organization| 
             TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository| 
               self.new repository 
             end
           end
+        end
+
+        def user_orgs
+          TaskMapper::Provider::Github.api.organizations(TaskMapper::Provider::Github.login)
         end
       end
 
