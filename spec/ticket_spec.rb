@@ -11,6 +11,7 @@ describe TaskMapper::Provider::Github::Ticket do
     before(:each) do 
       stub_get('https://taskmapper-user:Tm123456@api.github.com/orgs/2hf/repos', 'org_repos.json')
       stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/1', 'issues/1.json')
+      stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues', 'issues.json')
     end
     
     context "when #tickets" do 
