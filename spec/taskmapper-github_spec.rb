@@ -12,16 +12,13 @@ describe "TaskMapper::Provider::Github" do
   end
 
   context 'when calling #valid?' do
-    it 'should test #total_private_repos number' do
-      user = mock 'user'
-      user.should_receive(:total_private_repos).and_return 0
-      TaskMapper::Provider::Github.api.should_receive(:user).and_return user
+    it 'should test #authenticated' do
+      TaskMapper::Provider::Github.api.should_receive(:authenticated?).and_return true
       @github.valid?.should be_true
     end
 
     it 'should return false when the user provides wrong credentials' do
-      TaskMapper::Provider::Github.api.should_receive(:user).
-        and_raise 'some error'
+      TaskMapper::Provider::Github.api.should_receive(:authenticated?).and_return false
       @github.valid?.should_not be_true
     end
   end
