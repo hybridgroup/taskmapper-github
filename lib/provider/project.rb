@@ -79,13 +79,11 @@ module TaskMapper::Provider
         end
 
         def org_repos
-          org_repos = []
-          user_orgs.each do |organization| 
-            org_repos += TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository| 
+          user_orgs.collect do |organization| 
+            TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository| 
               self.new(repository)
             end
-          end
-          org_repos.flatten
+          end.flatten
         end
 
         def user_orgs
