@@ -16,6 +16,7 @@ module TaskMapper::Provider
     def authorize(auth = {})
       @authentication ||= TaskMapper::Authenticator.new(auth)
       auth = @authentication
+      $D =  auth
       login = auth.login || auth.username
       if auth.login.blank? and auth.username.blank?
         raise TaskMapper::Exception.new('Please provide at least a username')
@@ -27,6 +28,10 @@ module TaskMapper::Provider
         TaskMapper::Provider::Github.login = login
         TaskMapper::Provider::Github.user_token = auth.token
         TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login, :password => auth.password)
+      elsif auth.oauth_token
+        TaskMapper::Provider::Github.login = login
+        TaskMapper::Provider::Github.user_token = auth.oauth_token
+        TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login, :oauth_token => auth.oauth_token)
       else 
         TaskMapper::Provider::Github.login = login
         TaskMapper::Provider::Github.user_token = nil
@@ -35,7 +40,7 @@ module TaskMapper::Provider
     end
 
     def valid?
-      TaskMapper::Provider::Github.api.authenticated? 
+      TaskMapper::Provider::Github.api.authenticated? || TaskMapper::Provider::Github.api.oauthed?
     end
 
   end
