@@ -20,10 +20,6 @@ module TaskMapper::Provider
       login = auth.login || auth.username
       if auth.login.blank? and auth.username.blank?
         raise TaskMapper::Exception.new('Please provide at least a username')
-      elsif auth.token
-        TaskMapper::Provider::Github.login = login
-        TaskMapper::Provider::Github.user_token = auth.token
-        TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login, :token => auth.token)
       elsif auth.password
         TaskMapper::Provider::Github.login = login
         TaskMapper::Provider::Github.user_token = auth.token
