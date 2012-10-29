@@ -9,7 +9,7 @@ First we have to instantiate a new taskmapper instance:
 
 If you do not pass in the token and the username, it will only access public information for the account.
 
-== Finding Projects(Repositories)
+### Finding Projects(Repositories)
 
 You can find your own projects by doing:
 
@@ -25,34 +25,34 @@ Or even make a search with an array
 
 	projects = github.project.find(:all, ['ruby','git'])
 	
-== Finding Tickets(Issues)
+### Finding Tickets(Issues)
 
   tickets = project.tickets # All open issues
 	tickets = project.tickets(:all, {:state => 'closed'}) # All closed tickets
 	ticket = project.ticket(<issue_number>)
 
-== Open Tickets
+### Open Tickets
     
 	ticket = project.ticket!({:title => "New ticket", :body => "Body for the very new ticket"})
 
-== Close a ticket
+### Close a ticket
 	
 	ticket = ticket.close
 	
-== Reopen a ticket
+### Reopen a ticket
 
 	ticket = ticket.reopen
 	
-= Update a ticket
+### Update a ticket
 	
 	ticket.title = "New title"
 	ticket.body =  "New body"
 	ticket.save
 
-== Finding Comments
+### Finding Comments
 	comments = ticket.comments
 
-== Create Comment
+### Create Comment
 	comment = ticket.comment!("your comment goes here")
 
 ## Requirements
