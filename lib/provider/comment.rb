@@ -64,12 +64,6 @@ module TaskMapper::Provider
         self.new github_comment
       end
 
-      #See https://www.kanbanpad.com/projects/31edb8d134e7967c1f0d#!xt-4f994d17014289000707433f
-      def self.flat_body(comment_hashie)
-        comment_hashie.body = comment_hashie.body.body
-        comment_hashie
-      end
-
       # See https://www.kanbanpad.com/projects/31edb8d134e7967c1f0d#!xt-4f994f2101428900070759fd
       def self.clean_body!(comment)
         comment.body = comment.body.sub(/\A---\s\sbody:\s/, '').gsub(/\s\z/, '')
