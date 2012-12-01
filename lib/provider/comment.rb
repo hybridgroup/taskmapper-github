@@ -58,9 +58,9 @@ module TaskMapper::Provider
       end
 
       def self.create(project_id, ticket_id, comment)
+        comment = comment[:body]
         github_comment = TaskMapper::Provider::Github.api.add_comment(project_id, ticket_id, comment)
         github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
-        flat_body github_comment
         self.new github_comment
       end
 
