@@ -22,16 +22,17 @@ module TaskMapper::Provider
     
     # declare needed overloaded methods here
     def authorize(auth = {})
+      @authentication ||= TaskMapper::Authenticator.new(auth)
       auth[:login] = auth[:login] || auth[:username]
       raise TaskMapper::Exception.new('Please provide at least a username') if auth[:login].blank?
       provider.login = auth[:login]
-      provider.user_token = auth[:password] || auth[:oauth_token]
+      provider.user_token = auth[:password] || auth[:token]
       provider.api = new_github_client auth
     end
     
 
     def valid?
-      TaskMapper::Provider::Github.api.authenticated? || TaskMapper::Provider::Github.api.oauthed?
+      provider.api.authenticated? || provider.api.oauthed?
     end
 
   end
