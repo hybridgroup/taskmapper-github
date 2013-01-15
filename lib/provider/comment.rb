@@ -6,16 +6,15 @@ module TaskMapper::Provider
     # versions of the ticket.
     #
     class Comment < TaskMapper::Provider::Base::Comment
-      attr_accessor :prefix_options
 
       def initialize(*object) 
         if object.first 
           object = object.first
           unless object.is_a? Hash
             hash = {:id => object.id,
-                    :body => object.body,
-                    :created_at => object.created_at,
-                    :author => object.user.login}
+              :body => object.body,
+              :created_at => object.created_at,
+              :author => object.user.login}
           else
             hash = object
           end
@@ -28,19 +27,15 @@ module TaskMapper::Provider
       end
 
       def created_at
-        @created_at ||= begin
-                          Time.parse(self[:created_at])
-                        rescue
-                          self[:created_at]
-                        end
+        Time.parse(self[:created_at])
+      rescue
+        self[:created_at]
       end
 
       def updated_at
-        @updated_at ||= begin
-                          Time.parse(self[:updated_at])
-                        rescue
-                          self[:updated_at]
-                        end
+        Time.parse(self[:updated_at])
+      rescue
+        self[:updated_at]
       end
 
       # declare needed overloaded methods here
@@ -50,7 +45,8 @@ module TaskMapper::Provider
       end
 
       def self.find_all(project_id, ticket_id)
-        TaskMapper::Provider::Github.api.issue_comments(project_id, ticket_id).collect do |comment|
+        current_time = Time.now.httpdate
+        Array(TaskMapper::Provider::Github.api.issue_comments(project_id, ticket_id, :since => current_time)).collect do |comment|
           comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
           clean_body! comment
           self.new comment
@@ -58,10 +54,11 @@ module TaskMapper::Provider
       end
 
       def self.create(project_id, ticket_id, comment)
-        comment = comment[:body]
-        github_comment = TaskMapper::Provider::Github.api.add_comment(project_id, ticket_id, comment)
-        github_comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
-        self.new github_comment
+        self.new github_comment(project_id, ticket_id, comment[:body]).merge!(:project_id => project_id, :ticket_id => ticket_id)
+      end
+
+      def self.github_comment(project_id, number, body)
+        TaskMapper::Provider::Github.api.add_comment(project_id, number, body)
       end
 
       # See https://www.kanbanpad.com/projects/31edb8d134e7967c1f0d#!xt-4f994f2101428900070759fd
@@ -74,8 +71,8 @@ module TaskMapper::Provider
       end
 
       private
-      def update_comment(repo, number, comment, options = {})
-        TaskMapper::Provider::Github.api.update_comment repo, number, comment, options
+      def update_comment(repo, number, comment)
+        TaskMapper::Provider::Github.api.update_comment repo, number, comment 
         true
       end
 
