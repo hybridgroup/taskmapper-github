@@ -6,7 +6,7 @@ module TaskMapper::Provider
     class << self
       attr_accessor :login, :api, :user_token 
     end
-    
+
     # This is for cases when you want to instantiate using TaskMapper::Provider::Github.new(auth)
     def self.new(auth = {})
       TaskMapper.new(:github, auth)
@@ -17,21 +17,16 @@ module TaskMapper::Provider
       @authentication ||= TaskMapper::Authenticator.new(auth)
       auth = @authentication
       login = auth.login || auth.username
-      if auth.login.blank? and auth.username.blank?
+      if login.blank?
         raise TaskMapper::Exception.new('Please provide at least a username')
       elsif auth.token
-        TaskMapper::Provider::Github.login = login
-        TaskMapper::Provider::Github.user_token = auth.token
         TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login, :token => auth.token)
       elsif auth.password
-        TaskMapper::Provider::Github.login = login
-        TaskMapper::Provider::Github.user_token = auth.token
         TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login, :password => auth.password)
       else 
-        TaskMapper::Provider::Github.login = login
-        TaskMapper::Provider::Github.user_token = nil
         TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login)
       end
+      TaskMapper::Provider::Github.login = login
     end
 
     def valid?
