@@ -1,4 +1,4 @@
-#require YOUR_PROVIDER_API
+require 'bundler/setup'
 require 'octokit'
 require 'active_support/core_ext/string'
 require 'net/http'

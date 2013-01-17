@@ -6,7 +6,7 @@ describe TaskMapper::Provider::Github::Comment do
     @github = TaskMapper.new(:github, {:login => 'taskmapper-user', :password => 'Tm123456'})
     stub_get('https://taskmapper-user:Tm123456@github.com/api/v2/json/organizations/repositories', 'repositories.json')
     stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo', 'project.json')
-    stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues','issues.json')
+    stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues?since','issues.json')
     stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues?state=closed','closed_issues.json')
     stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/1/comments', 'comments.json')
     stub_post('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/1/comments', 'comments/3951282.json')

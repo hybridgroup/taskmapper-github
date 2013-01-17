@@ -1,22 +1,22 @@
 module TaskMapper::Provider
   module Github
     # Ticket class for taskmapper-github
-    
+
     class Ticket < TaskMapper::Provider::Base::Ticket
-      
+
       @@allowed_states = %w{open close}
       attr_accessor :prefix_options
       # declare needed overloaded methods here
-      
+
       def initialize(*object) 
         if object.first
           object = object.first
           unless object.is_a? Hash
             hash = {:id => object.number,
-                    :status => object.state,
-                    :description => object.body,
-                    :user => object.user,
-                    :project_id => object.project_id}
+              :status => object.state,
+              :description => object.body,
+              :user => object.user,
+              :project_id => object.project_id}
           else 
             hash = object
           end
@@ -35,11 +35,11 @@ module TaskMapper::Provider
       def description
         self.body
       end
-      
+
       def description=(val)
         self.body = val
       end
-      
+
       def author
         self.user.respond_to?('login') ? self.user.login : self.user
       end
@@ -64,9 +64,10 @@ module TaskMapper::Provider
       end
 
       def self.find_all(project_id)
+        last_modified = TaskMapper::Provider::Github.api.last_modified
         issues = []
-        issues += TaskMapper::Provider::Github.api.issues(project_id)
-        issues += TaskMapper::Provider::Github.api.issues(project_id, {:state => "closed"})
+        issues += TaskMapper::Provider::Github.api.issues(project_id, :since => last_modified)
+        issues += TaskMapper::Provider::Github.api.issues(project_id, {:state => "closed"}) unless issues.empty?
         issues.collect do |issue| 
           issue.merge!(:project_id => project_id)
           Ticket.new issue
