@@ -50,7 +50,8 @@ module TaskMapper::Provider
       end
 
       def self.find_all(project_id, ticket_id)
-        TaskMapper::Provider::Github.api.issue_comments(project_id, ticket_id).collect do |comment|
+        current_time = Time.now.httpdate
+        Array(TaskMapper::Provider::Github.api.issue_comments(project_id, ticket_id, :since => current_time)).collect do |comment|
           comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
           clean_body! comment
           self.new comment
