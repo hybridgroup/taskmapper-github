@@ -73,8 +73,7 @@ module TaskMapper::Provider
 
         private
         def user_repos
-          api = TaskMapper::Provider::Github.api
-          api.repositories(TaskMapper::Provider::Github.login, :since => api.last_modified).collect do |repository| 
+          TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login).collect do |repository| 
             self.new repository
           end
         end
@@ -90,8 +89,7 @@ module TaskMapper::Provider
         end
 
         def user_orgs
-          api = TaskMapper::Provider::Github.api
-          api.organizations(TaskMapper::Provider::Github.login, :since => api.last_modified)
+          TaskMapper::Provider::Github.api.organizations(TaskMapper::Provider::Github.login)
         end
       end
 
