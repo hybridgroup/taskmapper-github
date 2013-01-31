@@ -44,9 +44,12 @@ module TaskMapper::Provider
         search_by_attribute(self.find_all(project_id, ticket_id), attributes)
       end
 
+      def self.last_modified
+        TaskMapper::Provider::Github.api.last_modified || Time.now.httpdate
+      end
+
       def self.find_all(project_id, ticket_id)
-        current_time = Time.now.httpdate
-        Array(TaskMapper::Provider::Github.api.issue_comments(project_id, ticket_id, :since => current_time)).collect do |comment|
+        Array(TaskMapper::Provider::Github.api.issue_comments(project_id, ticket_id, :since => last_modified)).collect do |comment|
           comment.merge!(:project_id => project_id, :ticket_id => ticket_id)
           clean_body! comment
           self.new comment

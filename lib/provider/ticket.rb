@@ -61,10 +61,13 @@ module TaskMapper::Provider
         search_by_attribute(issues, attributes)
       end
 
+      def self.last_modified
+        TaskMapper::Provider::Github.api.last_modified || Time.now.httpdate
+      end
+
       def self.find_all(project_id)
-        current_time = Time.now.httpdate
         issues = []
-        issues = Array(TaskMapper::Provider::Github.api.issues(project_id, :since => current_time))
+        issues = Array(TaskMapper::Provider::Github.api.issues(project_id, :since => last_modified))
         issues += TaskMapper::Provider::Github.api.issues(project_id, {:state => "closed"}) unless issues.empty?
         issues.collect do |issue| 
           issue.merge!(:project_id => project_id)
