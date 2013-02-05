@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2013-01-31"
+  s.date = "2013-02-05"
   s.description = "This provides an interface with github through the taskmapper gem."
   s.email = "hong.quach@abigfisch.com"
   s.extra_rdoc_files = [
