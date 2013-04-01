@@ -15,21 +15,15 @@ module TaskMapper::Provider
     # declare needed overloaded methods here
     def authorize(auth = {})
       @authentication ||= TaskMapper::Authenticator.new(auth)
-      login = @authentication.login || @authentication.username
-      if login.blank?
-        raise TaskMapper::Exception.new('Please provide at least a username')
-      elsif @authentication.token
-        TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login, :token => @authentication.token)
-      elsif @authentication.password
-        TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login, :password => @authentication.password)
-      else 
-        TaskMapper::Provider::Github.api = Octokit::Client.new(:login => login)
-      end
-      TaskMapper::Provider::Github.login = login
+      auth[:login] = auth[:login] || auth[:username]
+      raise TaskMapper::Exception.new('Please provide at least a username') if auth[:login].blank?
+      provider.login = auth[:login]
+      provider.user_token = auth[:password] || auth[:token]
+      provider.api = new_github_client auth
     end
 
     def valid?
-      TaskMapper::Provider::Github.api.authenticated? || TaskMapper::Provider::Github.api.oauthed?
+      provider.api.authenticated? || provider.api.oauthed?
     end
 
   end
