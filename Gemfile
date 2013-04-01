@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 gem "taskmapper", "~> 0.8" 
-gem "octokit" 
+gem "octokit", :git => 'https://github.com/bratsche/octokit.git' 
 group :development do 
   gem "jeweler", "~> 1.6"
   gem "rspec", "~> 2.3"
