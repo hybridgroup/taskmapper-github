@@ -11,6 +11,14 @@ module TaskMapper::Provider
     def self.new(auth = {})
       TaskMapper.new(:github, auth)
     end
+
+    def provider
+      TaskMapper::Provider::Github
+    end
+
+    def new_github_client(auth)
+      Octokit::Client.new auth
+    end
     
     # declare needed overloaded methods here
     def authorize(auth = {})
