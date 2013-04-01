@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-github"
-  s.version = "0.11.2"
+  s.version = "0.11.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2013-03-14"
+  s.date = "2013-04-01"
   s.description = "This provides an interface with github through the taskmapper gem."
   s.email = "hong.quach@abigfisch.com"
   s.extra_rdoc_files = [
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/provider/comment.rb",
     "lib/provider/github.rb",
+    "lib/provider/octokit_wrapper.rb",
     "lib/provider/project.rb",
     "lib/provider/ticket.rb",
     "lib/taskmapper-github.rb",
@@ -52,11 +53,12 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/taskmapper-github_spec.rb",
     "spec/ticket_spec.rb",
+    "taskmapper-github-0.11.2.gem",
     "taskmapper-github.gemspec"
   ]
   s.homepage = "http://github.com/kiafaldorius/taskmapper-github"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "1.8.25"
   s.summary = "The github provider for taskmapper"
 
   if s.respond_to? :specification_version then
