@@ -12,11 +12,11 @@ module TaskMapper::Provider
           @system_data = {:client => object} 
           unless object.is_a? Hash
             hash = {:description => object.description,
-                    :created_at => object.created_at,
-                    :updated_at => object.created_at,
-                    :name => object.name,
-                    :id => object.name,
-                    :owner => object.owner}
+              :created_at => object.created_at,
+              :updated_at => object.created_at,
+              :name => object.name,
+              :id => object.name,
+              :owner => object.owner}
           else 
             hash = object
           end 
@@ -61,8 +61,8 @@ module TaskMapper::Provider
         end
 
         def find_by_id(id)
-          id = "#{TaskMapper::Provider::Github.login}/#{id}" unless id.include?("/")
-          self.new TaskMapper::Provider::Github.api.repository(id) 
+          project_id = "#{TaskMapper::Provider::Github.login}/#{id}" unless id.include?("/")
+          self.new TaskMapper::Provider::Github.api.repository(project_id)
         end
 
         def find_all
