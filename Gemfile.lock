@@ -62,7 +62,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  fakeweb (~> 1.3)
+  fakeweb
   jeweler (~> 1.6)
   octokit
   rcov (~> 1.0)

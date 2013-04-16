@@ -73,7 +73,8 @@ module TaskMapper::Provider
 
         private
         def user_repos
-          TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login).collect do |repository| 
+          repos = TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login)
+          repos.collect do |repository| 
             self.new repository
           end
         end

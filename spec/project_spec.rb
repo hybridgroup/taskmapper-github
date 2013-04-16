@@ -25,17 +25,17 @@ describe TaskMapper::Provider::Github::Project do
       end
     end
 
-    context "when #projects with id's" do 
+    pending "when #projects with id's" do 
       subject { tm.projects [project_name] }
       it { should be_an_instance_of Array }
     end
 
-    context "when #projects with attributes" do 
+    pending "when #projects with attributes" do 
       subject { tm.projects :name =>  project_name } 
       it { should be_an_instance_of Array }
     end
 
-    describe "Retrieve a single project" do 
+    pending "Retrieve a single project" do 
       context "when #project with name" do 
         subject { tm.project project_name } 
         it { should be_an_instance_of project_class }

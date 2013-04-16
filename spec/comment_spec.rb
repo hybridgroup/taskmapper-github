@@ -35,7 +35,7 @@ describe TaskMapper::Provider::Github::Comment do
     comments = @ticket.comments.map(&:body).should == ["for testing", "test comment"]
   end
   
-  it "should be able to update comments" do
+  pending "should be able to update comments" do
     comment = @ticket.comments.first
     comment.body = "updated comment"
     comment.save.should be_true

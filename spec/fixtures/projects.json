@@ -1,4 +1,5 @@
-[{
+[
+  {
   "watchers":"1",
   "url":"https://api.github.com/repos/taskmapper-user/tmtest-repo",
   "created_at":"2012-02-13T22:20:10Z",
@@ -19,16 +20,17 @@
   "pushed_at":"null",
   "updated_at":"2012-02-13T22:20:10Z",
   "owner": {
-    "url":"https://api.github.com/users/taskmapper-user",
-    "avatar_url":"https://secure.gravatar.com/avatar/42bd18419413dfbd6e7ec4fefdec94ae?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-    "gravatar_id":"42bd18419413dfbd6e7ec4fefdec94ae",
-    "login":"taskmapper-user",
-    "id":"1434902"
-  },
+  "url":"https://api.github.com/users/taskmapper-user",
+  "avatar_url":"https://secure.gravatar.com/avatar/42bd18419413dfbd6e7ec4fefdec94ae?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+  "gravatar_id":"42bd18419413dfbd6e7ec4fefdec94ae",
+  "login":"taskmapper-user",
+  "id":"1434902"
+},
   "name":"tmtest-repo",
   "has_downloads":true,
   "id":"3434734",
   "git_url":"git://github.com/taskmapper-user/tmtest-repo.git",
   "svn_url":"https://github.com/taskmapper-user/tmtest-repo",
   "language":"null"
-}]
+  }
+]
