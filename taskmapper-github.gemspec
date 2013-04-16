@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-github"
-  s.version = "0.11.4"
+  s.version = "0.12.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
@@ -68,7 +68,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<octokit>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_development_dependency(%q<rspec>, ["~> 2.3"])
-      s.add_development_dependency(%q<fakeweb>, ["~> 1.3"])
+      s.add_development_dependency(%q<fakeweb>, [">= 0"])
       s.add_development_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_development_dependency(%q<rcov>, ["~> 1.0"])
     else
@@ -76,7 +76,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<octokit>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_dependency(%q<rspec>, ["~> 2.3"])
-      s.add_dependency(%q<fakeweb>, ["~> 1.3"])
+      s.add_dependency(%q<fakeweb>, [">= 0"])
       s.add_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_dependency(%q<rcov>, ["~> 1.0"])
     end
@@ -85,7 +85,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<octokit>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
     s.add_dependency(%q<rspec>, ["~> 2.3"])
-    s.add_dependency(%q<fakeweb>, ["~> 1.3"])
+    s.add_dependency(%q<fakeweb>, [">= 0"])
     s.add_dependency(%q<simplecov>, ["~> 0.5"])
     s.add_dependency(%q<rcov>, ["~> 1.0"])
   end
