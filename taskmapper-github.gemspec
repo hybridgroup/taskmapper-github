@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-github"
-  s.version = "0.12.0"
+  s.version = "0.12.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2013-04-16"
+  s.date = "2013-05-23"
   s.description = "This provides an interface with github through the taskmapper gem."
   s.email = "hong.quach@abigfisch.com"
   s.extra_rdoc_files = [
