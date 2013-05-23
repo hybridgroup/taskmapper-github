@@ -1,25 +1,17 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "TaskMapper::Provider::Github" do
+describe "TaskMapper::Provider::tm" do
+  let(:tm) { TaskMapper.new(:github, :login => 'cored') }
+  subject { tm }
 
-  before(:each) do 
-    @github = TaskMapper.new(:github, :login => 'cored')
+  context "when calling #valid? with valid credentials" do
+    before { tm.should_receive(:valid?).and_return(true) }
+    its(:valid?) { should be_true }
   end
 
-  it "should be able to instantiate a new instance" do
-    @github.should be_an_instance_of(TaskMapper)
-    @github.should be_a_kind_of(TaskMapper::Provider::Github)
+  context "should return false when the user provides wrong credentials" do
+    before { tm.should_receive(:valid?).and_return(false) }
+    its(:valid?) { should be_false }  
   end
 
-  context 'when calling #valid?' do
-    it 'should test #authenticated' do
-      TaskMapper::Provider::Github.api.should_receive(:authenticated?).and_return true
-      @github.valid?.should be_true
-    end
-
-    it 'should return false when the user provides wrong credentials' do
-      TaskMapper::Provider::Github.api.should_receive(:authenticated?).and_return false
-      @github.valid?.should_not be_true
-    end
-  end
 end

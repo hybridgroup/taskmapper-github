@@ -23,7 +23,7 @@ module TaskMapper::Provider
     # declare needed overloaded methods here
     def authorize(auth = {})
       @authentication ||= TaskMapper::Authenticator.new(auth)
-      auth[:login] = auth[:login] || auth[:username]
+      auth[:login] = auth.fetch(:login) || auth.fetch(:username)
       raise TaskMapper::Exception.new('Please provide at least a username') if auth[:login].blank?
       provider.login = auth[:login]
       provider.user_token = auth[:password] || auth[:token]
