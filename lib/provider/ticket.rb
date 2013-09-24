@@ -45,8 +45,9 @@ module TaskMapper::Provider
         github_user
       end
 
-      def self.find_by_id(project_id, number)
-        issue = TaskMapper::Provider::Github.api.issue(project_id, number)
+      def self.find_by_id(project_id, issue_id)
+        api = TaskMapper::Provider::Github.api
+        issue = api.issue(project_id, issue_id).attrs[:issue].attrs
         issue.merge!(:project_id => project_id)
         self.new issue
       end
@@ -57,12 +58,12 @@ module TaskMapper::Provider
       end
 
       def self.find_all(project_id)
-        issues = []
         issues = Array(TaskMapper::Provider::Github.api.issues(project_id))
         issues += TaskMapper::Provider::Github.api.issues(project_id, {:state => "closed"}) unless issues.empty?
-        issues.collect do |issue|
+        issues.collect do |i|
+          issue = i.attrs
           issue.merge!(:project_id => project_id)
-          Ticket.new issue
+          self.new issue
         end
       end
 
@@ -71,8 +72,9 @@ module TaskMapper::Provider
         body = ticket_hash.delete(:description)
         title = ticket_hash.delete(:title)
         new_issue = TaskMapper::Provider::Github.api.create_issue(project_id, title, body, options.first)
-        new_issue.merge!(:project_id => project_id)
-        self.new new_issue
+        issue = new_issue.attrs[:issue].attrs
+        issue.merge!(:project_id => project_id)
+        self.new issue
       end
 
       def created_at

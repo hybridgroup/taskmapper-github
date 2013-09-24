@@ -28,7 +28,7 @@ module TaskMapper::Provider
     end
 
     def valid?
-      provider.api.authenticated? || provider.api.oauthed?
+      provider.api.user_authenticated?
     end
   end
 end

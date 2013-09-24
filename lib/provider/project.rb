@@ -57,12 +57,13 @@ module TaskMapper::Provider
 
         def find_by_id(id)
           project_id = "#{TaskMapper::Provider::Github.login}/#{id}" unless id.include?("/")
-          self.new TaskMapper::Provider::Github.api.repository(project_id)
+          repo = TaskMapper::Provider::Github.api.repository(project_id).attrs
+          self.new repo
         end
 
         def find_all
           repos = user_repos
-          repos += org_repos if TaskMapper::Provider::Github.api.authenticated?
+          repos += org_repos if TaskMapper::Provider::Github.api.user_authenticated?
           repos
         end
 
