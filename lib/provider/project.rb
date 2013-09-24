@@ -6,10 +6,10 @@ module TaskMapper::Provider
     class Project < TaskMapper::Provider::Base::Project
 
       # declare needed overloaded methods here
-      def initialize(*object) 
+      def initialize(*object)
         if object.first
           object = object.first
-          @system_data = {:client => object} 
+          @system_data = {:client => object}
           unless object.is_a? Hash
             hash = {:description => object.description,
               :created_at => object.created_at,
@@ -17,16 +17,16 @@ module TaskMapper::Provider
               :name => object.name,
               :id => object.name,
               :owner => object.owner}
-          else 
+          else
             hash = object
-          end 
+          end
           super hash
         end
       end
 
       def created_at
-        begin 
-          Time.parse(self[:created_at]) 
+        begin
+          Time.parse(self[:created_at])
         rescue
           self[:created_at]
         end
@@ -34,7 +34,7 @@ module TaskMapper::Provider
 
       def updated_at
         begin
-          Time.parse(self[:created_at]) 
+          Time.parse(self[:created_at])
         rescue
           self[:created_at]
         end
@@ -74,15 +74,15 @@ module TaskMapper::Provider
         private
         def user_repos
           repos = TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login)
-          repos.collect do |repository| 
+          repos.collect do |repository|
             self.new repository
           end
         end
 
         def org_repos
           repos =  []
-          user_orgs.each do |organization| 
-            repos += TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository| 
+          user_orgs.each do |organization|
+            repos += TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository|
               self.new(repository)
             end
           end

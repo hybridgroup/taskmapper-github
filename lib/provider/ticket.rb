@@ -6,7 +6,7 @@ module TaskMapper::Provider
 
       # declare needed overloaded methods here
 
-      def initialize(*object) 
+      def initialize(*object)
         if object.first
           object = object.first
           unless object.is_a? Hash
@@ -15,7 +15,7 @@ module TaskMapper::Provider
               :description => object.body,
               :user => object.user,
               :project_id => object.project_id}
-          else 
+          else
             hash = object
           end
           super hash
@@ -50,7 +50,7 @@ module TaskMapper::Provider
         github_user
       end
 
-      def self.find_by_id(project_id, number) 
+      def self.find_by_id(project_id, number)
         issue = TaskMapper::Provider::Github.api.issue(project_id, number)
         issue.merge!(:project_id => project_id)
         self.new issue
@@ -63,9 +63,9 @@ module TaskMapper::Provider
 
       def self.find_all(project_id)
         issues = []
-        issues = Array(TaskMapper::Provider::Github.api.issues(project_id)) 
+        issues = Array(TaskMapper::Provider::Github.api.issues(project_id))
         issues += TaskMapper::Provider::Github.api.issues(project_id, {:state => "closed"}) unless issues.empty?
-        issues.collect do |issue| 
+        issues.collect do |issue|
           issue.merge!(:project_id => project_id)
           Ticket.new issue
         end
@@ -81,8 +81,8 @@ module TaskMapper::Provider
       end
 
       def created_at
-        begin 
-          Time.parse(self[:created_at]) 
+        begin
+          Time.parse(self[:created_at])
         rescue
           self[:created_at]
         end
@@ -90,7 +90,7 @@ module TaskMapper::Provider
 
       def updated_at
         begin
-          Time.parse(self[:updated_at]) 
+          Time.parse(self[:updated_at])
         rescue
           self[:updated_at]
         end
@@ -106,14 +106,14 @@ module TaskMapper::Provider
       end
 
       def close
-        Ticket.new(project_id, TaskMapper::Provider::Github.api.close_issue(project_id, number)) 
+        Ticket.new(project_id, TaskMapper::Provider::Github.api.close_issue(project_id, number))
       end
 
       def comment!(attributes)
         Comment.create(project_id, number, attributes)
       end
 
-      private 
+      private
       def github_user
         self.user.login || self.user
       end

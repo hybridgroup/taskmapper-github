@@ -4,7 +4,7 @@ module TaskMapper::Provider
     include TaskMapper::Provider::Base
 
     class << self
-      attr_accessor :login, :api, :user_token 
+      attr_accessor :login, :api, :user_token
     end
 
     # This is for cases when you want to instantiate using TaskMapper::Provider::Github.new(auth)
@@ -19,7 +19,7 @@ module TaskMapper::Provider
     def new_github_client(auth)
       Octokit::Client.new auth
     end
-    
+
     # declare needed overloaded methods here
     def authorize(auth = {})
       @authentication ||= TaskMapper::Authenticator.new(auth)

@@ -25,9 +25,9 @@ def stub_request(method, url, filename, status=nil)
   options.merge!({:body => fixture_file(filename)}) if filename
   options.merge!({:body => status.last}) if status
   options.merge!({:status => status}) if status
-  options.merge!({:content_type => 'application/json'}) 
+  options.merge!({:content_type => 'application/json'})
 
-  FakeWeb.register_uri(method, url, options) 
+  FakeWeb.register_uri(method, url, options)
 end
 
 def stub_get(*args); stub_request(:get, *args) end

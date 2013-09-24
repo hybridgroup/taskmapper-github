@@ -7,8 +7,8 @@ module TaskMapper::Provider
     #
     class Comment < TaskMapper::Provider::Base::Comment
 
-      def initialize(*object) 
-        if object.first 
+      def initialize(*object)
+        if object.first
           object = object.first
           unless object.is_a? Hash
             hash = {:id => object.id,
@@ -71,7 +71,7 @@ module TaskMapper::Provider
 
       private
       def update_comment(repo, number, comment)
-        TaskMapper::Provider::Github.api.update_comment repo, number, comment 
+        TaskMapper::Provider::Github.api.update_comment repo, number, comment
         true
       end
 

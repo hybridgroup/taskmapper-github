@@ -11,7 +11,7 @@ describe "TaskMapper::Provider::tm" do
 
   context "should return false when the user provides wrong credentials" do
     before { tm.should_receive(:valid?).and_return(false) }
-    its(:valid?) { should be_false }  
+    its(:valid?) { should be_false }
   end
 
 end

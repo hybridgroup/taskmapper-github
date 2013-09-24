@@ -23,18 +23,18 @@ describe TaskMapper::Provider::Github::Comment do
     comments.first.should be_an_instance_of(@klass)
     comments.first.body.should == "for testing"
   end
-  
-  it "should be able to create a new comment" do  
+
+  it "should be able to create a new comment" do
     comment = @ticket.comment!(:body => 'for testing')
     comment.should be_an_instance_of(@klass)
     comment.body.should == 'for testing'
   end
-  
+
   #see bug 116 tm-github: Bug Ticket#comments returning comments with weird text in the body
   it "should be able to load a ticket and clean comment body" do
     comments = @ticket.comments.map(&:body).should == ["for testing", "test comment"]
   end
-  
+
   pending "should be able to update comments" do
     comment = @ticket.comments.first
     comment.body = "updated comment"

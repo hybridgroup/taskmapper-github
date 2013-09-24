@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 gem "taskmapper"
 gem "octokit"
-group :development do 
+group :development do
   gem "jeweler", "~> 1.6"
   gem "rspec", "~> 2.3"
   gem "fakeweb"
