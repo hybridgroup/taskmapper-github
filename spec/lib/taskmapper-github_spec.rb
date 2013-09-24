@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "TaskMapper::Provider::tm" do
+describe "TaskMapper::Provider::Github" do
   let(:tm) { TaskMapper.new(:github, :login => 'cored') }
   subject { tm }
 

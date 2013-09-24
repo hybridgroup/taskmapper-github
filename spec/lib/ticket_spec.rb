@@ -1,20 +1,12 @@
 require 'spec_helper'
 
 describe TaskMapper::Provider::Github::Ticket do
-  let(:tm) { TaskMapper.new(:github, {:login => 'taskmapper-user', :password => 'Tm123456'}) }
+  let(:tm) { create_instance }
   let(:ticket_id) { 1 }
   let(:ticket_class) { TaskMapper::Provider::Github::Ticket }
   let(:project) { tm.project 'tmtest-repo' }
 
   describe "Retrieving tickets" do
-    before(:each) do
-      stub_get('https://taskmapper-user:Tm123456@api.github.com/orgs/2hf/repos', 'org_repos.json')
-      stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/1', 'issues/1.json')
-      stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues', 'issues.json')
-      stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues?state=closed', 'issues.json')
-      stub_get('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues?state=open', 'issues.json')
-    end
-
     context "when #tickets" do
       subject { project.tickets }
       it { should be_an_instance_of Array }
@@ -40,10 +32,6 @@ describe TaskMapper::Provider::Github::Ticket do
   end
 
   describe "Create and Update" do
-    before(:each) do
-      stub_post('https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues', 'issues/1.json')
-    end
-
     context "when #ticket! with :title and :description" do
       subject { project.ticket!(:title => 'new ticket', :description => 'testing') }
       it { should be_an_instance_of ticket_class }
