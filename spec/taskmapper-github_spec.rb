@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'spec_helper'
 
 describe "TaskMapper::Provider::tm" do
   let(:tm) { TaskMapper.new(:github, :login => 'cored') }
@@ -13,5 +13,4 @@ describe "TaskMapper::Provider::tm" do
     before { tm.should_receive(:valid?).and_return(false) }
     its(:valid?) { should be_false }
   end
-
 end

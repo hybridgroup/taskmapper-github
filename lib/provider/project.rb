@@ -1,11 +1,6 @@
 module TaskMapper::Provider
   module Github
-    # Project class for taskmapper-github
-    #
-    #
     class Project < TaskMapper::Provider::Base::Project
-
-      # declare needed overloaded methods here
       def initialize(*object)
         if object.first
           object = object.first
@@ -106,6 +101,5 @@ module TaskMapper::Provider
         TaskMapper::Provider::Github::Ticket.open(self.id, options.first)
       end
     end
-
   end
 end

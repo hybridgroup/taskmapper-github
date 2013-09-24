@@ -1,7 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'spec_helper'
 
 describe TaskMapper::Provider::Github::Ticket do
-
   let(:tm) { TaskMapper.new(:github, {:login => 'taskmapper-user', :password => 'Tm123456'}) }
   let(:ticket_id) { 1 }
   let(:ticket_class) { TaskMapper::Provider::Github::Ticket }
@@ -50,5 +49,4 @@ describe TaskMapper::Provider::Github::Ticket do
       it { should be_an_instance_of ticket_class }
     end
   end
-
 end

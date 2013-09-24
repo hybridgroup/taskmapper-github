@@ -1,5 +1,4 @@
 module TaskMapper::Provider
-  # This is the Github Provider for taskmapper
   module Github
     include TaskMapper::Provider::Base
 
@@ -7,7 +6,6 @@ module TaskMapper::Provider
       attr_accessor :login, :api, :user_token
     end
 
-    # This is for cases when you want to instantiate using TaskMapper::Provider::Github.new(auth)
     def self.new(auth = {})
       TaskMapper.new(:github, auth)
     end
@@ -20,7 +18,6 @@ module TaskMapper::Provider
       Octokit::Client.new auth
     end
 
-    # declare needed overloaded methods here
     def authorize(auth = {})
       @authentication ||= TaskMapper::Authenticator.new(auth)
       auth[:login] = auth.fetch(:login) || auth.fetch(:username)
@@ -33,8 +30,5 @@ module TaskMapper::Provider
     def valid?
       provider.api.authenticated? || provider.api.oauthed?
     end
-
   end
 end
-
-

@@ -1,11 +1,6 @@
 module TaskMapper::Provider
   module Github
-    # Ticket class for taskmapper-github
-
     class Ticket < TaskMapper::Provider::Base::Ticket
-
-      # declare needed overloaded methods here
-
       def initialize(*object)
         if object.first
           object = object.first

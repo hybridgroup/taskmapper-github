@@ -1,12 +1,6 @@
 module TaskMapper::Provider
   module Github
-    # The comment class for taskmapper-github
-    #
-    # Do any mapping between TaskMapper and your system's comment model here
-    # versions of the ticket.
-    #
     class Comment < TaskMapper::Provider::Base::Comment
-
       def initialize(*object)
         if object.first
           object = object.first
@@ -37,8 +31,6 @@ module TaskMapper::Provider
       rescue
         self[:updated_at]
       end
-
-      # declare needed overloaded methods here
 
       def self.find_by_attributes(project_id, ticket_id, attributes = {})
         search_by_attribute(self.find_all(project_id, ticket_id), attributes)

@@ -1,7 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'spec_helper'
 
 describe TaskMapper::Provider::Github::Comment do
-
   before(:each) do
     @github = TaskMapper.new(:github, {:login => 'taskmapper-user', :password => 'Tm123456'})
     stub_get('https://taskmapper-user:Tm123456@github.com/api/v2/json/organizations/repositories', 'repositories.json')
@@ -40,5 +39,4 @@ describe TaskMapper::Provider::Github::Comment do
     comment.body = "updated comment"
     comment.save.should be_true
   end
-
 end

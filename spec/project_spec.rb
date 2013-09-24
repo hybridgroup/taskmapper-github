@@ -1,7 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'spec_helper'
 
 describe TaskMapper::Provider::Github::Project do
-
   let(:tm) {TaskMapper.new(:github, :login => 'taskmapper-user', :password => 'Tm123456')}
   let(:project_name) { 'tmtest-repo' }
   let(:returned_repo) { 'taskmapper-user/tmtest-repo' }
@@ -46,8 +45,6 @@ describe TaskMapper::Provider::Github::Project do
         it { should be_an_instance_of project_class }
       end
     end
-
   end
-
 end
 

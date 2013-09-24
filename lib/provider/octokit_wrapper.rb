@@ -1,6 +1,5 @@
 module TaskMapper::Provider::Github
   class OctokitWrapper
-
     def initialize(username, password)
       @username = username
       @password = password
