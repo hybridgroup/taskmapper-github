@@ -23,6 +23,7 @@ end
 def stub_get(*args); stub_request(:get, *args) end
 def stub_post(*args); stub_request(:post, *args) end
 def stub_put(*args); stub_request(:put, *args) end
+def stub_patch(*args); stub_request(:patch, *args) end
 def stub_delete(*args); stub_request(:delete, *args) end
 
 def create_instance(login = 'taskmapper-user', password = 'Tm123456')
@@ -33,6 +34,7 @@ RSpec.configure do |c|
   c.before do
     stub_get(
       'https://taskmapper-user:Tm123456@api.github.com/orgs/2hf/repos',
+
       'org_repos.json'
     )
     stub_get(
@@ -79,7 +81,7 @@ RSpec.configure do |c|
       'https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/1/comments',
       'comments/3951282.json'
     )
-    stub_post(
+    stub_patch(
       'https://taskmapper-user:Tm123456@api.github.com/repos/taskmapper-user/tmtest-repo/issues/comments/3951282',
       'comments/3951282_update.json'
     )

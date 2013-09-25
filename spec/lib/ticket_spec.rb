@@ -1,40 +1,56 @@
 require 'spec_helper'
 
-describe TaskMapper::Provider::Github::Ticket do
+describe TaskMapper::Provider::Github::Project do
   let(:tm) { create_instance }
+  let(:project) { tm.project 'tmtest-repo' }
   let(:ticket_id) { 1 }
   let(:ticket_class) { TaskMapper::Provider::Github::Ticket }
-  let(:project) { tm.project 'tmtest-repo' }
 
-  describe "Retrieving tickets" do
-    context "when #tickets" do
-      subject { project.tickets }
-      it { should be_an_instance_of Array }
-      it { should_not be_empty }
+  describe "#tickets" do
+    describe "with no arguments" do
+      let(:tickets) { project.tickets }
 
-      context "when #tickets.first" do
-        subject { project.tickets.first }
-        it { should be_an_instance_of ticket_class }
+      it "returns an array containing all tickets" do
+        expect(tickets).to be_an Array
+        expect(tickets.first).to be_a ticket_class
       end
     end
 
-    context "when #tickets with array of id's" do
-      subject { project.tickets [ticket_id] }
-      it { should be_an_instance_of Array }
-      it { should_not be_empty }
+    describe "with an array of ticket IDs" do
+      let(:tickets) { project.tickets [ticket_id] }
+
+      it "returns an array of matching tickets" do
+        expect(tickets).to be_an Array
+        expect(tickets.length).to eq 1
+        expect(tickets.first).to be_a ticket_class
+        expect(tickets.first.id).to eq ticket_id
+      end
     end
 
-    context "when #tickets with attributes" do
-      subject { project.tickets :id => ticket_id }
-      it { should be_an_instance_of Array }
-      it { should_not be_empty }
+    describe "with a hash containing a ticket ID" do
+      let(:tickets) { project.tickets :id => ticket_id }
+
+      it "returns an array with the matching ticket" do
+        expect(tickets).to be_an Array
+        expect(tickets.first).to be_a ticket_class
+        expect(tickets.first.id).to eq ticket_id
+      end
     end
   end
 
-  describe "Create and Update" do
-    context "when #ticket! with :title and :description" do
-      subject { project.ticket!(:title => 'new ticket', :description => 'testing') }
-      it { should be_an_instance_of ticket_class }
+  describe "#ticket!" do
+    context "with a title and description" do
+      let(:ticket) do
+        project.ticket!(
+          :title => "New Ticket",
+          :description => "testing"
+        )
+      end
+
+      it "creates a new ticket" do
+        expect(ticket).to be_a ticket_class
+        expect(ticket.title).to eq "New Ticket"
+      end
     end
   end
 end
