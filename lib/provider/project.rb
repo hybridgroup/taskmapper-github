@@ -2,47 +2,22 @@ module TaskMapper::Provider
   module Github
     class Project < TaskMapper::Provider::Base::Project
       def initialize(*object)
-        if object.first
-          object = object.first
-          @system_data = {:client => object}
-          unless object.is_a? Hash
-            hash = {:description => object.description,
-              :created_at => object.created_at,
-              :updated_at => object.created_at,
-              :name => object.name,
-              :id => object.name,
-              :owner => object.owner}
-          else
-            hash = object
-          end
-          super hash
-        end
-      end
-
-      def created_at
-        begin
-          Time.parse(self[:created_at])
-        rescue
-          self[:created_at]
-        end
-      end
-
-      def updated_at
-        begin
-          Time.parse(self[:created_at])
-        rescue
-          self[:created_at]
-        end
+        object = object.first if object.is_a?(Array)
+        super object
       end
 
       def id
-        "#{self.owner.login}/#{self[:name]}"
+        self.owner.login + "/" + self.name
       end
 
       # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|
-          copy_ticket = self.ticket!(:title => ticket.title, :description => ticket.description)
+          copy_ticket = self.ticket!(
+            :title => ticket.title,
+            :description => ticket.description
+          )
+
           ticket.comments.each do |comment|
             copy_ticket.comment!(:body => comment.body)
             sleep 1
@@ -56,50 +31,64 @@ module TaskMapper::Provider
         end
 
         def find_by_id(id)
-          project_id = "#{TaskMapper::Provider::Github.login}/#{id}" unless id.include?("/")
-          repo = TaskMapper::Provider::Github.api.repository(project_id).attrs
+          project_id = "#{login}/#{id}" unless id.include?("/")
+          repo = api.repository(project_id).attrs
           self.new repo
         end
 
         def find_all
           repos = user_repos
-          repos += org_repos if TaskMapper::Provider::Github.api.user_authenticated?
+          repos += org_repos if api.user_authenticated?
           repos
         end
 
         private
         def user_repos
-          repos = TaskMapper::Provider::Github.api.repositories(TaskMapper::Provider::Github.login)
-          repos.collect do |repository|
-            self.new repository
+          repos = api.repositories(login)
+          repos.collect do |repo|
+            self.new repo.attrs
           end
         end
 
         def org_repos
-          repos =  []
-          user_orgs.each do |organization|
-            repos += TaskMapper::Provider::Github.api.organization_repositories(organization.login).collect do |repository|
-              self.new(repository)
+          repos = []
+          api.organizations(login).each do |organization|
+            org_login = organization.login
+            repos += api.organization_repositories(org_login).collect do |repo|
+              self.new repo.attrs
             end
           end
           repos.flatten
         end
 
-        def user_orgs
-          TaskMapper::Provider::Github.api.organizations(TaskMapper::Provider::Github.login)
+        def api
+          TaskMapper::Provider::Github.api
+        end
+
+        def login
+          TaskMapper::Provider::Github.login
         end
       end
 
       def ticket(*options)
-        unless options.empty?
-          TaskMapper::Provider::Github::Ticket.find_by_id(self.id, options.first)
+        if options.empty?
+          Ticket
         else
-          TaskMapper::Provider::Github::Ticket
+          Ticket.find_by_id(self.id, options.first)
         end
       end
 
       def ticket!(*options)
         TaskMapper::Provider::Github::Ticket.open(self.id, options.first)
+      end
+
+      private
+      def api
+        self.class.api
+      end
+
+      def login
+        self.class.login
       end
     end
   end
