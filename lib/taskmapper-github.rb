@@ -1,5 +1,3 @@
-require 'bundler/setup'
-
 require 'octokit'
 require 'active_support/core_ext/string'
 require 'net/http'
