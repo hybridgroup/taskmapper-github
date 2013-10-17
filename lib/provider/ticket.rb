@@ -47,12 +47,8 @@ module TaskMapper::Provider
 
       def self.find_all(project_id)
         issues = Array(api.issues(project_id))
-        issues += api.issues(project_id, {:state => "closed"}) unless issues.empty?
-        issues.collect do |i|
-          issue = i.attrs
-          issue.merge!(:project_id => project_id)
-          self.new issue
-        end
+        issues += api.issues(project_id, :state => "closed") unless issues.empty?
+        issues.collect { |i| self.new i.attrs.merge(:project_id => project_id) }
       end
 
       def self.open(project_id, *options)
@@ -60,25 +56,19 @@ module TaskMapper::Provider
         body = ticket_hash.delete(:description)
         title = ticket_hash.delete(:title)
         new_issue = api.create_issue(project_id, title, body, options.first)
-        issue = new_issue.attrs[:issue].attrs
-        issue.merge!(:project_id => project_id)
-        self.new issue
+        new new_issue.attrs[:issue].attrs.merge(:project_id => project_id)
       end
 
       def created_at
-        begin
-          Time.parse(self[:created_at])
-        rescue
-          self[:created_at]
-        end
+        Time.parse(self[:created_at])
+      rescue
+        self[:created_at]
       end
 
       def updated_at
-        begin
-          Time.parse(self[:updated_at])
-        rescue
-          self[:updated_at]
-        end
+        Time.parse(self[:updated_at])
+      rescue
+        self[:updated_at]
       end
 
       def save
@@ -87,11 +77,13 @@ module TaskMapper::Provider
       end
 
       def reopen
-        Ticket.new(project_id, api.reopen_issue(project_id, number))
+        self.state = 'open'
+        api.reopen_issue(project_id, number)
       end
 
       def close
-        Ticket.new(project_id, api.close_issue(project_id, number))
+        self.state = 'closed'
+        api.close_issue(project_id, number)
       end
 
       def comment!(attributes)

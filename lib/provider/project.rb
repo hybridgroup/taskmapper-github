@@ -1,11 +1,6 @@
 module TaskMapper::Provider
   module Github
     class Project < TaskMapper::Provider::Base::Project
-      def initialize(*object)
-        object = object.first if object.is_a?(Array)
-        super object
-      end
-
       def id
         self.owner.login + "/" + self.name
       end
@@ -27,7 +22,7 @@ module TaskMapper::Provider
 
       class << self
         def find_by_attributes(attributes = {})
-          search_by_attribute(self.find_all, attributes)
+          search_by_attribute find_all, attributes
         end
 
         def find_by_id(id)
@@ -37,28 +32,23 @@ module TaskMapper::Provider
         end
 
         def find_all
-          repos = user_repos
+          repos = []
           repos += org_repos if api.user_authenticated?
-          repos
+          repos += user_repos
         end
 
         private
         def user_repos
-          repos = api.repositories(login)
-          repos.collect do |repo|
-            self.new repo.attrs
-          end
+          api.repositories(login).collect { |repo| self.new repo.attrs }
         end
 
         def org_repos
-          repos = []
-          api.organizations(login).each do |organization|
+          api.organizations(login).collect do |organization|
             org_login = organization.login
-            repos += api.organization_repositories(org_login).collect do |repo|
+            api.organization_repositories(org_login).map do |repo|
               self.new repo.attrs
             end
-          end
-          repos.flatten
+          end.flatten
         end
 
         def api

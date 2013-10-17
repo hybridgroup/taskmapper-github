@@ -11,7 +11,7 @@ module TaskMapper::Provider
       end
 
       def self.find_by_attributes(project_id, ticket_id, attributes = {})
-        search_by_attribute(self.find_all(project_id, ticket_id), attributes)
+        search_by_attribute(find_all(project_id, ticket_id), attributes)
       end
 
       def self.find_all(project_id, ticket_id)
@@ -46,7 +46,6 @@ module TaskMapper::Provider
         attrs = new.attrs
         clean_body! attrs
         self.merge!(attrs)
-        self
       end
 
       def self.api
