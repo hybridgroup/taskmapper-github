@@ -5,55 +5,63 @@ This is a provider for [taskmapper](http://ticketrb.com). It provides interopera
 # Usage and Examples
 
 First we have to instantiate a new taskmapper instance:
-  github = TaskMapper.new(:github, {:login => "coder", :token => "m4st3r!"})
+
+    github = TaskMapper.new(:github, {:login => "coder", :token => "m4st3r!"})
 
 If you do not pass in the token and the username, it will only access public information for the account.
 
-== Finding Projects(Repositories)
+### Finding Projects(Repositories)
 
 You can find your own projects by doing:
 
-	projects = github.projects # Will return all your repositories
-  projects = github.projects(['your_repo1', 'your_repo2'])
-  project = github.project('your_repo')
+    # Will return all your repositories
+    projects = github.projects
+    projects = github.projects(['your_repo1', 'your_repo2'])
+    project = github.project('your_repo')
 
 Also you can access other users repos
-	
-	project = github.project.find(:first, {:user => 'other_user', :repo => 'his_repo'})
+
+    project = github.project.find(:first, {:user => 'other_user', :repo => 'his_repo'})
 
 Or even make a search with an array
 
-	projects = github.project.find(:all, ['ruby','git'])
+    projects = github.project.find(:all, ['ruby','git'])
 	
-== Finding Tickets(Issues)
+### Finding Tickets(Issues)
 
-  tickets = project.tickets # All open issues
-	tickets = project.tickets(:all, {:state => 'closed'}) # All closed tickets
-	ticket = project.ticket(<issue_number>)
+    # All open issues
+    tickets = project.tickets
 
-== Open Tickets
+    # All closed tickets
+    tickets = project.tickets(:all, {:state => 'closed'})
+
+    ticket = project.ticket(<issue_number>)
+
+### Open Tickets
     
-	ticket = project.ticket!({:title => "New ticket", :body => "Body for the very new ticket"})
+    ticket = project.ticket!({:title => "New ticket", :body => "Body for the very new ticket"})
 
-== Close a ticket
+### Close a ticket
 	
-	ticket = ticket.close
+    ticket = ticket.close
 	
-== Reopen a ticket
+### Reopen a ticket
 
-	ticket = ticket.reopen
+    ticket = ticket.reopen
 	
-= Update a ticket
+### Update a ticket
 	
-	ticket.title = "New title"
-	ticket.body =  "New body"
-	ticket.save
+    ticket.title = "New title"
+    ticket.body =  "New body"
+    ticket.save
 
-== Finding Comments
-	comments = ticket.comments
+### Finding Comments
+    
+    comments = ticket.comments
 
-== Create Comment
-	comment = ticket.comment!("your comment goes here")
+### Create Comment
+
+    comment = ticket.comment!("your comment goes here")
 
 ## Requirements
 
